@@ -44,7 +44,7 @@ const config: Config = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           routeBasePath: '/', // Serve the docs at the site's root
-          sidebarPath: './sidebars/autogen.ts',
+          sidebarPath: './sidebars/docs.ts',
           sidebarCollapsible: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
