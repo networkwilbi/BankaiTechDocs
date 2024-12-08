@@ -13,6 +13,26 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import styles from '/src/css/tabs.css';
 
+<Script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  const tabs = document.querySelectorAll('.tabs__item'); // Adjust selector as needed
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const activeTab = tab.getAttribute('data-value'); // Get the active tab
+      // Logic to show/hide headings based on the active tab
+      document.querySelectorAll('.tab-specific-heading').forEach(heading => {
+        if (heading.classList.contains(activeTab)) {
+          heading.style.display = ''; // Show heading for active tab
+        } else {
+          heading.style.display = 'none'; // Hide other headings
+        }
+      });
+    });
+  });
+});
+
+</Script>
+
 <Tabs groupId="Install-Type" defaultValue="docker-engine">
 
   <TabItem value="docker-engine" label="Docker Engine">
