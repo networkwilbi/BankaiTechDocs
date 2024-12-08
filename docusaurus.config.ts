@@ -44,13 +44,14 @@ const config: Config = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           routeBasePath: '/', // Serve the docs at the site's root
-          sidebarPath: './sidebars/sidebars.ts',
-          sidebarCollapsible: true,
+          sidebarPath: './sidebars/docs.ts',
+          sidebarCollapsible: false,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/TrueBankai416/BankaiTechDocs/tree/main/',
         },
+        hideableSidebar: true,
         blog: false, //{
       //    showReadingTime: true,
           // Please change this to your repo.
