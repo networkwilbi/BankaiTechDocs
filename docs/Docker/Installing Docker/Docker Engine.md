@@ -11,7 +11,7 @@ last_update:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import styles from './styles.module.css';
+import styles from '/src/css/tabs.css';
 
 <Tabs groupId="Install-Type" defaultValue="docker-engine">
 
