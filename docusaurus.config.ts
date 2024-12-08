@@ -135,7 +135,6 @@ const config: Config = {
       // Optional: path for search page that enabled by default (`false` to disable it)
       searchPagePath: 'search',
     },
-    hideableSidebar: true,
     navbar: {
       title: 'Bankai Docs',
       logo: {
