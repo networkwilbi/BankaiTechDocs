@@ -157,7 +157,6 @@ const config: Config = {
         },
       ],
     },
-    hideableSidebar: true,
     footer: {
       style: 'dark',
       links: [
@@ -177,14 +176,12 @@ const config: Config = {
               label: 'Discord',
               href: 'https://discord.gg/6THYdvayjg',
             },
-            {
-              label: 'Buy me a Coffee',
-              href: 'https://buymeacoffee.com/BankaiTech',
-            },
           ],
         },
         {
-          title: 'More',
+          title: 'Support Me',
+          href: 'https://buymeacoffee.com/BankaiTech',
+          /*
           items: [
       //      {
       //        label: 'Blog',
@@ -195,6 +192,7 @@ const config: Config = {
       //        href: 'https://github.com/facebook/docusaurus',
       //      },
           ],
+          */
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} My HomeLab Docs`,
