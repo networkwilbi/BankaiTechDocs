@@ -184,6 +184,7 @@ const config: Config = {
             {
               label: 'Buy me a Beer',
               href: 'https://buymeacoffee.com/BankaiTech',
+            },
           /*
           items: [
       //      {
