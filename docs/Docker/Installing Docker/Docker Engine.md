@@ -11,7 +11,7 @@ last_update:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import CustomTabs from '@site/src/components/TabsComponents/customTabs';
+import CustomTabs from '/src/components/TabsComponents/customTabs';
 
 <CustomTabs groupId="Install-Type" defaultValue="docker-engine">
 
