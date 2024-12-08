@@ -99,5 +99,6 @@ sudo apt-get update
 sudo apt-get install docker-compose-plugin
 ```
   </TabItem>
+</Tabs>
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
