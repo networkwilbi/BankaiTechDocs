@@ -180,7 +180,10 @@ const config: Config = {
         },
         {
           title: 'Support Me',
-          href: 'https://buymeacoffee.com/BankaiTech',
+          items: [
+            {
+              label: 'Buy me a Beer',
+              href: 'https://buymeacoffee.com/BankaiTech',
           /*
           items: [
       //      {
@@ -191,8 +194,8 @@ const config: Config = {
       //        label: 'GitHub',
       //        href: 'https://github.com/facebook/docusaurus',
       //      },
+      */
           ],
-          */
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} My HomeLab Docs`,
