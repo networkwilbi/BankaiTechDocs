@@ -64,7 +64,6 @@ You still need to install the Docker Engine if you wish to use Docker-Compose
 
   </TabItem>
 
-<Tabs groupId="Install-Type">
   <TabItem value="docker-compose" label="Docker Compose">
 :::note
 
