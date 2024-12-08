@@ -13,11 +13,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-<Tabs groupId="Install-Type">
+<Tabs groupId="Install-Type" defaultValue="docker-engine">
+
   <TabItem value="docker-engine" label="Docker Engine">
 Official Documentation can be found here. [Official Docs](https://docs.docker.com/engine/install/ubuntu/)
 
-## Installation
+## Installation (Tab docker-engine)
 First you should always update your system. You can do so by running the following command inside a Terminal.
 ```
 sudo apt update && apt upgrade -y
