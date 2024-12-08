@@ -147,7 +147,7 @@ const config: Config = {
           position: 'left',
           label: 'Tutorials',
         },
-          {to: 'https://buymeacoffee.com/BankaiTech', label: 'Buy Me a Coffee', position: 'left'},
+          {to: 'https://buymeacoffee.com/BankaiTech', label: 'Buy Me a Beer', position: 'left'},
     //    {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
