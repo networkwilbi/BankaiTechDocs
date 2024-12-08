@@ -17,8 +17,6 @@ const sidebars: SidebarsConfig = {
   // But you can create a sidebar manually
   
   docsSidebar: [
-    'intro',
-    'hello',
     {
       type: 'category',
       label: 'Tutorial',
