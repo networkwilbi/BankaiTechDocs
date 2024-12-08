@@ -25,13 +25,13 @@ const sidebars: SidebarsConfig = {
       items: [
         {
           type: 'link',
-          label: '💼 Business Context',
-          href: '/business/About-business',
+          label: '💼 Docker',
+          href: '/Docker',
         },
         {
           type: 'link',
-          label: '📊 Data',
-          href: '/data/About-data',
+          label: '📊 Nextcloud',
+          href: '/Nextcloud',
         },
       ],
     },
