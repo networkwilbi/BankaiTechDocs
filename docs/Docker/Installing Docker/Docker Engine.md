@@ -11,11 +11,11 @@ last_update:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import styles from '/src/css/tabs.css';
+import styles from './src/css/tabs.css';
 
 <Tabs groupId="Install-Type" defaultValue="docker-engine">
 
-  <TabItem value="docker-engine" label="Docker Engine" attributes={{className: styles.tag-specifig-heading}}>
+  <TabItem value="docker-engine" label="Docker Engine">
 Official Documentation can be found here. [Official Docs](https://docs.docker.com/engine/install/ubuntu/)
 
 ## Installation (Tab docker-engine)
