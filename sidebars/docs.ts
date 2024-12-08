@@ -16,24 +16,31 @@ const sidebars: SidebarsConfig = {
 
   // But you can create a sidebar manually
   
-  docsSidebar: [
-    {
-      type: 'category',
-      label: 'Tutorial',
-      items: [
+  "docsSidebar": [
         {
-          type: 'link',
-          label: '💼 Docker',
-          href: '/Docker',
+            "type": "doc",
+            "label": "Introduction",
+            "id": "intro"
         },
+        "what_is_new_v3",
         {
-          type: 'link',
-          label: '📊 Nextcloud',
-          href: '/Nextcloud',
+            "type": "category",
+            "label": "Docker  ☁️",
+            "collapsed": false,
+            link: {
+                type: "doc",
+                id: "cloud/intro"
+            },
+            "items": [
+                "cloud/quickstart",
+                "cloud/app_config",
+                "cloud/deployment",
+                "cloud/app_check",
+                "cloud/creating_service_account",
+                "cloud/migrating_from_v2"
+            ]
         },
-      ],
-    },
-  ],
+   ],
 };
 
 export default sidebars;
