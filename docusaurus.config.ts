@@ -157,6 +157,7 @@ const config: Config = {
         },
       ],
     },
+    hideableSidebar: true,
     footer: {
       style: 'dark',
       links: [
