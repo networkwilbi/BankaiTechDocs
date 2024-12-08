@@ -51,7 +51,6 @@ const config: Config = {
           editUrl:
             'https://github.com/TrueBankai416/BankaiTechDocs/tree/main/',
         },
-        hideableSidebar: true,
         blog: false, //{
       //    showReadingTime: true,
           // Please change this to your repo.
@@ -136,6 +135,7 @@ const config: Config = {
       // Optional: path for search page that enabled by default (`false` to disable it)
       searchPagePath: 'search',
     },
+    hideableSidebar: true,
     navbar: {
       title: 'Bankai Docs',
       logo: {
