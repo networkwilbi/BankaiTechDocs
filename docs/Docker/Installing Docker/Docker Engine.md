@@ -9,7 +9,6 @@ last_update:
   author: BankaiTech
 ---
 
-import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CustomTabs from '/src/components/TabsComponents/customTabs';
 
