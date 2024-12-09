@@ -38,4 +38,4 @@ const sidebars: SidebarsConfig = {
 };
 
 
-export default sidebar;
+export default sidebars;
