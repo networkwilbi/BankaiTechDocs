@@ -37,4 +37,14 @@ const sidebars: SidebarsConfig = {
    ],
 };
 
-export default sidebars;
+export default sidebars; {
+
+  themeConfig: {
+    docs: {
+      docsSidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
+    },
+  },
+};
