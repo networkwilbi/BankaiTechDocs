@@ -10,7 +10,7 @@ require('dotenv').config({path: './.env', debug: true})
 
 // Main Config 
 const config: Config = {
-  title: 'Welcome to Bankai-Tech Docs',
+  title: 'Bankai-Tech Docs',
   tagline: 'Debugging is when you are a detective in a crime where you are also the murderer',
   favicon: 'img/favcon.ico',
 
