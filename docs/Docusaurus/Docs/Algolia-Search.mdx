@@ -4,28 +4,20 @@ last_update:
 draft: false
 comments: true
 ---
-## Installing Algolia Search for Docusaurus
-<h3>*This method will use the Local version of  [Algolia Search Bar](https://docsearch.algolia.com/docs/legacy/run-your-own/)*</h3>
-*Click [here](https://docusaurus.io/docs/search) for official Docs.*
-
-### Installing Jq
-First we need to install [Jq](https://jqlang.github.io/jq/download/)
-```
-sudo apt-get install jq -y
-```
-:::info
-
-`-y` auto-selects `yes` when installing
-:::
+## Installing [Algolia DocSearch](https://docusaurus.io/docs/search) for Docusaurus
 
 Make sure you are in the root of your website, in my case ill run
 ```
 cd /var/websites/"HomeLab Docs"
 ```
-### Creating an Algolia Account
-Lets create an [Algolia Account](https://crawler.algolia.com/)
+### Applying to the DocSearch Program
+Lets apply for [Algolia DocSearch](https://docsearch.algolia.com/apply/)
 
-![Create Algolia Account](/img/Docusaurus/CreateAccount.jpg)
+:::note
+You should recieve an Email with further instructions and a Crawler should have been [automatically setup for you](https://docsearch.algolia.com/docs/templates/#getting-started).
+I this is an updated Doc from Legacy search, this doc may not be 100% accurate because I migrated some time ago and am just now documenting it. I appologize
+There is however great support from Algolia if you need further assistance, click [HERE](https://discord.gg/docusaurus)
+:::
 
 Now go to the `Settings` page
 
@@ -39,6 +31,22 @@ Take note of the ID and Both keys, we will be using them shortly.
 
 ![Algolia Keys](/img/Docusaurus/AlgoliaKeys.jpg)
 
+### Dotenv
+In order to keep your sensitive information hidden, we need to install and configure dotenv
+#### Installing dotenv
+Run the following command
+```
+npm install dotenv --save
+```
+#### Configuring dotenv
+Open `docusaurus.config.ts using your prefered text editor such as nano.
+Add the following code snippet above your main config near the top.
+```
+// Environment Variable Config
+import dotenv from 'dotenv';
+require('dotenv').config({path: './.env', debug: true})
+```
+
 ### Creating the .env file
 Now lets create an `.env` file.
 ```
@@ -46,8 +54,8 @@ nano .env
 ```
 Paste your `ID` and `Admin API Key` in the following format
 ```
-APPLICATION_ID=YOUR_APP_ID
-API_KEY=YOUR_API_KEY
+ALGOLIA_APP_ID = ""
+ALGOLIA_API_KEY = ""
 ```
 :::tip[Hint]
 
@@ -55,126 +63,29 @@ Paste by pressing `CTRL+SHIFT+V`
 Save by pressing `CTRL+X`
 :::
 
-### Creating config.json file
-Now lets make a [Docusaurus v2 config](https://github.com/algolia/docsearch-configs/blob/master/configs/docusaurus-2.json) file.
+### Modifying the docusaurus.config.ts file
 ```
-nano config.json
+nano docusaurus.config.ts
 ```
 Paste the following
 ```
-{
-  "index_name": "docusaurus-2",
-  "start_urls": [
-    "https://docusaurus.io/"
-  ],
-  "sitemap_urls": [
-    "https://docusaurus.io/sitemap.xml"
-  ],
-  "sitemap_alternate_links": true,
-  "stop_urls": [
-    "/tests"
-  ],
-  "selectors": {
-    "lvl0": {
-      "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
-      "type": "xpath",
-      "global": true,
-      "default_value": "Documentation"
-    },
-    "lvl1": "header h1",
-    "lvl2": "article h2",
-    "lvl3": "article h3",
-    "lvl4": "article h4",
-    "lvl5": "article h5, article td:first-child",
-    "lvl6": "article h6",
-    "text": "article p, article li, article td:last-child"
-  },
-  "strip_chars": " .,;:#",
-  "custom_settings": {
-    "separatorsToIndex": "_",
-    "attributesForFaceting": [
-      "language",
-      "version",
-      "type",
-      "docusaurus_tag"
-    ],
-    "attributesToRetrieve": [
-      "hierarchy",
-      "content",
-      "anchor",
-      "url",
-      "url_without_anchor",
-      "type"
-    ]
-  },
-  "conversation_id": [
-    "833762294"
-  ],
-  "nb_hits": 46250
-}
-```
-Update the following with your `domain`
-```
-  "start_urls": [
-    "https://docusaurus.io/"
-  ],
-  "sitemap_urls": [
-    "https://docusaurus.io/sitemap.xml"
-  ],
-```
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_API_KEY,
+      indexName: 'bankai-tech',
+      // Optional: see doc section below
+      contextualSearch: true,
+      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      replaceSearchResultPathname: {
+        from: '/docs/', // or as RegExp: /\/docs\//
+        to: '/',
+      },
+      // Optional: Algolia search parameters
+      searchParameters: {},
 
-#### My completed config.json file
-```
-{
-  "index_name": "bankai-tech.com",
-  "start_urls": [
-    "https://docs.bankai-tech.com/"
-  ],
-  "sitemap_urls": [
-    "https://docs.bankai-tech.com/sitemap.xml"
-  ],
-  "sitemap_alternate_links": true,
-  "stop_urls": [
-    "/tests"
-  ],
-  "selectors": {
-    "lvl0": {
-      "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
-      "type": "xpath",
-      "global": true,
-      "default_value": "Documentation"
+      // Optional: path for search page that enabled by default (`false` to disable it)
+      searchPagePath: 'search',
     },
-    "lvl1": "header h1",
-    "lvl2": "article h2",
-    "lvl3": "article h3",
-    "lvl4": "article h4",
-    "lvl5": "article h5, article td:first-child",
-    "lvl6": "article h6",
-    "text": "article p, article li, article td:last-child"
-  },
-  "strip_chars": " .,;:#",
-  "custom_settings": {
-    "separatorsToIndex": "_",
-    "attributesForFaceting": [
-      "language",
-      "version",
-      "type",
-      "docusaurus_tag"
-    ],
-    "attributesToRetrieve": [
-      "hierarchy",
-      "content",
-      "anchor",
-      "url",
-      "url_without_anchor",
-      "type"
-    ]
-  },
-  "conversation_id": [
-    "833762294"
-  ],
-  "nb_hits": 46250
-}
 ```
 
 ### Building the website
@@ -183,20 +94,18 @@ Now build the site.
 npm run build
 ```
 
-### Start the crawler with docker
-Now we should be able to start the [crawler](https://docsearch.algolia.com/docs/legacy/run-your-own/#run-the-crawl-from-the-docker-image).
-```
-docker run -it --env-file=./.env -e "CONFIG=$(cat ./config.json | jq -r tostring)" algolia/docsearch-scraper
-```
-:::note
+### Start the first Crawl
+Now we should be able to [login](https://dashboard.algolia.com/).
+Go to `Data Sources`
 
-You will have to run this command everytime you create or change a directory
-:::
+![Algolia Dashboard](/img/Docusaurus/Algolia_Dashboard.png)
 
+Go to `Crawler`
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/BankaiTech)
-If successful the output should look like this
+![Algolia Crawler](/img/Docusaurus/Algolia_Crawler.png)
 
-![Algolia Crawler](/img/Docusaurus/Crawler.jpg)
+Click on your crawler and then Start Crawl
+
+![Crawler](/img/Docusaurus/Crawl.png)
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
