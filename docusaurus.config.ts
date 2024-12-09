@@ -144,7 +144,7 @@ const config: Config = {
       },
       items: [
         {
-          type: 'docSidebar',
+          type: 'sidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Tutorials',
