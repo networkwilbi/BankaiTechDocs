@@ -78,7 +78,8 @@ const sidebars: SidebarsConfig = {
          'Docusaurus/Docs Only Mode',
          'Docusaurus/Connecting to GitHub',
      ],
-  },
+   },
+ ],
 };
 
 
