@@ -59,10 +59,9 @@ const sidebars: SidebarsConfig = {
     label: 'NextcloudPI',
     link: { type: 'doc', id: 'NextcloudPI/Introduction' },
     items: [
-     {
+     
         'NextcloudPI/Installation/Install',
-     },
-   ],
+    ],
   },
  ],  
 };
