@@ -44,8 +44,8 @@ const config: Config = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           routeBasePath: '/', // Serve the docs at the site's root
-          sidebarPath: './sidebars/docs.ts',
           sidebarCollapsible: true,
+          sidebarPath: './sidebars/docs.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -105,6 +105,7 @@ const config: Config = {
       {name: 'keywords', content: 'Docs, Nextcloud, Tutorial, Documentation'},
     ],
     sidebar: {
+      sidebarCollapsible: true,
       autoCollapseCategories: true
     },
     colorMode: {
