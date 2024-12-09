@@ -36,9 +36,9 @@ const sidebars: SidebarsConfig = {
     },
    ],
 };
-
-export default sidebars {
-
+export default sidebars;
+export default {
+ 
   themeConfig: {
     docs: {
       docsSidebar: {
