@@ -52,6 +52,16 @@ const sidebars: SidebarsConfig = {
         'Nextcloud/Docs/Updating',
         'Nextcloud/Docs/Pre-built Images',
         'Nextcloud/Docs/Helpful Commands',
+     {
+       type: 'category',
+       label: 'Troubleshooting',
+       items: [
+         'Nextcloud/Troubleshooting/Nextcloud',
+         'Nextcloud/Troubleshooting/Nextcloud Memories',
+         'Nextcloud/Troubleshooting/Collabora Code',
+         'Nextcloud/Troubleshooting/Only Office',
+        ],
+     },
     ],
   }, 
   {
