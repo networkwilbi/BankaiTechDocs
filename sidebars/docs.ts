@@ -16,7 +16,7 @@ const sidebars: SidebarsConfig = {
 
   // But you can create a sidebar manually
   
-  "Sidebar": [
+  "sidebar": [
         {
       type: 'category',
       label: 'Getting Started with Docker',
