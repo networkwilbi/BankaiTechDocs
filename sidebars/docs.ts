@@ -42,7 +42,6 @@ export default {
   themeConfig: {
     docs: {
       docsSidebar: {
-        hideable: true,
         autoCollapseCategories: true,
       },
     },
