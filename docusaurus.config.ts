@@ -165,7 +165,7 @@ const config: Config = {
           items: [
             {
               label: 'Tutorials',
-              to: '/category/tutorial---docker',
+              to: '/category/docker',
             },
           ],
         },
