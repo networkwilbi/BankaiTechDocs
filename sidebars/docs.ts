@@ -17,7 +17,6 @@ const sidebars: SidebarsConfig = {
   // But you can create a sidebar manually
   
   "docsSidebar": [
-      hideable: true,
         {
       type: 'category',
       label: 'Getting Started with Docker',
@@ -36,6 +35,14 @@ const sidebars: SidebarsConfig = {
       ],
     },
    ],
+  themeConfig: {
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
+  },
 };
+
 
 export default sidebar;
