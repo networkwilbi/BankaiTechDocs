@@ -145,7 +145,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'autoSidebar',
+          sidebarId: 'docSidebar',
           position: 'left',
           label: 'Tutorials',
         },
