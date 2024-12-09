@@ -38,10 +38,9 @@ const sidebars: SidebarsConfig = {
 };
 
 export default {
- 
   themeConfig: {
     docs: {
-      docsSidebar: {
+      sidebar: {
         autoCollapseCategories: true,
       },
     },
