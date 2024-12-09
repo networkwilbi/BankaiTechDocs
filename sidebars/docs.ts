@@ -49,7 +49,7 @@ const sidebars: SidebarsConfig = {
           'Nextcloud/Installation/Complete',
          ],
       },   
-   ],
+    ],
   },  
 };
 
