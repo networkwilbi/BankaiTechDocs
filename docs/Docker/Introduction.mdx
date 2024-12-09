@@ -52,6 +52,20 @@ Docker is an open-source project that automates the deployment of applications i
   </TabItem>
 </Tabs>
 
+<Tabs
+  defaultValue="docker_engine"
+  values={[
+    {label: 'Docker Engine', value: 'docker_engine'},
+    {label: 'Docker Compose', value: 'docker_compose'},
+  ]}>
+  <TabItem value="docker_engine">
+    Docker Engine is the core of Docker, providing the runtime environment for containers. It allows users to build and containerize applications, then run them as isolated containers. This lightweight and powerful engine supports container orchestration, networking, volume management, and more, making it the backbone of the Docker platform.
+  </TabItem>
+  <TabItem value="docker_compose">
+    Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you can use a YAML file to configure your applicationâ€™s services, networks, and volumes, and then create and start all the services from your configuration with a single command. It simplifies the development process by allowing developers to define a complex stack in a file, then manage it with simple commands.
+  </TabItem>
+</Tabs>
+
 ## Conclusion
 
 Docker has revolutionized how developers build, deploy, and manage applications. By leveraging Docker, teams can focus on building great software without worrying about inconsistencies between development and production environments. Whether you're developing complex applications, deploying microservices, or automating your development pipeline, Docker provides the tools and flexibility needed to streamline these processes.
