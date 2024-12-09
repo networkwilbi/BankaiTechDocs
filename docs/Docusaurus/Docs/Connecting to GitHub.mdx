@@ -86,6 +86,83 @@ git remote add origin <SSh Repo URL>
 `git@github.com:TrueBankai416/BankaiTechDocs.git`
 :::
 
+## Security
+### Installing [talisman](https://github.com/thoughtworks/talisman)
+Go to the root directory of your website and run the following
+```
+curl --silent  https://raw.githubusercontent.com/thoughtworks/talisman/main/global_install_scripts/install.bash > /tmp/install_talisman.bash && /bin/bash /tmp/install_talisman.bash
+```
+
+### Setting Up [GitLeaks](https://github.com/gitleaks/gitleaks)
+#### Creating a GitHub API Key
+<p>Click the user icon at the top right and go to `Settings`</p>
+
+![GitHub Profile](/img/Docusaurus/GitHub_Profile.png)
+
+<p>On the bottom left go to `Developer Settings`</p>
+
+
+![GitHub Developer Settings](/img/Docusaurus/GitHub_Developer.png)
+
+##### Creating a new Token (classic)
+<p>Click on `Tokens (classic)` and then Generate a new Token</p>
+
+![GitHub Tokens](/img/Docusaurus/GitHub_Token.png)
+
+<p>Name the new Token and Select an Expiration Date</p>
+
+:::info
+It is recommended that you set an expiration date instead of having no Expiration, For security reasons.
+:::
+
+<p>Check the `Repo` and `Projects` checkboxes and Generate the Token</p>
+
+![Token Repo](/img/Docusaurus/Token_Repo.png)
+![Token Project](/img/Docusaurus/Token_Project.png)
+
+##### Creating Action Secrets for GitLeaks
+<p>Go to `Settings` and then `Secrets and Variables > Actions` and create a new Repository Secret</p>
+![GitLeaks Secret](/img/Docusaurus/GitLeaks_Secrets.png)
+<p>For the name, type in `GIT_TOKEN`</p>
+Paste your GitHub API Key into the secret field and then save.
+
+#### Creating the GitLeaks Workflow Action
+<p>Go to `Actions` and then Click `New Workflow`</p>
+
+![GitLeaks](/img/Docusaurus/GitLeaks1.png)
+
+<p>Set up a New Workflow</p>
+
+![Workflow](/img/Docusaurus/GitLeaks_Workflow.png)
+
+<p>Paste the Following Snippet</p>
+```
+name: gitleaks
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *" # run once a day at 4 AM
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITLEAKS_NOTIFY_USER_LIST: "@<YOUR_GITHUB_USER>"
+```
+##### Running the Action
+Run the New GitLeaks Workflow
+
+![Run Workflow](/img/Docusaurus/Run_Workflow.png)
+
+## Pushing to GitHub
 <p>Now run the following commands</p>
 ```
 git add -A
