@@ -149,6 +149,12 @@ const config: Config = {
           position: 'left',
           label: 'Tutorials',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'autoSidebar',
+          position: 'left',
+          label: 'Examples',
+        },
           {to: 'https://buymeacoffee.com/BankaiTech', label: 'Buy Me a Beer', position: 'left'},
     //    {to: '/blog', label: 'Blog', position: 'left'},
         {
@@ -167,6 +173,15 @@ const config: Config = {
             {
               label: 'Tutorials',
               to: '/category/docker',
+            },
+          ],
+        },
+        {
+          title: 'Examples',
+          items: [
+            {
+              label: 'Examples',
+              to: '/category/examples',
             },
           ],
         },
