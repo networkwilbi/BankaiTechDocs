@@ -76,7 +76,7 @@ const sidebars: SidebarsConfig = {
      items: [
          'Docusaurus/Algolia-Search',
          'Docusaurus/Docs Only Mode',
-         'Dicusaurus/Connecting to GitHub',
+         'Docusaurus/Connecting to GitHub',
      ],
   },
 };
