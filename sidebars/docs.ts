@@ -83,4 +83,36 @@ const sidebars: SidebarsConfig = {
 };
 
 
+  "exampleSidebar": [
+        {
+      type: 'category',
+      label: 'Getting started with Reverse Proxies',
+      link: { type: 'doc', id: 'Examples/Reverse Proxies/Introduction' },
+      items: [
+        {
+          type: 'category',
+          label: 'Nginx',
+          items: [
+            'Examples/Reverse Proxies/Nginx/Nginx',
+          ],
+        },
+      ],      
+    },
+   {
+    type: 'category',
+    label: 'Node-RED',
+    link: { type: 'doc', id: 'Examples/Node-RED/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Node-RED',
+        items: [
+          'Examples/Node-RED/Flows/Flows',
+         ],
+      },   
+    ],
+  }, 
+ ],
+};
+
 export default sidebars;
