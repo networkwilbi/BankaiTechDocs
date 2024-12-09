@@ -86,6 +86,51 @@ git remote add origin <SSh Repo URL>
 `git@github.com:TrueBankai416/BankaiTechDocs.git`
 :::
 
+## Security
+### Installing [talisman](https://github.com/thoughtworks/talisman)
+Go to the root directory of your website and run the following
+```
+curl --silent  https://raw.githubusercontent.com/thoughtworks/talisman/main/global_install_scripts/install.bash > /tmp/install_talisman.bash && /bin/bash /tmp/install_talisman.bash
+```
+
+### GitLeaks
+#### Configuring GitLeaks on GitHub
+<p>Go to `Actions` and then Click `New Workflow`
+
+![GitLeaks](/img/Docusaurus/GitLeaks1.png)
+
+<p>Set up a New Workflow</p>
+
+![Workflow](/img/Docusaurus/GitLeaks_Workflow.png)
+
+<p>Paste the Following Snippet</p>
+```
+name: gitleaks
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *" # run once a day at 4 AM
+jobs:
+  scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITLEAKS_NOTIFY_USER_LIST: "@<YOUR_GITHUB_USER>"
+```
+##### Running the Action
+Run the New GitLeaks Workflow
+
+![Run Workflow](/img/Docusaurus/Run_Workflow.png)
+
+## Pushing to GitHub
 <p>Now run the following commands</p>
 ```
 git add -A
