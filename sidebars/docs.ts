@@ -36,7 +36,7 @@ const sidebars: SidebarsConfig = {
     },
    {
     type: 'category',
-    label: 'Getting started with Nextcloud',
+    label: 'Nextcloud',
     link: { type: 'doc', id: 'Nextcloud/Introduction' },
     items: [
      {
