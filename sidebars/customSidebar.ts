@@ -85,7 +85,7 @@ const sidebars: SidebarsConfig = {
   "exampleSidebar": [
         {
       type: 'category',
-      label: 'Getting started with Reverse Proxies',
+      label: 'Reverse Proxy',
       link: { type: 'doc', id: 'Examples/Reverse Proxies/Introduction' },
       items: [
         {
@@ -104,7 +104,7 @@ const sidebars: SidebarsConfig = {
     items: [
      {
         type: 'category',
-        label: 'Node-RED',
+        label: 'Flows',
         items: [
           'Examples/Node-RED/Flows/Flows',
          ],
