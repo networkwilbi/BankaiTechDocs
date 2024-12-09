@@ -10,7 +10,7 @@ require('dotenv').config({path: './.env', debug: true})
 
 // Main Config 
 const config: Config = {
-  title: 'My HomeLab Documentation',
+  title: 'Welcome to Bankai-Tech Docs',
   tagline: 'Debugging is when you are a detective in a crime where you are also the murderer',
   favicon: 'img/favcon.ico',
 
@@ -137,7 +137,7 @@ const config: Config = {
       searchPagePath: 'search',
     },
     navbar: {
-      title: 'Bankai Docs',
+      title: 'Bankai-Tech Docs',
       logo: {
         alt: 'My Site Logo',
         src: 'img/icon.jpg',
@@ -215,7 +215,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My HomeLab Docs`,
+      copyright: `Copyright © ${new Date().getFullYear()} Bankai-Tech Docs`,
     },
     prism: {
       darkTheme: prismThemes.dracula,
