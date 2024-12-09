@@ -46,18 +46,27 @@ Lets take ownership of the directory
 sudo chown -R 1000:1000 /var/docker
 ```
 ### Creating .env files
-Now lets download and modify [Docker Secrets](https://docs.docker.com/compose/use-secrets/) files in the new directory.
+Now lets create the files that will contain the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
+
+#### Creating .nextcloud.env
 ```
-wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/.nextcloud.env
-wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/.mariadb.env
-wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/.go_vod.env
-nano .mariadb.env
-```
-Update the following
-```
-MYSQL_ROOT_PASSWORD=CHANGEME
+NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.xxx/24
+TRUSTED_PROXIES=192.168.x.xxx
+OVERWRITEPROTOCOL=https
+OVERWRITECLIURL=https://cloud.example.com
+REDIS_HOST=redis
+REDIS_PORT=6379
+PHP_MEMORY_LIMIT=512M
+PHP_UPLOAD_LIMIT-100M
 MYSQL_PASSWORD=CHANGEME
+MYSQL_DATABASE=nextcloud
+MYSQL_USER=nextcloud
+MYSQL_HOST=mariadb
 ```
+:::tip[info]
+Save the new file by pressing `CTRL+X`
+:::
+
 :::tip[Info]
 
 Please Change `CHANGEME` to a password of your choosing.
@@ -65,68 +74,96 @@ Please Change `CHANGEME` to a password of your choosing.
 Refrain from using Special characters for you MySQL Passwords. \
 Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
-Save the new file by pressing `CTRL+X`
 
-Now lets edit the second file.
+#### Creating .mariadb.env
 ```
-nano .nextcloud.env
-```
-Update the Following
-```
-NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
-TRUSTED_PROXIES=<IP address of your Reverse Proxy>
-OVERWRITECLIURL=https://cloud.<YourDomain>.com
+MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
+MYSQL_DATABASE=nextcloud
+MYSQL_USER=nextcloud
 ```
-:::tip[Info]
 
-<p>Please Change the `Domain` and `Reverse Proxy IP`.</p>
+#### Creating .go_vod.env
+```
+NEXTCLOUD_HOST=https://cloud.example.com
+NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
+NVIDIA_VISIBLE_DEVICES=all
+#devices:
+#  - /dev/dri:/dev/dri # VA-API (omit for NVENC)
+```
+
 
 :::warning[warning]
 
 <p>Please make sure that the Password is the same as the one you previously set in the last file</p>
 <p>Remove all instances of `<>`</p>
 :::
-<p>Now lets update the go-vod.env file</p>
-```
-nano .go_vod.env
-```
-Update the following
-```
-NEXTCLOUD_HOST=https://cloud.bankai-tech.com
-```
-   <Tabs>
-      <TabItem value="Prebuilt Image" label="Pre-built Image">
-   ### Downloading the Compose file
-   ```
-   wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/docker-compose.yaml
-   ```
-      </TabItem>
-      <TabItem value="Docker Build" label="Building Custom Image">
-   ### Creating the Custom Image
-   ```
-   wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/Dockerfile \
-   wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/supervisord.conf \
-   docker build . -t nextcloud:28.0.4-custom
-   ```
-   :::tip
-   Go grab a beer, this will take awhile.... maybe take a nap.
-   :::note[Recomendation]
-   Change the `nextcloud:28.0.4-custom to the latest version of nextcloud\
-   Ex. `nextcloud:29.0.8-custom`
-   :::
-   ### Modifying the Compose file
+
+
+   ### Creating the Compose file
    Now lets edit the compose file.
    ```
-   wget https://raw.githubusercontent.com/TrueBankai416/BankaiTechDocs/main/Files/Nextcloud/Memories%20and%20Office/docker-compose.yaml
    nano docker-compose.yaml
    ```
-   Update this line if you named the image differently during the `build command`.
+
    ```
-   image: nextcloud:28.0.4-custom
+name: nextcloud
+
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --log_bin_trust_function_creators=true
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    env_file:
+      - .mariadb.env
+
+  nextcloud:
+    image: bankaitech/nextcloud:latest
+    container_name: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - mariadb
+      - redis
+      - go-vod
+    volumes:
+      - ./nextcloud:/var/www/html
+    env_file:
+      - .nextcloud.env
+
+  cron:
+    image: bankaitech/nextcloud:latest
+    container_name: cron
+    restart: always
+    volumes:
+      - ./nextcloud:/var/www/html:z
+    depends_on:
+      - mariadb
+      - redis
+    entrypoint: /cron.sh
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    expose:
+      - 6379
+    command: redis-server --save 60 1 --loglevel warning
+    restart: always
+
+  go-vod:
+    image: radialapps/go-vod
+    restart: always
+    container_name: go-vod
+    env_file:
+      - .go_vod.env
+    volumes:
+      - ./nextcloud:/var/www/html:ro
+#    runtime: nvidia # (NVENC)
    ```
-      </TabItem>
-   </Tabs>
 
 :::info[NVIDIA HWA]
 If you want to use GPU for transcoding then uncomment this line\
