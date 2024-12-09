@@ -22,16 +22,16 @@ const sidebars: SidebarsConfig = {
       label: 'Getting Started with Docker',
       link: { type: 'doc', id: 'Docker/Introduction' },
       items: [
-       {
+        {
           type: 'category',
           label: 'Installation',
           items: [
             'Docker/Installing Docker/Docker Engine',
             'Docker/Installing Docker/Docker-Compose',
           ],
-       },
-        'Docker/Helpful Commands',
-        'Docker/Troubleshooting/Docker',
+        },
+         'Docker/Helpful Commands',
+         'Docker/Troubleshooting/Docker',
       ],      
     },
    {
@@ -50,7 +50,8 @@ const sidebars: SidebarsConfig = {
          ],
       },   
     ],
-  },  
+  }, 
+ ],  
 };
 
 
