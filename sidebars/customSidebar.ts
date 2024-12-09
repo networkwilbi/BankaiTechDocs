@@ -30,7 +30,7 @@ const sidebars: SidebarsConfig = {
             'Docker/Installing Docker/Docker-Compose',
           ],
         },
-         'Docker/Helpful Commands',
+         'Docker/Docs/Helpful Commands',
          'Docker/Troubleshooting/Docker',
       ],      
     },
