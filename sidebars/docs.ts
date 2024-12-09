@@ -35,13 +35,6 @@ const sidebars: SidebarsConfig = {
       ],
     },
    ],
-  themeConfig: {
-    docs: {
-      sidebar: {
-        hideable: true,
-      },
-    },
-  },
 };
 
 
