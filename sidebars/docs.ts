@@ -27,13 +27,28 @@ const sidebars: SidebarsConfig = {
           label: 'Installation',
           items: [
             'Docker/Installing Docker/Docker Engine',
-            'Docker/Installing Docker/Docker-Compose'
+            'Docker/Installing Docker/Docker-Compose',
           ],
        },
         'Docker/Helpful Commands',
         'Docker/Troubleshooting/Docker',
-      ],
+      ],      
     },
+   {
+    type: 'category',
+    label: 'Getting started with Nextcloud',
+    link: { type: 'doc', id: 'Nextcloud/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Installation',
+        items: [
+          'Nextcloud/Installation/Minimum',
+          'Nextcloud/Installation/Collabora',
+          'Nextcloud/Installation/Memories',
+          'Nextcloud/Installation/Complete',
+         ],
+      },   
    ],
 };
 
