@@ -49,8 +49,8 @@ const sidebars: SidebarsConfig = {
           'Nextcloud/Installation/Complete',
          ],
       },   
-        'Nextcloud/Docs/Pre-built Images',
         'Nextcloud/Docs/Updating',
+        'Nextcloud/Docs/Pre-built Images',
         'Nextcloud/Docs/Helpful Commands',
     ],
   }, 
@@ -59,10 +59,24 @@ const sidebars: SidebarsConfig = {
     label: 'NextcloudPI',
     link: { type: 'doc', id: 'NextcloudPI/Introduction' },
     items: [
-     
         'NextcloudPI/Installation/Install',
     ],
   },
+  { 
+     type: 'category',
+     label: 'MariaDb',
+     items: [
+         'MariaDB/Updating',
+    ],
+  },
+  {  
+     type: 'category',
+     label: 'Docusaurus',
+     link: { type: 'doc', id: 'Docusaurus/Introduction' },
+     items: [
+         'Docusaurus/Algolia-Search',
+         'Docusaurus/Docs Only Mode',
+         'Dicusaurus/Connecting to GitHub',
  ],  
 };
 
