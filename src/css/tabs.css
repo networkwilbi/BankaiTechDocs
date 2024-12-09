@@ -1,0 +1,4 @@
+/* Initially hide all tab-specific headings */
+.tab-specific-heading {
+  display: none;
+}
