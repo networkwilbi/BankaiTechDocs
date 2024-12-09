@@ -151,7 +151,7 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'autoSidebar',
+          sidebarId: 'exampleSidebar',
           position: 'left',
           label: 'Examples',
         },
