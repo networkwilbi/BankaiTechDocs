@@ -54,6 +54,16 @@ const sidebars: SidebarsConfig = {
         'Nextcloud/Docs/Helpful Commands',
     ],
   }, 
+  {
+    type: 'category',
+    label: 'NextcloudPI',
+    link: { type: 'doc', id: 'NextcloudPI/Introduction' },
+    items: [
+     {
+        'NextcloudPI/Installation/Install',
+     },
+   ],
+  },
  ],  
 };
 
