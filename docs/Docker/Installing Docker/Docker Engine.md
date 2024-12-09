@@ -11,7 +11,7 @@ last_update:
 
 Official Documentation can be found here. [Official Docs](https://docs.docker.com/engine/install/ubuntu/)
 
-## Installation (Tab docker-engine)
+## Installation
 First you should always update your system. You can do so by running the following command inside a Terminal.
 ```
 sudo apt update && apt upgrade -y
