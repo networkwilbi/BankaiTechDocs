@@ -22,7 +22,7 @@ const sidebars: SidebarsConfig = {
       label: 'Getting Started with Docker',
       link: { type: 'doc', id: 'Docker/Introduction' },
       items: [
-       {,
+       {
           type: 'category',
           label: 'Installation',
           items: [
