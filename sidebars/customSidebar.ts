@@ -59,7 +59,7 @@ const sidebars: SidebarsConfig = {
          'Nextcloud/Troubleshooting/Nextcloud',
          'Nextcloud/Troubleshooting/Nextcloud Memories',
          'Nextcloud/Troubleshooting/Collabora Code',
-         'Nextcloud/Troubleshooting/Only Office',
+         'Nextcloud/Troubleshooting/OnlyOffice',
         ],
      },
     ],
