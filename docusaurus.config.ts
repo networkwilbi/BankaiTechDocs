@@ -45,7 +45,7 @@ const config: Config = {
           showLastUpdateTime: true,
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarCollapsible: true,
-          sidebarPath: './sidebars/docs.ts',
+          sidebarPath: './sidebars/customSidebar.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
