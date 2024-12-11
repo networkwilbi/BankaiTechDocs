@@ -70,6 +70,68 @@ If the error doesnt go away, you may need to clear your browser cache and restar
 ```
 sudo docker exec -it -u 33 nextcloud php occ db:add-missing-indices
 ```
+## Example Files
+### Config.php
+```
+<?php
+$CONFIG = array (
+  'htaccess.RewriteBase' => '/',
+  'memcache.local' => '\\OC\\Memcache\\APCu',
+  'apps_paths' => 
+  array (
+    0 => 
+    array (
+      'path' => '/var/www/html/apps',
+      'url' => '/apps',
+      'writable' => false,
+    ),
+    1 => 
+    array (
+      'path' => '/var/www/html/custom_apps',
+      'url' => '/custom_apps',
+      'writable' => true,
+    ),
+  ),
+  'memcache.distributed' => '\\OC\\Memcache\\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' => 
+  array (
+    'host' => 'redis',
+    'password' => '',
+    'port' => 6379,
+  ),
+  'trusted_proxies' => 
+  array (
+    0 => '192.168.4.204',
+  ),
+  'upgrade.disable-web' => true,
+  'instanceid' => '**REDACTED**',
+  'passwordsalt' => '**REDACTED**',
+  'secret' => '**REDACTED**',
+  'trusted_domains' => 
+  array (
+    0 => 'cloud.bankai-tech.com',
+    1 => '192.168.4.130',
+  ),
+  'datadirectory' => '/var/www/html/data',
+  'dbtype' => 'mysql',
+  'version' => '30.0.2.2',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'mariadb',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'nextcloud',
+  'dbpassword' => 'CHANGEME',
+  'installed' => true,
+  'maintenance_window_start' => 1,
+  'default_phone_region' => 'US',
+  'overwriteprotocol' => 'https',
+  'overwrite.cli.url' => 'https://cloud.bankai-tech.com',
+  'loglevel' => 2,
+);
+```
+
 ## Resources
 
 
