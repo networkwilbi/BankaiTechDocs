@@ -162,6 +162,10 @@ const config: Config = {
           label: 'GitHub',
           position: 'right',
         },
+        { href: 'https://github.com/TrueBankai416/BankaiTechDocs/issues',
+          label: 'Issues',
+          position: 'right',
+        },
       ],
     },
     footer: {
