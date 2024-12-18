@@ -137,7 +137,7 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Testing',
         items: [
-          'Examples/VPN/Testing/dnsleaktest.sh',
+          'Examples/VPN/Testing/dnsleaktest',
          ],
       }, 
      ],
