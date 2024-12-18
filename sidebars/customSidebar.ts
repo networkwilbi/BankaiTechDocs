@@ -123,62 +123,6 @@ const sidebars: SidebarsConfig = {
   }, 
   {
     type: 'category',
-    label: '*Arr Suite',
-    link: { type: 'doc', id: 'Examples/Arr Suite/Introduction' },
-    items: [
-     {
-        type: 'category',
-        label: 'Full Stack',
-        items: [
-          'Examples/Arr Suite/Full Stack/',
-         ],
-      },  
-      {
-        type: 'category',
-        label: 'Jellyseerr',
-        items: [
-          'Examples/Arr Suite/Jellyseerr/',
-         ],
-      },
-      {
-        type: 'category',
-        label: 'Radarr',
-        items: [
-          'Examples/Arr Suite/Radarr/',
-         ],
-      },
-      {
-        type: 'category',
-        label: 'Sonarr',
-        items: [
-          'Examples/Arr Suite/Sonarr/',
-         ],
-      }, 
-      {
-        type: 'category',
-        label: 'Lidarr',
-        items: [
-          'Examples/Arr Suite/Lidarr/',
-         ],
-      }, 
-      {
-        type: 'category',
-        label: 'Readarr',
-        items: [
-          'Examples/Arr Suite/Readarr/',
-         ],
-      }, 
-      {
-        type: 'category',
-        label: 'Prowlarr',
-        items: [
-          'Examples/Arr Suite/Prowlarr/',
-         ],
-      }, 
-    ],
-  },
-  {
-    type: 'category',
     label: 'VPN',
     link: { type: 'doc', id: 'Examples/VPN/Introduction' },
     items: [
@@ -186,14 +130,14 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Firewall',
         items: [
-          'Examples/VPN/Firewall/',
+          'Examples/VPN/Firewall/Linux Firewall',
         ],
       },
       {
         type: 'category',
         label: 'Testing',
         items: [
-          'Examples/VPN/Testing/',
+          'Examples/VPN/Testing/dnsleaktest.sh',
          ],
       }, 
      ],
