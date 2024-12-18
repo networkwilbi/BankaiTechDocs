@@ -1,0 +1,24 @@
+name: radarr
+
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    hostname: radarr
+    depends_on:
+      - prowlarr
+    environtment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./radarr:/config
+      - /media/Movies:/Movies #optional
+      - /media/Downloads:/media/Downloads #optional
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - 7878:7878
+    restart: unless-stopped
