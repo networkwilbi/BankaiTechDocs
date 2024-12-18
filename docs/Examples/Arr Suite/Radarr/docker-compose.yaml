@@ -5,8 +5,6 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     hostname: radarr
-    depends_on:
-      - prowlarr
     environtment:
       - PUID=1000
       - PGID=1000
