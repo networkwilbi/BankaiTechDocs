@@ -137,8 +137,8 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Testing',
         link: {
-        type: 'generated-index',
-        title: 'Testing',
+          type: 'generated-index',
+          title: 'Testing',
         },
       }, 
      ],
