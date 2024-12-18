@@ -121,7 +121,7 @@ const sidebars: SidebarsConfig = {
       },   
     ],
   }, 
-     {
+  {
     type: 'category',
     label: '*Arr Suite',
     link: { type: 'doc', id: 'Examples/Arr Suite/Introduction' },
@@ -189,7 +189,7 @@ const sidebars: SidebarsConfig = {
           'Examples/VPN/Firewall/Linux Firewall',
         ],
       },
-       {
+      {
         type: 'category',
         label: 'Testing',
         items: [
