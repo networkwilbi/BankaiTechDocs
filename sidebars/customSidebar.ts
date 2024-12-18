@@ -121,7 +121,7 @@ const sidebars: SidebarsConfig = {
       },   
     ],
   },
-    {
+  {
     type: 'category',
     label: '*Arr Suite',
     link: { type: 'doc', id: 'Examples/Arr Suite/Introduction' },
