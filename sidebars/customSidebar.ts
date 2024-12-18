@@ -136,9 +136,10 @@ const sidebars: SidebarsConfig = {
       {
         type: 'category',
         label: 'Testing',
-        items: [
-          'Examples/VPN/Testing/dnsleaktest',
-         ],
+        link: {
+        type: 'generated-index',
+        title: 'Testing',
+        },
       }, 
      ],
   },
