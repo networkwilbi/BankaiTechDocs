@@ -181,6 +181,22 @@ const sidebars: SidebarsConfig = {
     type: 'category',
     label: 'VPN',
     link: { type: 'doc', id: 'Examples/VPN/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Firewall',
+        items: [
+          'Examples/VPN/Firewall/Linux Firewall',
+        ],
+      },
+       {
+        type: 'category',
+        label: 'Testing',
+        items: [
+          'Examples/VPN/Testing/dnsleaktest',
+         ],
+      }, 
+     ],
   },
  ],
 };
