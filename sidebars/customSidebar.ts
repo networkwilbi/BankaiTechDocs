@@ -33,7 +33,7 @@ const sidebars: SidebarsConfig = {
          'Docker/Docs/Helpful Commands',
          'Docker/Troubleshooting/Docker',
       ],      
-    },
+   },
    {
     type: 'category',
     label: 'Nextcloud',
@@ -62,7 +62,7 @@ const sidebars: SidebarsConfig = {
          'Nextcloud/Troubleshooting/OnlyOffice',
         ],
      },
-    ],
+     ],
   }, 
   {
     type: 'category',
