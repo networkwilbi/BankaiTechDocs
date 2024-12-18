@@ -175,7 +175,8 @@ const sidebars: SidebarsConfig = {
           'Examples/Arr Suite/Prowlarr/docker-compose',
          ],
       },
-    },
+     ],
+   },
  ],
 };
 
