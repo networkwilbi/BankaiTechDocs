@@ -121,6 +121,67 @@ const sidebars: SidebarsConfig = {
       },   
     ],
   }, 
+     {
+    type: 'category',
+    label: '*Arr Suite',
+    link: { type: 'doc', id: 'Examples/Arr Suite/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Full Stack',
+        items: [
+          'Examples/Arr Suite/Full Stack/docker-compose',
+         ],
+      },  
+      {
+        type: 'category',
+        label: 'Jellyseerr',
+        items: [
+          'Examples/Arr Suite/Jellyseerr/docker-compose',
+         ],
+      },
+      {
+        type: 'category',
+        label: 'Radarr',
+        items: [
+          'Examples/Arr Suite/Radarr/docker-compose',
+         ],
+      },
+      {
+        type: 'category',
+        label: 'Sonarr',
+        items: [
+          'Examples/Arr Suite/Sonarr/docker-compose',
+         ],
+      }, 
+      {
+        type: 'category',
+        label: 'Lidarr',
+        items: [
+          'Examples/Arr Suite/Lidarr/docker-compose',
+         ],
+      }, 
+      {
+        type: 'category',
+        label: 'Readarr',
+        items: [
+          'Examples/Arr Suite/Readarr/docker-compose',
+         ],
+      }, 
+      {
+        type: 'category',
+        label: 'Prowlarr',
+        items: [
+          'Examples/Arr Suite/Prowlarr/docker-compose',
+         ],
+      }, 
+    ],
+  },
+  {
+    type: 'category',
+    label: 'VPN',
+    link: { type: 'doc', id: 'Examples/VPN/Introduction' },
+  },
  ],
 };
 
