@@ -130,49 +130,49 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Full Stack',
         items: [
-          'Examples/Arr Suite/Full Stack/docker-compose.yaml',
+          'Examples/Arr Suite/Full Stack/docker-compose',
          ],
       },  
       {
         type: 'category',
         label: 'Jellyseerr',
         items: [
-          'Examples/Arr Suite/Jellyseerr/docker-compose.yaml',
+          'Examples/Arr Suite/Jellyseerr/docker-compose',
          ],
       },
       {
         type: 'category',
         label: 'Radarr',
         items: [
-          'Examples/Arr Suite/Radarr/docker-compose.yaml',
+          'Examples/Arr Suite/Radarr/docker-compose',
          ],
       },
       {
         type: 'category',
         label: 'Sonarr',
         items: [
-          'Examples/Arr Suite/Sonarr/docker-compose.yaml',
+          'Examples/Arr Suite/Sonarr/docker-compose',
          ],
       }, 
       {
         type: 'category',
         label: 'Lidarr',
         items: [
-          'Examples/Arr Suite/Lidarr/docker-compose.yaml',
+          'Examples/Arr Suite/Lidarr/docker-compose',
          ],
       }, 
       {
         type: 'category',
         label: 'Readarr',
         items: [
-          'Examples/Arr Suite/Readarr/docker-compose.yaml',
+          'Examples/Arr Suite/Readarr/docker-compose',
          ],
       }, 
       {
         type: 'category',
         label: 'Prowlarr',
         items: [
-          'Examples/Arr Suite/Prowlarr/docker-compose.yaml',
+          'Examples/Arr Suite/Prowlarr/docker-compose',
          ],
       }, 
     ],
@@ -193,7 +193,7 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Testing',
         items: [
-          'Examples/VPN/Testing/dnsleaktest.sh',
+          'Examples/VPN/Testing/dnsleaktest',
          ],
       }, 
      ],
