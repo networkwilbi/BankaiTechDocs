@@ -130,49 +130,49 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Full Stack',
         items: [
-          'Examples/Arr Suite/Full Stack/docker-compose',
+          'Examples/Arr Suite/Full Stack/',
          ],
       },  
       {
         type: 'category',
         label: 'Jellyseerr',
         items: [
-          'Examples/Arr Suite/Jellyseerr/docker-compose',
+          'Examples/Arr Suite/Jellyseerr/',
          ],
       },
       {
         type: 'category',
         label: 'Radarr',
         items: [
-          'Examples/Arr Suite/Radarr/docker-compose',
+          'Examples/Arr Suite/Radarr/',
          ],
       },
       {
         type: 'category',
         label: 'Sonarr',
         items: [
-          'Examples/Arr Suite/Sonarr/docker-compose',
+          'Examples/Arr Suite/Sonarr/',
          ],
       }, 
       {
         type: 'category',
         label: 'Lidarr',
         items: [
-          'Examples/Arr Suite/Lidarr/docker-compose',
+          'Examples/Arr Suite/Lidarr/',
          ],
       }, 
       {
         type: 'category',
         label: 'Readarr',
         items: [
-          'Examples/Arr Suite/Readarr/docker-compose',
+          'Examples/Arr Suite/Readarr/',
          ],
       }, 
       {
         type: 'category',
         label: 'Prowlarr',
         items: [
-          'Examples/Arr Suite/Prowlarr/docker-compose',
+          'Examples/Arr Suite/Prowlarr/',
          ],
       }, 
     ],
@@ -186,14 +186,14 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Firewall',
         items: [
-          'Examples/VPN/Firewall/Linux Firewall',
+          'Examples/VPN/Firewall/',
         ],
       },
       {
         type: 'category',
         label: 'Testing',
         items: [
-          'Examples/VPN/Testing/dnsleaktest',
+          'Examples/VPN/Testing/',
          ],
       }, 
      ],
