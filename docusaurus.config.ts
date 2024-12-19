@@ -190,7 +190,7 @@ const config: Config = {
           items: [
             {
               label: 'Examples',
-              to: '/category/examples',
+              to: 'Examples/Reverse Proxies/Introduction',
             },
           ],
         },
