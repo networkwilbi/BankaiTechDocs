@@ -10,21 +10,35 @@ import CodeBlock from '@theme/CodeBlock';
 <h3>*Official Docs can be found here. [Link](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#last_update)*</h3>
 ![Example](/img/Docusaurus/Styling/lastUpdate.jpg)
 ### Creating a GitHub Repository
-<p>First we need to create a [GitHub Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories).</p>
-<p>When you are done creating your new repository we will have to add `SSH Keys` to your account</p>
-<p>In the upper-right corner of any page, click your profile photo, then click Settings.</p>
+<p>
+<>First we need to create a [GitHub Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories).</>
+</p>
+
+<p>
+<>When you are done creating your new repository we will have to add `SSH Keys` to your account</>
+</p>
+
+<p>
+<>In the upper-right corner of any page, click your profile photo, then click Settings.</>
+</p>
 
 ![GitHub Settings](/img/Docusaurus/Styling/githubSettings.png)
 
-<p>In the "Access" section of the sidebar, click SSH and GPG keys.</p>
+<p>
+<>In the "Access" section of the sidebar, click SSH and GPG keys.</>
+</p>
 
 ![SSH and GPG keys](/img/Docusaurus/Styling/sshKeys.jpg)
 
-<p>Click `New SSH key`</p>
+<p>
+<>Click `New SSH key`</>
+</p>
 
 ![New SSH key](/img/Docusaurus/Styling/NewSSHkey.png)
 
-<p>You should now see this screen</p>
+<p>
+<>You should now see this screen</>
+</p>
 
 ![Paste key](/img/Docusaurus/Styling/addKey.jpg)
 :::note
@@ -33,11 +47,15 @@ Key type is `Authentication key`
 :::
 
 ### Creating local SSH key
-<p>Go to your temninal and run this command</p>
+<p>
+<>Go to your temninal and run this command</>
+</p>
 ```
 ssh-keygen -t ed25519 -C "your-email@example.com"
 ```
-<p>Press `ENTER` and follow the prompts</p>
+<p>
+<>Press `ENTER` and follow the prompts</>
+</p>
 
 ![Generate Keys](/img/Docusaurus/Styling/generateKey.jpg)
 
@@ -47,7 +65,9 @@ You do not need to enter a `passphrase` but it is recommended for security
 If you do use a Passphrase, please keep it safe as you will need it every time you run `Git pull` or `Git push`
 :::
 
-<p>Run the following command and copy the contents of the result</p>
+<p>
+<>Run the following command and copy the contents of the result</>
+</p>
 ```
 cat <location of new ssh key>
 ```
@@ -56,29 +76,41 @@ I ran `cat /root/.ssh/id_ed25519.pub`
 :::
 
 ### Adding SSH key to GitHub
-<p>Go back over to GitHub and Paste the SSH key you just copied</p>
+<p>
+<>Go back over to GitHub and Paste the SSH key you just copied</>
+</p>
 
 ![key](/img/Docusaurus/Styling/key.jpg)
 
-<p>Press `Add SSH key`</p>
+<p>
+<>Press `Add SSH key`</>
+</p>
 
 ## Creating a local .git repo
-<p>Go to the root directory of your website</p>
+<p>
+<>Go to the root directory of your website</>
+</p>
 :::note
 This directory will contain your `docusaurus.config.js` or `docusaurus.config.ts` file
 :::
-<p>In your terminal, run the following commands</p>
+<p>
+<>In your terminal, run the following commands</>
+</p>
 ```
 git init
 git config --global user.name "<USER_NAME>"
 git config --global user.email "<USER_EMAIL>"
 ```
 ## Connecting to the remote Repo
-<p>We are going to need the SSH url for your repo, we can find that here</p>
+<p>
+<>We are going to need the SSH url for your repo, we can find that here</>
+</p>
 
 ![Repo URL](/img/Docusaurus/Styling/sshUrl.jpg)
 
-<p>Run this command to add your remote repo</p>
+<p>
+<>Run this command to add your remote repo</>
+</p>
 ```
 git remote add origin <SSh Repo URL>
 ```
@@ -95,47 +127,67 @@ curl --silent  https://raw.githubusercontent.com/thoughtworks/talisman/main/glob
 
 ### Setting Up [GitLeaks](https://github.com/gitleaks/gitleaks)
 #### Creating a GitHub API Key
-<p>Click the user icon at the top right and go to `Settings`</p>
+<p>
+<>Click the user icon at the top right and go to `Settings`</>
+</p>
 
 ![GitHub Profile](/img/Docusaurus/GitHub_Profile.png)
 
-<p>On the bottom left go to `Developer Settings`</p>
+<p>
+<>On the bottom left go to `Developer Settings`</>
+</p>
 
 
 ![GitHub Developer Settings](/img/Docusaurus/GitHub_Developer.png)
 
 ##### Creating a new Token (classic)
-<p>Click on `Tokens (classic)` and then Generate a new Token</p>
+<p>
+<>Click on `Tokens (classic)` and then Generate a new Token</>
+</p>
 
 ![GitHub Tokens](/img/Docusaurus/GitHub_Token.png)
 
-<p>Name the new Token and Select an Expiration Date</p>
+<p>
+<>Name the new Token and Select an Expiration Date</>
+</p>
 
 :::info
 It is recommended that you set an expiration date instead of having no Expiration, For security reasons.
 :::
 
-<p>Check the `Repo` and `Projects` checkboxes and Generate the Token</p>
+<p>
+<>Check the `Repo` and `Projects` checkboxes and Generate the Token</>
+</p>
 
 ![Token Repo](/img/Docusaurus/Token_Repo.png)
 ![Token Project](/img/Docusaurus/Token_Project.png)
 
 ##### Creating Action Secrets for GitLeaks
-<p>Go to `Settings` and then `Secrets and Variables > Actions` and create a new Repository Secret</p>
+<p>
+<>Go to `Settings` and then `Secrets and Variables > Actions` and create a new Repository Secret</>
+</p>
 ![GitLeaks Secret](/img/Docusaurus/GitLeaks_Secrets.png)
-<p>For the name, type in `GIT_TOKEN`</p>
+<p>
+<>For the name, type in `GIT_TOKEN`</>
+</p>
 Paste your GitHub API Key into the secret field and then save.
 
 #### Creating the GitLeaks Workflow Action
-<p>Go to `Actions` and then Click `New Workflow`</p>
+<p>
+<>Go to `Actions` and then Click `New Workflow`</>
+</p>
 
 ![GitLeaks](/img/Docusaurus/GitLeaks1.png)
 
-<p>Set up a New Workflow</p>
+<p>
+<>Set up a New Workflow</>
+</p>
 
 ![Workflow](/img/Docusaurus/GitLeaks_Workflow.png)
 
-<p>Paste the Following Snippet</p>
+<p>
+<>Paste the Following Snippet</>
+</p>
 ```
 name: gitleaks
 on:
@@ -163,14 +215,18 @@ Run the New GitLeaks Workflow
 ![Run Workflow](/img/Docusaurus/Run_Workflow.png)
 
 ## Pushing to GitHub
-<p>Now run the following commands</p>
+<p>
+<>Now run the following commands</>
+</p>
 ```
 git add -A
 git commit -m 'main'
 git push  origin master
 git pull origin main
 ```
-<p>You should now be able to make changes on GitHub and then run `git pull origin main` to download the changes locally, or you can make changes locally and run `git push origin main` to send the changes to GitHub</p>
+<p>
+<>You should now be able to make changes on GitHub and then run `git pull origin main` to download the changes locally, or you can make changes locally and run `git push origin main` to send the changes to GitHub</>
+</p>
 :::note
 When you run `git pull origin main` you will have to run `npm run build` afterwards to apply the changes
 :::
@@ -183,7 +239,9 @@ When you run `git pull origin main` you will have to run `npm run build` afterwa
 ```
 nano docusaurus.config.js
 ```
-<p>Find the following Snippet of code</p>
+<p>
+<>Find the following Snippet of code</>
+</p>
 ```
   presets: [
     [
@@ -211,12 +269,16 @@ nano docusaurus.config.js
     ],
   ],
 ```
-<p>Add the following lines in the `docs` section</p>
+<p>
+<>Add the following lines in the `docs` section</>
+</p>
 ```
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
 ```
-<p>The snippet of code should now look like this</p>
+<p>
+<>The snippet of code should now look like this</>
+</p>
 ```
   presets: [
     [
@@ -252,7 +314,9 @@ nano docusaurus.config.js
 ```
 nano docusaurus.config.ts
 ```
-<p>Find the following Snippet of code</p>
+<p>
+<>Find the following Snippet of code</>
+</p>
 ```
   presets: [
     [
@@ -280,12 +344,16 @@ nano docusaurus.config.ts
     ],
   ],
 ```
-<p>Add the following lines in the `docs` section</p>
+<p>
+<>Add the following lines in the `docs` section</>
+</p>
 ```
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
 ```
-<p>The snippet of code should now look like this</p>
+<p>
+<>The snippet of code should now look like this</>
+</p>
 ```
   presets: [
     [
@@ -319,8 +387,13 @@ nano docusaurus.config.ts
 </Tabs>
 
 ### Adding the last updated to Font Matter
-<p>Open up one of your `.md` files in `/docs`</p>
-<p>Add the following lines to the top of the file</p>
+<p>
+<>Open up one of your `.md` files in `/docs`</>
+</p>
+
+<p>
+<>Add the following lines to the top of the file</>
+</p>
 ```
 ---
 last_update:
@@ -330,7 +403,9 @@ last_update:
 :::note
 You will have to add this too all of your `.md` files
 :::
-<p>Now everytime you run `git pull origin main` and `npm run build` it will update the `last_updated` line from `git history`</p>
+<p>
+Now everytime you run `git pull origin main` and `npm run build` it will update the `last_updated` line from `git history`</>
+</p>
 
 ## References
 [Font Matter Options](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter)\
