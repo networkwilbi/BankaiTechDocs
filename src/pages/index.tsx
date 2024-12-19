@@ -16,7 +16,7 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <p>
-        <><h2>For Ubuntu Systems</h2></>
+        <h2><>For Ubuntu Systems</></h2>
         </p>
       </div>
     </header>
