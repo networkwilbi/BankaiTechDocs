@@ -14,6 +14,11 @@ const config: Config = {
   tagline: 'Debugging is when you are a detective in a crime where you are also the murderer',
   favicon: 'img/favcon.ico',
 
+  // Adopt Docusaurus Faster
+  future: {
+    experimental_faster: true,
+  },
+
   // Set the production url of your site here
   url: 'https://docs.bankai-tech.com',
   // Set the /<baseUrl>/ pathname under which your site is served
