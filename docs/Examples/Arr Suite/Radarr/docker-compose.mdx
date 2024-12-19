@@ -1,0 +1,35 @@
+---
+title: docker-compose.yaml
+tags:
+    - Arr Suite
+    - Radarr
+keywords: [Arr Suite, Radarr]
+last_update:
+  author: BankaiTech
+---
+```
+name: radarr
+
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    hostname: radarr
+    environtment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./radarr:/config
+      - /media/Movies:/Movies #optional
+      - /media/Downloads:/media/Downloads #optional
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+```
+
+<a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
