@@ -10,7 +10,7 @@ require('dotenv').config({path: './.env', debug: true})
 
 // Main Config 
 const config: Config = {
-  title: 'My HomeLab Documentation',
+  title: 'Bankai-Tech Docs',
   tagline: 'Debugging is when you are a detective in a crime where you are also the murderer',
   favicon: 'img/favcon.ico',
 
@@ -44,7 +44,8 @@ const config: Config = {
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
           routeBasePath: '/', // Serve the docs at the site's root
-          sidebarPath: './sidebars.ts',
+          sidebarCollapsible: true,
+          sidebarPath: './sidebars/customSidebar.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -104,6 +105,7 @@ const config: Config = {
       {name: 'keywords', content: 'Docs, Nextcloud, Tutorial, Documentation'},
     ],
     sidebar: {
+      sidebarCollapsible: true,
       autoCollapseCategories: true
     },
     colorMode: {
@@ -135,7 +137,7 @@ const config: Config = {
       searchPagePath: 'search',
     },
     navbar: {
-      title: 'Bankai Docs',
+      title: 'Bankai-Tech Docs',
       logo: {
         alt: 'My Site Logo',
         src: 'img/icon.jpg',
@@ -143,15 +145,25 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docSidebar',
           position: 'left',
           label: 'Tutorials',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'exampleSidebar',
+          position: 'left',
+          label: 'Examples',
         },
           {to: 'https://buymeacoffee.com/BankaiTech', label: 'Buy Me a Beer', position: 'left'},
     //    {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/TrueBankai416/BankaiTechDocs',
           label: 'GitHub',
+          position: 'right',
+        },
+        { href: 'https://github.com/TrueBankai416/BankaiTechDocs/issues',
+          label: 'Issues',
           position: 'right',
         },
       ],
@@ -164,7 +176,16 @@ const config: Config = {
           items: [
             {
               label: 'Tutorials',
-              to: '/category/tutorial---docker',
+              to: '/category/docker',
+            },
+          ],
+        },
+        {
+          title: 'Examples',
+          items: [
+            {
+              label: 'Examples',
+              to: '/category/examples',
             },
           ],
         },
@@ -175,14 +196,16 @@ const config: Config = {
               label: 'Discord',
               href: 'https://discord.gg/6THYdvayjg',
             },
-            {
-              label: 'Buy me a Coffee',
-              href: 'https://buymeacoffee.com/BankaiTech',
-            },
           ],
         },
         {
-          title: 'More',
+          title: 'Support Me',
+          items: [
+            {
+              label: 'Buy me a Beer',
+              href: 'https://buymeacoffee.com/BankaiTech',
+            },
+          /*
           items: [
       //      {
       //        label: 'Blog',
@@ -192,10 +215,11 @@ const config: Config = {
       //        label: 'GitHub',
       //        href: 'https://github.com/facebook/docusaurus',
       //      },
+      */
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My HomeLab Docs`,
+      copyright: `Copyright © ${new Date().getFullYear()} Bankai-Tech Docs`,
     },
     prism: {
       darkTheme: prismThemes.dracula,

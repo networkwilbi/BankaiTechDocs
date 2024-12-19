@@ -1,0 +1,349 @@
+---
+title: Complete Install
+tags:
+   - Docker
+   - Docker Compose
+   - Tutorial
+   - Nextcloud
+   - Collabora Code
+   - Nextcloud Office
+keywords: [Docker, Docker Engine, Tutorial, Nextcloud]
+last_update:
+  author: BankaiTech
+---
+
+
+            ## Nextcloud Installation using Docker Build and Docker Compose
+***This method includes Redis, MariaDB, Nextcloud Memories, and Office***
+:::note
+inotify libraries have been added to the Dockerfile for the iNotify App
+:::
+:::info
+Nextcloud 28.0.4 was the latest version when making this tutorial.
+:::
+
+First lets update your system.
+```
+sudo apt-get update && apt-get upgrade -y
+```
+
+### Setting up the directories
+Now lets setup the Directories
+:::note
+
+You can change the directories to your liking.
+
+:::
+
+```
+sudo mkdir /var/docker && sudo mkdir /var/docker/nextcloud
+```
+Lets take ownership of the directory
+```
+sudo chown -R 1000:1000 /var/docker && cd /var/docker/nextcloud
+```
+
+### Creating .env files
+Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
+
+#### Creating .nextcloud.env
+```
+NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.0/24
+TRUSTED_PROXIES=192.168.x.xxx
+OVERWRITEPROTOCOL=https
+OVERWRITECLIURL=https://cloud.example.com
+REDIS_HOST=redis
+REDIS_PORT=6379
+PHP_MEMORY_LIMIT=512M
+PHP_UPLOAD_LIMIT-100M
+MYSQL_PASSWORD=CHANGEME
+MYSQL_DATABASE=nextcloud
+MYSQL_USER=nextcloud
+MYSQL_HOST=mariadb
+```
+
+#### Creating .mariadb.env
+```
+MYSQL_ROOT_PASSWORD=CHANGE
+MYSQL_PASSWORD=CHANGEME
+MYSQL_DATABASE=nextcloud
+MYSQL_USER=nextcloud
+```
+
+:::tip[Info]
+
+Please Change `CHANGEME` to a password of your choosing.
+:::danger
+Refrain from using Special characters for you MySQL Passwords. \
+Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
+:::
+Save the new file by pressing `CTRL+X`
+
+#### Creating .go_vod.env
+```
+NEXTCLOUD_HOST=https://cloud.example.com
+NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
+NVIDIA_VISIBLE_DEVICES=all
+#devices:
+#  - /dev/dri:/dev/dri # VA-API (omit for NVENC)
+```
+
+:::warning[warning]
+
+<p>Please make sure that the Password is the same as the one you previously set in the last file</p>
+<p>Remove all instances of `<>`</p>
+:::
+
+#### Creating .collabora.env
+```
+username=admin
+password=CHANGEME
+domain=cloud\\.example\\.com
+```
+
+   ### Creating the Compose file
+   ```
+   nano docker-compose.yaml
+   ```
+  
+   Now lets edit the compose file.
+
+```
+name: nextcloud
+
+services:
+  mariadb:
+    image: mariadb:10.11
+    container_name: mariadb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --log_bin_trust_function_creators=true
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    env_file:
+      - .mariadb.env
+
+  nextcloud:
+    image: bankaitech/nextcloud:latest
+    container_name: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - mariadb
+      - redis
+      - collabora
+#      - onlyoffice
+      - go-vod
+    volumes:
+      - ./nextcloud:/var/www/html
+    env_file:
+      - .nextcloud.env
+
+  cron:
+    image: bankaitech/nextcloud:latest
+    container_name: cron
+    restart: always
+    volumes:
+      - ./nextcloud:/var/www/html:z
+    depends_on:
+      - mariadb
+      - redis
+    entrypoint: /cron.sh
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    expose:
+      - 6379
+    command: redis-server --save 60 1 --loglevel warning
+    restart: always
+
+  collabora:
+    container_name: collabora
+    hostname: collabora
+    privileged: true
+    tty: true
+    ports:
+      - 9980:9980
+    cap_add:
+      - MKNOD
+    image: collabora/code:latest
+#    volumes:
+#      - ./collabora/config/coolwsd.xml:/etc/coolwsd/coolwsd.xml
+    env_file:
+      - .collabora.env
+    restart: always
+
+  go-vod:
+    image: radialapps/go-vod
+    restart: always
+    container_name: go-vod
+    env_file:
+      - .go_vod.env
+    volumes:
+      - ./nextcloud:/var/www/html:ro
+#    runtime: nvidia # (NVENC)
+
+#  documentserver:
+#    container_name: onlyoffice
+#    stdin_open: true
+#    tty: true
+#    ports:
+#      - 87:80
+#    volumes:
+#      - ./DocumentServer/logs:/var/log/onlyoffice
+#      - ./DocumentServer/data:/var/www/onlyoffice/Data
+#    image: onlyoffice/documentserver
+```
+
+:::info[NVIDIA HWA]
+If you want to use GPU for transcoding then uncomment this line\
+runtime: nvidia # (NVENC)  # For Nvidia HW Acceleration, Uncomment after installing nvidia drivers.\
+Test nvidia by running `sudo nvidia-smi`
+:::
+## Starting Nextcloud
+Now lets start it up.
+```
+sudo docker compose up -d
+```
+:::info
+
+the `-d` flag stands for [detatched](https://docs.docker.com/engine/reference/run/#foreground-and-background) mode.
+:::
+<p>After its done pulling the docker images you can open up a web browser.</p>
+:::note
+Before proceeding, you will need to configure your reverse proxy. I have an example Nginx config [Here](https://docs.bankai-tech.com/Reverse%20Proxy/Nginx).
+:::
+<p>Connect to nextcloud by typing in your configured `domain`</p>
+<p>You should see this screen.</p>
+
+![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
+
+### Account Creation
+<p>Now create an admin account and click `Install`</p>
+<p>Click `Install Recommended Apps`</p>
+
+![Nextcloud Install Recommended Apps](/img/nextcloud/FirstStart_RecommendedApps.jpg)
+
+<p>When its done installing you should see your Dashboard</p>
+
+![Nextcloud Dashboard](/img/nextcloud/Dashboard.jpg)
+
+### Checking for errors and warnings
+<p>On the top right click the `User Icon` and go to `Administration Settings`</p>
+
+![Nextcloud Administration Settings](/img/nextcloud/Administration_Settings.jpg)
+
+<p>Here you should see `Security & Setup Warnings`</p>
+
+![Nextcloud Warnings](/img/nextcloud/Warnings.jpg)
+
+<p>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</p>
+
+### Modifying the config.php file
+Run the following command to open the `config.php` file with nano.
+```
+nano nextcloud/config/config.php
+```
+:::tip[Hint]
+
+<p>If you recieved an error `Directory nextcloud doesnt exist`, then you need to change directories.</p>
+Run `cd /var/docker/nextcloud` then try again.
+:::
+
+Now add the following to the bottom of the file.
+```
+  'maintenance_window_start' => 1,
+  'default_phone_region' => 'US',
+```
+
+
+![Nextcloud config.php](/img/nextcloud/config.jpg)
+
+<p>Now if you go back to your `Administration Settings` Page.</p>
+<p>It should look something like this.</p>
+
+![Nextcloud No Warnings](/img/nextcloud/NoErrors.jpg)
+
+:::tip[HINT]
+
+In some cases, you may have to delete your browser cache and restart the browser for the Warnings to update.
+:::
+
+### Creating production use user
+<p>Now you can go create a user for yourself.</p>
+<p>Go to the user icon on the top right and select `Users`.</p>
+
+![Nextcloud Users](/img/nextcloud/users.jpg)
+
+<p>Click on `Add User` on the left hand side.</p>
+
+![Nextcloud Add Users](/img/nextcloud/Adduser.jpg)
+
+
+<p>Now create your User.</p>
+:::warning[Caution]
+
+Make sure to set `Groups` to `admin`
+:::
+
+![Nextcloud Add Users1](/img/nextcloud/Adduser1.jpg)
+## Setting up Nextcloud Office (Collabora Code)
+Head back over to your `Administration Settings` and scroll down on the left until you see `Nextcloud Office`
+Wait a few seconds while it processes.
+Now choose `Use your own Server`
+![Choose your Server](/img/nextcloud/OfficeServer.jpg)
+
+<p>Enter in your domain that you will use for office and Uncheck `Disable certificate verification`</p>
+:::note
+You will have to add an `A` record for `office` and setup your reverse proxy for Collabra
+:::
+![CollaboraUrl](/img/nextcloud/OfficeUrl.jpg)
+### WOPI List
+<p>Now scroll down to the `WOPI List`</p>
+Enter in your `Public IP`, Network `CIDR`, and `127.0.0.1`
+:::info
+Ex. `251.163.184.3,192.168.1.1/24,127.0.0.1`
+:::
+![Office WOPI](/img/nextcloud/OfficeWOPI.jpg)
+Press `ENTER`
+### Testing Nextcloud Office
+<p>Go to `Files` and create a new document</p>
+![New Document](/img/nextcloud/NewDocument.jpg)
+![Nextcloud Office](/img/nextcloud/NextcloudOffice.jpg)
+## Installing Nextcloud Memories
+<p>Go to `Apps`</p>
+![Nextcloud Apps](/img/nextcloud/Apps.jpg)
+<p>Now click `Download and enable`</p>
+![Enable Memories](/img/nextcloud/InstallMemories.jpg)
+<p>Now search and install `Preview Generator`.</p>
+### Configuring Nextcloud Memories
+<p>Go to your `Administration Settings` and find `Memories`</p>
+![Memories](/img/nextcloud/Memories.jpg)
+<p>My Settings are as Follows</p>
+![Memories Setting1](/img/nextcloud/MemoriesSetting1.jpg)
+![Memories Setting2](/img/nextcloud/MemoriesSetting2.jpg)
+![Memories Setting3](/img/nextcloud/MemoriesSetting3.jpg)
+![Memories Setting4](/img/nextcloud/MemoriesSetting4.jpg)
+![Memories Setting5](/img/nextcloud/MemoriesSetting5.jpg)
+![Memories Setting6](/img/nextcloud/MemoriesSetting6.jpg)
+### Fixing the warnings
+<p>Im sure you noticed that there are a few warnings we need to take care of.</p>
+```
+ Geometry table has not been created.
+Reverse geocoding has not been configured (-1). 
+```
+<p>We can generate the Geometry table using this command.</p>
+```
+sudo docker exec -it -u 33 nextcloud php occ memories:places-setup
+```
+:::tip
+I prefer generating the Geometry table this way so I can view the progress
+:::
+## Congragulations!! you have installed Nextcloud!
+
+## Troubleshooting
+<p>For troubleshooting, please visit [Troublshooting](https://docs.bankai-tech.com/Nextcloud/Troubleshooting/Nextcloud/).</p>
+<p>Comment at the bottom of this page if you need help or have any suggestions to improve this site</p>
+
+<a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
