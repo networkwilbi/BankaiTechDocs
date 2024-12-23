@@ -181,7 +181,7 @@ const config: Config = {
           items: [
             {
               label: 'Tutorials',
-              to: '/category/docker',
+              to: 'Docker/Introduction',
             },
           ],
         },
@@ -190,7 +190,7 @@ const config: Config = {
           items: [
             {
               label: 'Examples',
-              to: '/category/examples',
+              to: 'Examples/Reverse Proxies/Introduction',
             },
           ],
         },
