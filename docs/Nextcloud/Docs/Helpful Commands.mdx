@@ -16,11 +16,12 @@ Here's a breakdown of the command components:
 
 - **`nextcloud`**: This is the name or ID of the Docker container in which the command is to be executed. Docker uses this to identify which container to target for the command.
 
-- **`php occ config:list system`**:
+- **`php occ`**:
   - **`php`**: This specifies that the command following it should be executed with PHP, indicating a PHP script or command is being run.
   - **`occ`**: This is the Nextcloud's command-line interface (CLI) tool. `occ` stands for "ownCloud console," as Nextcloud forked from ownCloud. It allows administrators to perform a wide range of operations, including installing and upgrading Nextcloud, managing users, encrypting data, and much more.
 
 ### Generating a redacted list of your config.php
+This command will output a redacted version of your `config.php` file. This may make it easier for you to view and share your configuration with others without needing to manually hide the sensitive information within the file.
 ```
 docker exec -it -u www-data nextcloud php occ config:list system
 ```
