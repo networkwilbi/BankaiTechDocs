@@ -44,9 +44,14 @@ sudo chown -R 1000:1000 /var/docker && cd /var/docker/nextcloud
 ```
 
 ### Creating .env files
+
 Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
 
 #### Creating .nextcloud.env
+```
+nano .nextcloud.env
+```
+Paste the Following with `CNTRL+SHIFT+V`
 ```
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.0/24
 TRUSTED_PROXIES=192.168.x.xxx
@@ -64,6 +69,10 @@ MYSQL_HOST=mariadb
 
 #### Creating .mariadb.env
 ```
+nano .mariadb.env
+```
+Paste the Following with `CNTRL+SHIFT+V`
+```
 MYSQL_ROOT_PASSWORD=CHANGE
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -80,6 +89,10 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 Save the new file by pressing `CTRL+X`
 
 #### Creating .go_vod.env
+```
+nano .go_vod.env
+```
+Paste the Following with `CNTRL+SHIFT+V`
 ```
 NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
@@ -100,6 +113,10 @@ NVIDIA_VISIBLE_DEVICES=all
 :::
 
 #### Creating .collabora.env
+```
+nano .collabora.env
+```
+Paste the Following with `CNTRL+SHIFT+V`
 ```
 username=admin
 password=CHANGEME
