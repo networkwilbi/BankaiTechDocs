@@ -55,7 +55,7 @@ OVERWRITECLIURL=https://cloud.example.com
 REDIS_HOST=redis
 REDIS_PORT=6379
 PHP_MEMORY_LIMIT=512M
-PHP_UPLOAD_LIMIT-100M
+PHP_UPLOAD_LIMIT=100M
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
@@ -90,8 +90,13 @@ NVIDIA_VISIBLE_DEVICES=all
 
 :::warning[warning]
 
-<p>Please make sure that the Password is the same as the one you previously set in the last file</p>
-<p>Remove all instances of `<>`</p>
+<p>
+<>Please make sure that the Password is the same as the one you previously set in the last file</>
+</p>
+
+<p>
+<>Remove all instances of `<>`</>
+</p>
 :::
 
 #### Creating .collabora.env
@@ -210,35 +215,55 @@ sudo docker compose up -d
 
 the `-d` flag stands for [detatched](https://docs.docker.com/engine/reference/run/#foreground-and-background) mode.
 :::
-<p>After its done pulling the docker images you can open up a web browser.</p>
+<p>
+<>After its done pulling the docker images you can open up a web browser.</>
+</p>
 :::note
 Before proceeding, you will need to configure your reverse proxy. I have an example Nginx config [Here](https://docs.bankai-tech.com/Reverse%20Proxy/Nginx).
 :::
-<p>Connect to nextcloud by typing in your configured `domain`</p>
-<p>You should see this screen.</p>
+<p>
+<>Connect to nextcloud by typing in your configured `domain`</>
+</p>
+
+<p>
+<>You should see this screen.</>
+</p>
 
 ![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
 
 ### Account Creation
-<p>Now create an admin account and click `Install`</p>
-<p>Click `Install Recommended Apps`</p>
+<p>
+<>Now create an admin account and click `Install`</>
+</p>
+
+<p>
+<>Click `Install Recommended Apps`</>
+</p>
 
 ![Nextcloud Install Recommended Apps](/img/nextcloud/FirstStart_RecommendedApps.jpg)
 
-<p>When its done installing you should see your Dashboard</p>
+<p>
+<>When its done installing you should see your Dashboard</>
+</p>
 
 ![Nextcloud Dashboard](/img/nextcloud/Dashboard.jpg)
 
 ### Checking for errors and warnings
-<p>On the top right click the `User Icon` and go to `Administration Settings`</p>
+<p>
+<>On the top right click the `User Icon` and go to `Administration Settings`</>
+</p>
 
 ![Nextcloud Administration Settings](/img/nextcloud/Administration_Settings.jpg)
 
-<p>Here you should see `Security & Setup Warnings`</p>
+<p>
+<>Here you should see `Security & Setup Warnings`</>
+</p>
 
 ![Nextcloud Warnings](/img/nextcloud/Warnings.jpg)
 
-<p>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</p>
+<p>
+<>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</>
+</p>
 
 ### Modifying the config.php file
 Run the following command to open the `config.php` file with nano.
@@ -247,7 +272,9 @@ nano nextcloud/config/config.php
 ```
 :::tip[Hint]
 
-<p>If you recieved an error `Directory nextcloud doesnt exist`, then you need to change directories.</p>
+<p>
+<>If you recieved an error `Directory nextcloud doesnt exist`, then you need to change directories.</>
+</p>
 Run `cd /var/docker/nextcloud` then try again.
 :::
 
@@ -260,8 +287,13 @@ Now add the following to the bottom of the file.
 
 ![Nextcloud config.php](/img/nextcloud/config.jpg)
 
-<p>Now if you go back to your `Administration Settings` Page.</p>
-<p>It should look something like this.</p>
+<p>
+<>Now if you go back to your `Administration Settings` Page.</>
+</p>
+
+<p>
+<>It should look something like this.</>
+</p>
 
 ![Nextcloud No Warnings](/img/nextcloud/NoErrors.jpg)
 
@@ -271,17 +303,26 @@ In some cases, you may have to delete your browser cache and restart the browser
 :::
 
 ### Creating production use user
-<p>Now you can go create a user for yourself.</p>
-<p>Go to the user icon on the top right and select `Users`.</p>
+<p>
+<>Now you can go create a user for yourself.</>
+</p>
+
+<p>
+<>Go to the user icon on the top right and select `Users`.</>
+</p>
 
 ![Nextcloud Users](/img/nextcloud/users.jpg)
 
-<p>Click on `Add User` on the left hand side.</p>
+<p>
+<>Click on `Add User` on the left hand side.</>
+</p>
 
 ![Nextcloud Add Users](/img/nextcloud/Adduser.jpg)
 
 
-<p>Now create your User.</p>
+<p>
+<>Now create your User.</>
+</p>
 :::warning[Caution]
 
 Make sure to set `Groups` to `admin`
@@ -294,13 +335,17 @@ Wait a few seconds while it processes.
 Now choose `Use your own Server`
 ![Choose your Server](/img/nextcloud/OfficeServer.jpg)
 
-<p>Enter in your domain that you will use for office and Uncheck `Disable certificate verification`</p>
+<p>
+<>Enter in your domain that you will use for office and Uncheck `Disable certificate verification`</>
+</p>
 :::note
 You will have to add an `A` record for `office` and setup your reverse proxy for Collabra
 :::
 ![CollaboraUrl](/img/nextcloud/OfficeUrl.jpg)
 ### WOPI List
-<p>Now scroll down to the `WOPI List`</p>
+<p>
+<>Now scroll down to the `WOPI List`</>
+</p>
 Enter in your `Public IP`, Network `CIDR`, and `127.0.0.1`
 :::info
 Ex. `251.163.184.3,192.168.1.1/24,127.0.0.1`
@@ -308,19 +353,31 @@ Ex. `251.163.184.3,192.168.1.1/24,127.0.0.1`
 ![Office WOPI](/img/nextcloud/OfficeWOPI.jpg)
 Press `ENTER`
 ### Testing Nextcloud Office
-<p>Go to `Files` and create a new document</p>
+<p>
+<>Go to `Files` and create a new document</>
+</p>
 ![New Document](/img/nextcloud/NewDocument.jpg)
 ![Nextcloud Office](/img/nextcloud/NextcloudOffice.jpg)
 ## Installing Nextcloud Memories
-<p>Go to `Apps`</p>
+<p>
+<>Go to `Apps`</>
+</p>
 ![Nextcloud Apps](/img/nextcloud/Apps.jpg)
-<p>Now click `Download and enable`</p>
+<p>
+<>Now click `Download and enable`</>
+</p>
 ![Enable Memories](/img/nextcloud/InstallMemories.jpg)
-<p>Now search and install `Preview Generator`.</p>
+<p>
+<>Now search and install `Preview Generator`.</>
+</p>
 ### Configuring Nextcloud Memories
-<p>Go to your `Administration Settings` and find `Memories`</p>
+<p>
+<>Go to your `Administration Settings` and find `Memories`</>
+</p>
 ![Memories](/img/nextcloud/Memories.jpg)
-<p>My Settings are as Follows</p>
+<p>
+<>My Settings are as Follows</>
+</p>
 ![Memories Setting1](/img/nextcloud/MemoriesSetting1.jpg)
 ![Memories Setting2](/img/nextcloud/MemoriesSetting2.jpg)
 ![Memories Setting3](/img/nextcloud/MemoriesSetting3.jpg)
@@ -328,12 +385,16 @@ Press `ENTER`
 ![Memories Setting5](/img/nextcloud/MemoriesSetting5.jpg)
 ![Memories Setting6](/img/nextcloud/MemoriesSetting6.jpg)
 ### Fixing the warnings
-<p>Im sure you noticed that there are a few warnings we need to take care of.</p>
+<p>
+<>Im sure you noticed that there are a few warnings we need to take care of.</>
+</p>
 ```
  Geometry table has not been created.
 Reverse geocoding has not been configured (-1). 
 ```
-<p>We can generate the Geometry table using this command.</p>
+<p>
+<>We can generate the Geometry table using this command.</>
+</p>
 ```
 sudo docker exec -it -u 33 nextcloud php occ memories:places-setup
 ```
@@ -343,7 +404,12 @@ I prefer generating the Geometry table this way so I can view the progress
 ## Congragulations!! you have installed Nextcloud!
 
 ## Troubleshooting
-<p>For troubleshooting, please visit [Troublshooting](https://docs.bankai-tech.com/Nextcloud/Troubleshooting/Nextcloud/).</p>
-<p>Comment at the bottom of this page if you need help or have any suggestions to improve this site</p>
+<p>
+<>For troubleshooting, please visit [Troublshooting](https://docs.bankai-tech.com/Nextcloud/Troubleshooting/Nextcloud/).</>
+</p>
+
+<p>
+<>Comment at the bottom of this page if you need help or have any suggestions to improve this site</>
+</p>
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
