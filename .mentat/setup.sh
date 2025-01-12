@@ -1,0 +1,6 @@
+echo "ALGOLIA_APP_ID=LOCAL_DEV" > .env
+echo "ALGOLIA_API_KEY=LOCAL_DEV" >> .env
+echo "ALGOLIA_INDEX_NAME=LOCAL_DEV" >> .env
+echo "POSTHOG_API_KEY=phc_000000000000000000000000000000000000" >> .env
+npm install
+npm run build
