@@ -3,6 +3,23 @@ last_update:
   author: BankaiTech
 ---
 ## Helpful `occ` commands for Nextcloud
+## Break down of the commands
+Here's a breakdown of the command components:
+
+- **`docker exec`**: This is a command used to run a specific command inside an already running container. It's handy when you need to interact with an application inside the container without stopping and starting it with a new command.
+
+- **`-it`**: These are two separate options combined:
+  - **`-i`** or **`--interactive`** keeps STDIN open even if not attached. This option ensures that the terminal remains interactive, meaning it can receive input from the user.
+  - **`-t`** or **`--tty`** allocates a pseudo-TTY, which simulates a real terminal, like what you would have if you were logged into a shell session. This is useful for when you want the command you're executing to behave as if it's being run in a real terminal session.
+
+- **`-u www-data or -u 33`**: This option specifies the username or UID with which to run the command inside the container. In this case, `www-data` is specified, indicating that the command should be executed as the `www-data` user. This is particularly important for applications that have permissions or actions that can only be conducted by certain users. It helps in maintaining permissions and ownership correctly within the Docker container's filesystem.
+
+- **`nextcloud`**: This is the name or ID of the Docker container in which the command is to be executed. Docker uses this to identify which container to target for the command.
+
+- **`php occ config:list system`**:
+  - **`php`**: This specifies that the command following it should be executed with PHP, indicating a PHP script or command is being run.
+  - **`occ`**: This is the Nextcloud's command-line interface (CLI) tool. `occ` stands for "ownCloud console," as Nextcloud forked from ownCloud. It allows administrators to perform a wide range of operations, including installing and upgrading Nextcloud, managing users, encrypting data, and much more.
+
 ### Generating a redacted list of your config.php
 ```
 docker exec -it -u www-data nextcloud php occ config:list system
