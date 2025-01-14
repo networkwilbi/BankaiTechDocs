@@ -160,6 +160,12 @@ const config: Config = {
           position: 'left',
           label: 'Examples',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'MSwindowsSidebar',
+          position: 'left',
+          label: 'MS Windows',
+        },
           {to: 'https://buymeacoffee.com/BankaiTech', label: 'Buy Me a Beer', position: 'left'},
     //    {to: '/blog', label: 'Blog', position: 'left'},
         {
