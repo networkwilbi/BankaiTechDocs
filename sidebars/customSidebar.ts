@@ -209,7 +209,7 @@ const sidebars: SidebarsConfig = {
         type: 'category',
         label: 'Windows 11',
         items: [
-          'MS Windows/Windows/Windows 11/Editions/Changing to Windows 11 Pro',
+          'MS Windows/Windows/Windows 11/Editions/Changing to Windows 11 Enterprise',
          ],
       },
       {
