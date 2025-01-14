@@ -1,17 +1,17 @@
 ---
-title: Changing to Windows 11 Pro
+title: Changing to Windows 11 Enterprise
 tags:
    - Windows
-   - Windows 11 Pro
+   - Windows 11 Enterprise
 
-keywords: [Windows 11, Pro]
+keywords: [Windows 11, Enterprise]
 last_update:
   author: BankaiTech
 ---
-An guide how to activate Windows 11 Pro for free.
+An guide how to activate Windows 11 Enterprise for free.
 
-## Am i also able to switch from any other edition to Pro?
-The answer is yes! You can switch from almost any edition to Pro completely for free!
+## Am i also able to switch from any other edition to Enterprise?
+The answer is yes! You can switch from almost any edition to Enterprise completely for free!
 
 ## Getting started
 What you first need to do is open CMD (Command Prompt) as Administrator using this keyboard key:
@@ -51,10 +51,10 @@ And now type this command:
 ``slmgr.vbs /ckms``
 Once again click on OK when you get an message
 ### Edition upgradable check command
-Now we are gonna check of your edition is supported to upgrade to Pro, run the following command to check this:
+Now we are gonna check of your edition is supported to upgrade to Enterprise, run the following command to check this:
 ``DISM /online /Get-TargetEditions``
-If you see "Professional" in the list, then you can upgrade your Windows edition to Pro for free!
-### Running Windows Pro installer
+If you see "Enterprise" in the list, then you can upgrade your Windows edition to Enterprise for free!
+### Running Windows Enterprise installer
 Now, copy and paste this complete command:
 
 ``sc config LicenseManager start= auto & net start LicenseManager``
@@ -71,35 +71,10 @@ Now wait until it's 100% and it's not weird that you will get an error
 
 When you get the error, just click Exit and then reboot your pc.
 
-You will now see an message that he is running updates and is installing features, just wait until its done and check "info" in settings, You will see that Windows 11 Pro is installed! 
+You will now see an message that he is running updates and is installing features, just wait until its done and check "info" in settings, You will see that Windows 11 Enterprise is installed! 
 
-But we are not done, You will see that it isn't activated and that you can't change some settings, now we are gonna fix that!
-## Activating Windows Pro
-Now we are gonna run some other commands to activate Windows 11 Pro
+Windows WILL need to be activated, you can find docs [here](https://docs.bankai-tech.com/MS%20Windows/Windows/Activation/Activating%20Windows}
 
-Press these keyboard keys once again:
-
-Windows-logo key+R
-
-It looks like this again:
-
-![Run Dialog With cmd.exe Text In It](https://user-images.githubusercontent.com/66115754/134801377-b9769c34-8a9d-4d4f-ba8e-6c073f1ce4a2.png)
-
-Press ctrl+shift+enter
-
-You will get an message, just click on Yes
-
-Now you will get an Command Prompt.
-
-Type the following commands one for one to activate:
-
-``slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX``
-
-``slmgr /skms kms8.msguides.com``
-
-``slmgr /ato``
- 
-Now you have Windows 11 Pro and it activated! You can check settings to see it.
 
 <p>
 <>Comment at the bottom of this page if you need help or have any suggestions to improve this site</>
