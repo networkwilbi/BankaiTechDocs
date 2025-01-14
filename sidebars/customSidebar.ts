@@ -211,7 +211,14 @@ const sidebars: SidebarsConfig = {
         items: [
           'MS Windows/Windows/Windows 11/Editions/Changing to Windows 11 Pro',
          ],
-      },   
+      },
+      {
+        type: 'category',
+        label: 'Activation',
+        items: [
+          'MS Windows/Windows/Activation/Activating Windows',
+         ],
+      }, 
     ],
   },
  ],
