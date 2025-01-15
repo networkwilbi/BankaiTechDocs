@@ -57,6 +57,7 @@ services:
       - type: bind
         source: /path/to/media
         target: /media
+        read_only: true
       - type: bind
         source: /path/to/media2
         target: /media2
@@ -75,7 +76,13 @@ services:
       - 'host.docker.internal:host-gateway'
 ```
 
-Replace `/path/to/config`, `/path/to/cache`, and `/path/to/media` with your preferred directories on your host system. The `--publish 8096:8096` option maps port 8096 on the host to port 8096 in the Docker container, enabling you to access the Jellyfin interface.
+Replace `/path/to/config`, `/path/to/cache`, and `/path/to/media` with your preferred directories on your host system.
+
+Start the Stack with the following command:
+```bash
+sudo docker compose up -d
+```
+The `-d` flag tells it to run in the background
 
 ### Step 4: Accessing Jellyfin
 
