@@ -9,6 +9,123 @@ last_update:
   author: BankaiTech
 ---
 
+# Installing Nginx on Ubuntu
 
+This tutorial covers the installation of Nginx on Ubuntu, a popular choice for serving as both a powerful web server and a reverse proxy. By following these detailed steps, you can quickly get Nginx up and running on your Ubuntu system.
+
+## Prerequisites
+
+- A system running Ubuntu (18.04, 20.04, or later versions).
+- A user account with `sudo` privileges.
+
+## Step 1: Update Package Repository
+
+Before installing any new software, it's a good practice to update your package repository to ensure you're installing the latest versions. Open your terminal and run:
+
+```
+sudo apt update
+```
+
+## Step 2: Install Nginx
+
+With the package repository updated, you can install Nginx by executing:
+
+```
+sudo apt install nginx -y
+```
+
+The `-y` flag automatically confirms the installation.
+
+## Step 3: Adjust Firewall Settings
+
+Ubuntu comes with `ufw` - an uncomplicated firewall. To allow Nginx traffic, you need to adjust the firewall settings. First, check the available application profiles:
+
+```
+sudo ufw app list
+```
+
+You should see "Nginx Full", "Nginx HTTP", and "Nginx HTTPS" in the list. To allow HTTP traffic, run:
+
+```
+sudo ufw allow 'Nginx HTTP'
+```
+
+Optionally, if you plan to use HTTPS, also allow "Nginx HTTPS":
+
+```
+sudo ufw allow 'Nginx HTTPS'
+```
+
+## Step 4: Verifying Nginx Installation
+
+After installing Nginx and adjusting the firewall, verify that Nginx is running:
+
+```
+sudo systemctl status nginx
+```
+
+You should see an active (running) status. Alternatively, you can visit your server's public IP address in a web browser. You should be greeted with the default Nginx landing page.
+
+If you need to find your server's IP address, you can run:
+
+```
+ip addr show
+```
+
+Look for the "inet" line under your network interface.
+
+## Step 5: Managing Nginx Service
+
+To manage the Nginx service, you can use the following `systemctl` commands:
+
+- To stop Nginx:
+  
+```
+sudo systemctl stop nginx
+```
+
+- To start Nginx:
+  
+```
+sudo systemctl start nginx
+```
+
+- To enable Nginx to start on boot:
+  
+```
+sudo systemctl enable nginx
+```
+
+- To disable nginx from starting on boot:
+  
+```
+sudo systemctl disable nginx
+```
+
+## Step 6: Configuring Nginx
+
+Nginx's configuration files are located in `/etc/nginx`. The main configuration file is `/etc/nginx/nginx.conf`. Website-specific configurations can be placed under `/etc/nginx/sites-available` and symlinked to `/etc/nginx/sites-enabled` for activation.
+
+A good practice is to create a new configuration file for each domain or subdomain in `sites-available` and create a symlink using:
+
+```
+sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+```
+
+After making any changes, you should check the configuration for syntax errors:
+
+```
+sudo nginx -t
+```
+
+If everything is correct, reload Nginx to apply the changes:
+
+```
+sudo systemctl reload nginx
+```
+
+## Conclusion
+
+You've successfully installed Nginx on your Ubuntu system. Nginx is now ready to serve your web content and handle reverse proxy configurations for your applications. For more detailed configuration options and advanced setups, refer to the [official Nginx documentation](http://nginx.org/en/docs/).
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
