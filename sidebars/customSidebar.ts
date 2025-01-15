@@ -89,6 +89,21 @@ const sidebars: SidebarsConfig = {
          'Docusaurus/Docs/Connecting to GitHub',
      ],
    },
+   {  
+     type: 'category',
+     label: 'Ubiquiti',
+     link: { type: 'doc', id: 'Ubiquiti/Introduction' },
+     items: [
+      {
+        type: 'category',
+        label: 'Access Points',
+        link: { type: 'doc', id: 'Ubiquiti/Access Points/Introduction' },
+        items: [
+          'Ubiquiti/Access Points/Unifi Controller Server',
+        ],
+      },
+     ],
+   },
  ],
 
 
