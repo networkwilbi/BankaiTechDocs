@@ -83,7 +83,7 @@ sudo chmod 600 /etc/letsencrypt/.cloudflare.ini
 Run Certbot with the Cloudflare DNS plugin to obtain your certificate:
 
 ```bash
-sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /etc/letsencrypt/.cloudflare.ini -d *.yourdomain.com
+sudo certbot certonly --dns-cloudflare --dns-cloudflare-credentials /etc/letsencrypt/.cloudflare.ini -d lunekes.com -d *.yourdomain.com --preferred-challenges dns-01 --dns-cloudflare-propagation-seconds 60
 ```
 
 Replace `yourdomain.com` with your actual domain. You can specify multiple domains and subdomains by adding additional `-d` parameters.
