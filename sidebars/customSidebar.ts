@@ -122,8 +122,14 @@ const sidebars: SidebarsConfig = {
         label: 'Certbot',
         link: { type: 'doc', id: 'Reverse Proxy/Certbot/Introduction' },
         items: [
-          'Reverse Proxy/Certbot/Cloudflare/Introduction',
-          'Reverse Proxy/Certbot/Cloudflare/Cloudflare',
+          {
+            type: 'category',
+            label: 'Cloudflare',
+            link: { type: 'doc', id: 'Reverse Proxy/Certbot/Cloudflare/Introduction' },
+            items: [
+              'Reverse Proxy/Certbot/Cloudflare/Cloudflare',
+            ],
+          },
         ],
       },
      ],
