@@ -10,4 +10,76 @@ last_update:
   author: BankaiTech
 ---
 
+# Setting Up Jellyfin on Ubuntu with Docker
+
+This guide details the installation of Jellyfin, a free and open-source media solution, on Ubuntu using Docker. Docker simplifies application deployment by containerizing components, resulting in easier management and isolation from the system environment.
+
+## Prerequisites
+
+- A system running Ubuntu 18.04 or later.
+- Basic understanding of terminal and command line usage.
+- Docker installed on your Ubuntu system. If Docker is not installed, follow the [official Docker installation guide for Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
+
+## Installation Steps
+
+### Step 1: Update Your System
+
+Ensure your system is up-to-date by running:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+### Step 2: Pull the Jellyfin Docker Image
+
+Pull the latest Jellyfin image from Docker Hub:
+
+```bash
+docker pull jellyfin/jellyfin
+```
+
+### Step 3: Create a Docker Container for Jellyfin
+
+Run the Jellyfin container. This command also sets volume mappings for your media and configuration data to persist outside the container:
+
+```bash
+docker run -d \
+  --name=jellyfin \
+  --user 1000:1000 \
+  --volume /path/to/config:/config \
+  --volume /path/to/cache:/cache \
+  --volume /path/to/media:/media \
+  --publish 8096:8096 \
+  --restart=unless-stopped \
+  jellyfin/jellyfin
+```
+
+Replace `/path/to/config`, `/path/to/cache`, and `/path/to/media` with your preferred directories on your host system. The `--publish 8096:8096` option maps port 8096 on the host to port 8096 in the Docker container, enabling you to access the Jellyfin interface.
+
+### Step 4: Accessing Jellyfin
+
+Once the container is running, access Jellyfin by navigating to:
+
+```
+http://your-server-ip:8096
+```
+
+If you're running this locally, you can use `http://localhost:8096`.
+
+### Step 5: Complete the Jellyfin Setup Wizard
+
+Upon accessing Jellyfin for the first time, the setup wizard will guide you through the initial configuration, including creating an administrator account and setting up your media libraries.
+
+## Additional Configurations
+
+- **HTTPS:** For secure access, consider setting up a reverse proxy with HTTPS. Utilize Docker images like `nginx` or `traefik` for this purpose.
+- **Data Persistence:** The volume mappings in the `docker run` command ensure that your configuration and media remain persistent across container restarts.
+- **Updates:** To update Jellyfin, pull the latest Docker image and recreate the container.
+
+## Conclusion
+
+Deploying Jellyfin on Ubuntu using Docker provides a flexible and straightforward method to set up a personal media server. By following this guide, you have created an isolated Jellyfin instance capable of serving your media collection consistently across devices.
+
+Docker's encapsulation allows for easy scaling, updates, and maintenance without impacting your host system's configuration, making it an ideal choice for users seeking efficient media server management.
+
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
