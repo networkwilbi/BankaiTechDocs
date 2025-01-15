@@ -52,8 +52,8 @@ services:
     user: 1000:1000
     network_mode: 'host'
     volumes:
-      - /path/to/config:/config
-      - /path/to/cache:/cache
+      - ./config:/config
+      - ./cache:/cache
       - type: bind
         source: /path/to/media
         target: /media
@@ -76,7 +76,8 @@ services:
       - 'host.docker.internal:host-gateway'
 ```
 
-Replace `/path/to/config`, `/path/to/cache`, and `/path/to/media` with your preferred directories on your host system.
+Replace `./config`, `/path/to/cache`, and `/path/to/media` with your preferred directories on your host system.
+By default, `./config` will be created in the same directory as the `docker-compose.yaml` file.
 
 Start the Stack with the following command:
 ```bash
