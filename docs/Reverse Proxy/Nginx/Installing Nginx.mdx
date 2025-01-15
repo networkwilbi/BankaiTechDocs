@@ -50,7 +50,7 @@ You should see "Nginx Full", "Nginx HTTP", and "Nginx HTTPS" in the list. To all
 sudo ufw allow 'Nginx HTTP'
 ```
 
-Optionally, if you plan to use HTTPS, also allow "Nginx HTTPS":
+Optionally, if you plan to use HTTPS (recommended), also allow "Nginx HTTPS":
 
 ```
 sudo ufw allow 'Nginx HTTPS'
@@ -69,10 +69,10 @@ You should see an active (running) status. Alternatively, you can visit your ser
 If you need to find your server's IP address, you can run:
 
 ```
-ip addr show
+ifconfig
 ```
 
-Look for the "inet" line under your network interface.
+Look for the "inet" line under your network interface, Interface is usually `eth0`.
 
 ## Step 5: Managing Nginx Service
 
