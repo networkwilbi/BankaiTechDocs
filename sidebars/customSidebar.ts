@@ -104,6 +104,21 @@ const sidebars: SidebarsConfig = {
       },
      ],
    },
+   {  
+     type: 'category',
+     label: 'Reverse Proxy',
+     link: { type: 'doc', id: 'Reverse Proxy/Introduction' },
+     items: [
+      {
+        type: 'category',
+        label: 'Nginx',
+        link: { type: 'doc', id: 'Reverse Proxy/Nginx/Introduction' },
+        items: [
+          'Reverse Proxy/Nginx/Installing Nginx',
+        ],
+      },
+     ],
+   },
  ],
 
 
