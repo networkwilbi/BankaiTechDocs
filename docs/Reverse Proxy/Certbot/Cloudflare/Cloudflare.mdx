@@ -98,7 +98,7 @@ Edit your domain's Nginx configuration file:
 Example nginx configs can be found [here](https://docs.bankai-tech.com/Examples/Reverse%20Proxies/Nginx/)
 :::
 ```bash
-sudo nano /etc/nginx/sites-available/yourdomain.com
+sudo nano /etc/nginx/sites-available/yoursite.conf
 ```
 
 Ensure there is a server block for HTTPS configured to use the SSL certificate and key:
@@ -106,7 +106,7 @@ Ensure there is a server block for HTTPS configured to use the SSL certificate a
 ```nginx
 server {
     listen 443 ssl;
-    server_name yourdomain.com www.yourdomain.com;
+    server_name sub.yourdomain.com;
 
     ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
