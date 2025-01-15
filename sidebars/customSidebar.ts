@@ -132,6 +132,22 @@ const sidebars: SidebarsConfig = {
           },
         ],
       },
+      {
+        type: 'category',
+        label: 'Jellyfin',
+        link: { type: 'doc', id: 'Jellyfin/Introduction' },
+        items: [
+          {
+            type: 'category',
+            label: 'Installation',
+            link: { type: 'doc', id: 'Jellyfin/Installation/Introduction' },
+            items: [
+              'Jellyfin/Installation/Docker Install',
+              'Jellyfin/Installation/Host Install',
+            ],
+          },
+        ],
+      },
      ],
    },
  ],
