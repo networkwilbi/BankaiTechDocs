@@ -30,39 +30,17 @@ Before installing any new software, it's best practice to update your current sy
 sudo apt update && sudo apt upgrade -y
 ```
 
-### Step 2: Add the Jellyfin Repository
+### Step 2: Install Jellyfin
 
-Jellyfin isn’t included in the default Ubuntu repositories. However, it maintains its own repository, which you can add to your system with the following commands:
+To simplify deployment and help automate this for as many users as possible, Jellyfin provides a BASH script to handle repo installation as well as installing Jellyfin. All you need to do is run this command on your system (requires curl, or subsitute curl with wget -O-):
 
-1. **Import the GPG signing key:**
-
-```bash
-wget -O - https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/jellyfin.gpg
-```
-
-2. **Add the Jellyfin repository:**
+1. **Download and Install Jellyfin:**
 
 ```bash
-echo "deb [signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/jellyfin.list
+curl https://repo.jellyfin.org/install-debuntu.sh | sudo bash
 ```
 
-### Step 3: Install Jellyfin
-
-With the repository added, you can now install Jellyfin:
-
-1. **Update your package list to include the Jellyfin repository:**
-
-```bash
-sudo apt update
-```
-
-2. **Install Jellyfin:**
-
-```bash
-sudo apt install jellyfin -y
-```
-
-### Step 4: Start and Enable Jellyfin Service
+### Step 3: Start and Enable Jellyfin Service
 
 After installation, start the Jellyfin service and enable it to launch at boot:
 
@@ -71,7 +49,7 @@ sudo systemctl start jellyfin
 sudo systemctl enable jellyfin
 ```
 
-### Step 5: Access Jellyfin
+### Step 4: Access Jellyfin
 
 Jellyfin will be running on your Ubuntu server. Access the web interface by navigating to:
 
@@ -81,7 +59,7 @@ http://your-server-ip:8096
 
 Replace `your-server-ip` with the actual IP address of your Ubuntu server. If you're installing on a local machine, you can use `http://localhost:8096`.
 
-### Step 6: Complete the Setup Wizard
+### Step 5: Complete the Setup Wizard
 
 The first time you access Jellyfin, you'll be greeted with a setup wizard. Follow the prompts to configure Jellyfin, including creating an admin user, setting up your media library, and tuning your preferred options.
 
