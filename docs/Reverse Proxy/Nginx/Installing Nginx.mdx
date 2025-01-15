@@ -104,7 +104,7 @@ sudo systemctl disable nginx
 
 ## Step 6: Configuring Nginx
 
-Nginx's configuration files are located in `/etc/nginx`. The main configuration file is `/etc/nginx/nginx.conf`. Website-specific configurations can be placed under `/etc/nginx/sites-available` and symlinked to `/etc/nginx/sites-enabled` for activation. Example files would be `nextcloud.conf`, `jellyfin.conf`, other_service.conf` and so on.
+Nginx's configuration files are located in `/etc/nginx`. The main configuration file is `/etc/nginx/nginx.conf`. Website-specific configurations can be placed under `/etc/nginx/sites-available` and symlinked to `/etc/nginx/sites-enabled` for activation. Example files would be `nextcloud.conf`, `jellyfin.conf`, `other_service.conf` and so on.
 
 A good practice is to create a new configuration file for each domain or subdomain in `sites-available` and create a symlink using:
 
