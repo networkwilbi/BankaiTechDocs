@@ -199,6 +199,29 @@ const sidebars: SidebarsConfig = {
      ],
    },
  ],
+  "MSwindowsSidebar": [
+   {
+    type: 'category',
+    label: 'Windows',
+    link: { type: 'doc', id: 'MS Windows/Windows/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Windows 11',
+        items: [
+          'MS Windows/Windows/Windows 11/Editions/Changing to Windows 11 Enterprise',
+         ],
+      },
+      {
+        type: 'category',
+        label: 'Activation',
+        items: [
+          'MS Windows/Windows/Activation/Activating Windows',
+         ],
+      }, 
+    ],
+  },
+ ],
 };
 
 export default sidebars;
