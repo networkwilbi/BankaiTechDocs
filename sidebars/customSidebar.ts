@@ -117,6 +117,14 @@ const sidebars: SidebarsConfig = {
           'Reverse Proxy/Nginx/Installing Nginx',
         ],
       },
+      {
+        type: 'category',
+        label: 'Certbot',
+        link: { type: 'doc', id: 'Reverse Proxy/Certbot/Introduction' },
+        items: [
+          'Reverse Proxy/Certbot/Cloudflare/Introduction',
+        ],
+      },
      ],
    },
  ],
