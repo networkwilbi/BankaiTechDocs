@@ -132,6 +132,8 @@ const sidebars: SidebarsConfig = {
           },
         ],
       },
+     ],
+   },
       {
         type: 'category',
         label: 'Jellyfin',
@@ -148,8 +150,6 @@ const sidebars: SidebarsConfig = {
           },
         ],
       },
-     ],
-   },
  ],
 
 
