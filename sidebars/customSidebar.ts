@@ -123,6 +123,7 @@ const sidebars: SidebarsConfig = {
         link: { type: 'doc', id: 'Reverse Proxy/Certbot/Introduction' },
         items: [
           'Reverse Proxy/Certbot/Cloudflare/Introduction',
+          'Reverse Proxy/Certbot/Cloudflare/Cloudflare',
         ],
       },
      ],
