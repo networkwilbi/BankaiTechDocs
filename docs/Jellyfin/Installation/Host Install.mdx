@@ -34,22 +34,11 @@ sudo apt update && sudo apt upgrade -y
 
 To simplify deployment and help automate this for as many users as possible, Jellyfin provides a BASH script to handle repo installation as well as installing Jellyfin. All you need to do is run this command on your system (requires curl, or subsitute curl with wget -O-):
 
-1. **Download and Install Jellyfin:**
-
 ```bash
 curl https://repo.jellyfin.org/install-debuntu.sh | sudo bash
 ```
 
-### Step 3: Start and Enable Jellyfin Service
-
-After installation, start the Jellyfin service and enable it to launch at boot:
-
-```bash
-sudo systemctl start jellyfin
-sudo systemctl enable jellyfin
-```
-
-### Step 4: Access Jellyfin
+### Step 3: Access Jellyfin
 
 Jellyfin will be running on your Ubuntu server. Access the web interface by navigating to:
 
