@@ -52,7 +52,7 @@ python3 -m pip install discord openai dotenv
 - `openai`: The official OpenAI library to interact with the GPT-3.5 API.
 - `dotenv`: Loads environment variables from `.env` files.
 
-### Step 3: Writing the Bot with Python
+### Step 4: Writing the Bot with Python
 
 Create a new Python file for your bot, e.g., `discord_bot.py`, and add the following code:
 To create the file, run
@@ -124,20 +124,56 @@ def generate_openai_response(prompt):
         print(f"Error generating OpenAI response: {e}")
         return "Sorry, I can't process that right now."
 
-client.run=os.environ.get("DISCORD_KEY_TOKEN"),
+client.run=os.environ.get("DISCORD_BOT_TOKEN"),
 ```
+Create the Environment file `.env`
+Run the following to create the file
+```
+nano .env
+```
+Paste the following contents
+```
+OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
+DISCORD_BOT_TOKEN="YOUR_DISCORD_BOT_TOKEN"
+DISCORD_CLIENT_ID=""
 
+ALLOWED_SERVER_IDS=""
+SERVER_TO_MODERATION_CHANNEL=1:1
+DEFAULT_MODEL=gpt-3.5-turbo
+```
 Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key and `YOUR_DISCORD_TOKEN` with your Discord bot token.
 
-### Step 4: Running the Bot
+### Step 5: Creating Systemd File to run the bot on system boot
+```
+nano /etc/systemd/system/discord_bot.service
+```
+Paste the following
+```
+[Unit]
+Description=Discord AI Bot service
 
-Run your Python script from the terminal or command prompt:
+[Service]
+User=root
+WorkingDirectory=/var/discord
+ExecStart=/var/discord/.venv/bin/python3 -m discord_bot.py
 
-```bash
-python discord_bot.py
+[Install]
+WantedBy=multi-user.target
+```
+Enable the service
+```
+sudo systemctl enable discord_bot.service
+```
+Reload daemon
+```
+sudo systemctl daemon-reload
+```
+Start the service
+```
+sudo systemctl start discord_bot
 ```
 
-### Step 5: Adding the Bot to Your Discord Server
+### Step 6: Adding the Bot to Your Discord Server
 
 1. In the Discord Developer Portal, navigate to the “OAuth2” tab.
 2. Under “Scopes,” select “bot” and then set the permissions your bot needs under “Bot Permissions.” At a minimum, your bot will need permission to send messages.
