@@ -44,7 +44,7 @@ cd /var/docker/nextcloud
 nano .mariadb.env
 ```
 Paste the following using `CTRL+SHIFT+V`
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1,2} showLineNumbers
 MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -64,7 +64,7 @@ Now lets make the second file.
 nano .nextcloud.env
 ```
 Paste the Following
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1,2,4,9} showLineNumbers
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
 TRUSTED_PROXIES=<IP address of your Reverse Proxy>
 OVERWRITEPROTOCOL=https
@@ -99,7 +99,7 @@ Now lets make the third file.
 nano .collabora.env
 ```
 Paste the following
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1,2,3} showLineNumbers
 username=admin
 password=PASSWORD
 domain=cloud\\.domain\\.com
@@ -249,7 +249,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```editorconfig
+```editorconfig title="Highlighted items can be changed to your Time Zone Identifier" (2} showLineNumbers
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```
