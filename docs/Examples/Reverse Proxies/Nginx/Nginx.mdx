@@ -18,7 +18,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ## Nextcloud
-```nginx
+```nginx title="NGINX" {7,9,16,17,19,20,21,47,48,} showLineNumbers
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
@@ -118,7 +118,7 @@ server {
 ```
 
 ## Adguard Home
-```
+```nginx
 server {
     listen [::]:443 ssl http2;
     listen 443 ssl http2;
@@ -155,7 +155,7 @@ server {
 ```
 
 ## Authelia
-```
+```nginx
 #websocket
 map $http_upgrade $connection_upgrade {
     default upgrade;
@@ -224,7 +224,7 @@ server {
 ```
 
 ## HomeBridge
-```
+```nginx
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
@@ -285,7 +285,7 @@ server {
 ```
 
 ## Home Assistant
-```
+```nginx
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
@@ -344,7 +344,7 @@ server {
 ```
 
 ## Jellyfin | JFA-GO
-```
+```nginx
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
@@ -476,7 +476,7 @@ server {
 ```
 
 ## Jellyseerr
-```
+```nginx
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
@@ -538,7 +538,7 @@ server {
 ```
 
 ## Docusaurus
-```
+```nginx
 server {
     listen 80;
     listen [::]:80;
