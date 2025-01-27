@@ -34,29 +34,10 @@ Lets take ownership of the directory
 sudo chown -R 1000:1000 /var/docker
 ```
 ### Creating .env files
-Now lets make two [Docker Secrets](https://docs.docker.com/compose/use-secrets/) files in the new directory.
+Now lets make [Docker Secrets](https://docs.docker.com/compose/use-secrets/) files in the new directory.
 ```bash
 cd /var/docker/nextcloud
 ```
-```bash
-nano .mariadb.env
-```
-Paste the following using `CTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {2,3} showLineNumbers
-DB_DATA_LOCATION=./mariadb
-MYSQL_ROOT_PASSWORD=CHANGEME
-MYSQL_PASSWORD=CHANGEME
-MYSQL_DATABASE=nextcloud
-MYSQL_USER=nextcloud
-```
-:::tip[Info]
-
-Please Change `CHANGEME` to a password of your choosing.
-:::danger
-Refrain from using Special characters for you MySQL Passwords. \
-Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
-:::
-Save the new file by pressing `CTRL+X`
 
 Now lets make the environment file.
 ```bash
@@ -87,13 +68,14 @@ Please Change `CHANGEME` to a password of your choosing.
 Refrain from using Special characters for you MySQL Passwords. \
 Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
-Save the new file by pressing `CTRL+X`
 
 :::warning[warning]
 <p>
 <>Remove all instances of `<>`</>
 </p>
 :::
+
+Save the new file by pressing `CTRL+X`
 
 ### Creating the Compose file
 Now lets create the compose file.
