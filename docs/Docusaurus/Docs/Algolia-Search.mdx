@@ -7,7 +7,7 @@ comments: true
 ## Installing [Algolia DocSearch](https://docusaurus.io/docs/search) for Docusaurus
 
 Make sure you are in the root of your website, in my case ill run
-```
+```bash
 cd /var/websites/"HomeLab Docs"
 ```
 ### Applying to the DocSearch Program
@@ -41,13 +41,13 @@ Take note of the ID and Both keys, we will be using them shortly.
 In order to keep your sensitive information hidden, we need to install and configure dotenv
 #### Installing dotenv
 Run the following command
-```
+```py
 npm install dotenv --save
 ```
 #### Configuring dotenv
 Open `docusaurus.config.ts using your prefered text editor such as nano.
 Add the following code snippet above your main config near the top.
-```
+```ts
 // Environment Variable Config
 import dotenv from 'dotenv';
 require('dotenv').config({path: './.env', debug: true})
@@ -55,11 +55,11 @@ require('dotenv').config({path: './.env', debug: true})
 
 #### Creating the .env file
 Now lets create an `.env` file.
-```
+```bash
 nano .env
 ```
 Paste your `ID` and `Admin API Key` in the following format
-```
+```editorconfig
 ALGOLIA_APP_ID = ""
 ALGOLIA_API_KEY = ""
 ```
@@ -70,11 +70,11 @@ Save by pressing `CTRL+X`
 :::
 
 ### Modifying the docusaurus.config.ts file
-```
+```bash
 nano docusaurus.config.ts
 ```
 Paste the following
-```
+```ts
     algolia: {
       appId: process.env.ALGOLIA_APP_ID,
       apiKey: process.env.ALGOLIA_API_KEY,
@@ -96,7 +96,7 @@ Paste the following
 
 ### Building the website
 Now build the site.
-```
+```py
 npm run build
 ```
 
