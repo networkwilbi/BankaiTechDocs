@@ -123,7 +123,7 @@ server {
     listen [::]:443 ssl http2;
     listen 443 ssl http2;
     server_name adguard.bankai-tech.com;
-    set $upstream_adguard http://192.168.4.55;
+    set $upstream_adguard http://192.168.4.55:3001;
     #              Logging
     access_log /var/log/nginx/AdGuardHome_access.log;
     error_log /var/log/nginx/AdGuardHome_error.log;
@@ -140,7 +140,7 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_redirect / /;
         proxy_cookie_path / /;
-        proxy_pass $upstream_adguard:3001;
+        proxy_pass $upstream_adguard;
         #websockets
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -227,6 +227,7 @@ server {
     listen 80;
     listen [::]:80;
     server_name homebridge.bankai-tech.com;
+    set $upstream_homebridge http://192.168.4.200:8581;
     #             Redirect to https version of website
     return 301 https://homebridge.bankai-tech.com;
     #             Logging
@@ -268,7 +269,7 @@ server {
         proxy_set_header "Connection" "";
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_pass http://192.168.4.200:8581;
+        proxy_pass $upstream_homebridge;
         proxy_read_timeout 300s;
         #Cache
         proxy_buffering on;
@@ -296,6 +297,7 @@ server {
 server {
     listen 443 ssl http2;
     server_name home.bankai-tech.com;
+    set $upstream_ha http://192.168.4.202:8123;
     #            Load TLS Certs
     ssl_certificate /etc/letsencrypt/live/bankai-tech.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/bankai-tech.com/privkey.pem;
@@ -327,7 +329,7 @@ server {
         proxy_set_header "Connection" "";
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_pass http://192.168.4.207:8123;
+        proxy_pass $upstream_ha;
         proxy_read_timeout 300s;
         #Cache
         proxy_buffering on;
@@ -356,7 +358,7 @@ server {
     #                     use a variable to store the upstream proxy
     #                     in this example we are using a hostname which is resolved via DNS
     #                     (if you aren't using DNS remove the resolver line and change the variable to point to an IP address e.g `set $jellyfin 127.0.0.1`)
-    set $jellyfin 192.168.4.31:8096;
+    set $jellyfin http://192.168.4.31:8096;
     ssl_stapling on;
     ssl_stapling_verify on;
     resolver 1.1.1.1 1.0.0.1;
@@ -400,7 +402,7 @@ server {
     #                    }
     location / {
         # Proxy main Jellyfin traffic
-        proxy_pass http://$jellyfin;
+        proxy_pass $jellyfin;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -413,7 +415,7 @@ server {
     #                     location block for /web - This is purely for aesthetics so /web/!/ works instead of having to go to /web/index.html/!/
     location = /web/ {
         # Proxy main Jellyfin traffic
-        proxy_pass http://$jellyfin/web/index.html;
+        proxy_pass $jellyfin/web/index.html;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -423,7 +425,7 @@ server {
     }
     location /socket {
         # Proxy Jellyfin Websockets traffic
-        proxy_pass http://$jellyfin;
+        proxy_pass $jellyfin;
         proxy_read_timeout 300;
         proxy_connect_timeout 300;
         proxy_send_timeout 300;
@@ -489,6 +491,7 @@ server {
     listen [::]:443 ssl http2;
     listen 443 ssl http2;
     server_name requests.bankai-tech.com;
+    set $upstream_jellyseerr http://192.168.4.206:5055;
     #                    Load TLS Certs
     ssl_certificate /etc/letsencrypt/live/bankai-tech.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/bankai-tech.com/privkey.pem;
@@ -525,7 +528,7 @@ server {
         proxy_set_header "Connection" "";
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_pass http://192.168.4.206:5055;
+        proxy_pass $upstream_jellyseerr;
         proxy_read_timeout 300s;
     }
 }
@@ -562,7 +565,6 @@ server {
     resolver_timeout 5s;
     #                      Connect to backend server
     location / {
-        #proxy_pass $upstream_netgear;
         proxy_pass $upstream_docs;
         client_body_buffer_size 128k;
         proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
