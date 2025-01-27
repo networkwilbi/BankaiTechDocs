@@ -23,7 +23,7 @@ Nextcloud 28.0.4 was the latest version when making this tutorial.
 :::
 
 First lets update your system.
-```
+```bash
 sudo apt-get update && apt-get upgrade -y
 ```
 
@@ -39,7 +39,7 @@ You can change the directories to your liking.
 sudo mkdir /var/docker && sudo mkdir /var/docker/nextcloud
 ```
 Lets take ownership of the directory
-```
+```bash
 sudo chown -R 1000:1000 /var/docker && cd /var/docker/nextcloud
 ```
 
@@ -48,11 +48,11 @@ sudo chown -R 1000:1000 /var/docker && cd /var/docker/nextcloud
 Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
 
 #### Creating .nextcloud.env
-```
+```bash
 nano .nextcloud.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```
+```editorconfig
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.0/24
 TRUSTED_PROXIES=192.168.x.xxx
 OVERWRITEPROTOCOL=https
@@ -68,11 +68,11 @@ MYSQL_HOST=mariadb
 ```
 
 #### Creating .mariadb.env
-```
+```bash
 nano .mariadb.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```
+```editorconfig
 MYSQL_ROOT_PASSWORD=CHANGE
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -89,11 +89,11 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 Save the new file by pressing `CTRL+X`
 
 #### Creating .go_vod.env
-```
+```bash
 nano .go_vod.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```
+```editorconfig
 NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
 NVIDIA_VISIBLE_DEVICES=all
@@ -113,24 +113,24 @@ NVIDIA_VISIBLE_DEVICES=all
 :::
 
 #### Creating .collabora.env
-```
+```bash
 nano .collabora.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```
+```editorconfig
 username=admin
 password=CHANGEME
 domain=cloud\\.example\\.com
 ```
 
    ### Creating the Compose file
-   ```
+   ```bash
    nano docker-compose.yaml
    ```
   
    Now lets edit the compose file.
 
-```
+```yaml
 name: nextcloud
 
 services:
@@ -225,7 +225,7 @@ Test nvidia by running `sudo nvidia-smi`
 :::
 ## Starting Nextcloud
 Now lets start it up.
-```
+```bash
 sudo docker compose up -d
 ```
 :::info
@@ -296,7 +296,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```
+```editorconfig
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```
