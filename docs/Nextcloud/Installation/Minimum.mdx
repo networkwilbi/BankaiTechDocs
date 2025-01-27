@@ -42,7 +42,8 @@ cd /var/docker/nextcloud
 nano .mariadb.env
 ```
 Paste the following using `CTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1,2} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {2,3} showLineNumbers
+DB_DATA_LOCATION=./mariadb
 MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -57,12 +58,15 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
 Save the new file by pressing `CTRL+X`
 
-Now lets make the second file.
+Now lets make the environment file.
 ```bash
-nano .nextcloud.env
+nano .env
 ```
 Paste the Following
-```editorconfig title="Highlighted items will need to be modified" {1,2,4,9} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {4,5,7,12} showLineNumbers
+DATA_LOCATION=./nextcloud
+DB_DATA_LOCATION=./mariadb
+PORT=8080
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
 TRUSTED_PROXIES=<IP address of your Reverse Proxy>
 OVERWRITEPROTOCOL=https
@@ -78,16 +82,14 @@ MYSQL_HOST=mariadb
 ```
 :::tip[Info]
 
-<p>
-<>Please Change the `Domain` and `Reverse Proxy IP`.</>
-</p>
+Please Change `CHANGEME` to a password of your choosing.
+:::danger
+Refrain from using Special characters for you MySQL Passwords. \
+Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
+:::
+Save the new file by pressing `CTRL+X`
 
 :::warning[warning]
-
-<p>
-<>Please make sure that the Password is the same as the one you previously set in the last file</>
-</p>
-
 <p>
 <>Remove all instances of `<>`</>
 </p>
@@ -99,7 +101,7 @@ Now lets create the compose file.
 nano docker-compose.yaml
 ```
 Paste this into the file
-```yaml
+```yaml title="Nothing in this file requires modification"
 name: nextcloud
 
 services:
@@ -109,23 +111,23 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
-      - .mariadb.env
+      - .env
 
   nextcloud:
     image: nextcloud:production
     container_name: nextcloud
     restart: always
     ports:
-      - 8080:80
+      - ${PORT}:80
     links:
       - mariadb
       - redis
     volumes:
-      - ./nextcloud:/var/www/html
+      - ${DATA_LOCATION}:/var/www/html
     env_file:
-      - .nextcloud.env
+      - .env
 
   redis:
     container_name: redis
