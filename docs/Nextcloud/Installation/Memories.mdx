@@ -53,7 +53,7 @@ Now lets create the files that will contain the [Docker Variables](https://docs.
 nano .nextcloud.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" (1,2,4,9} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {1,2,4,9} showLineNumbers
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.xxx/24
 TRUSTED_PROXIES=192.168.x.xxx
 OVERWRITEPROTOCOL=https
@@ -84,7 +84,7 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 nano .mariadb.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" (1,2} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {1,2} showLineNumbers
 MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -96,7 +96,7 @@ MYSQL_USER=nextcloud
 nano .go_vod.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" (1} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {1} showLineNumbers
 NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
 NVIDIA_VISIBLE_DEVICES=all
@@ -260,7 +260,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```editorconfig title="Highlighted items can be chaged to your Time Zone Identifier" (2} showLineNumbers
+```editorconfig title="Highlighted items can be chaged to your Time Zone Identifier" {2} showLineNumbers
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```
