@@ -41,14 +41,26 @@ Now lets make an [Environment File with Interpolation](https://docs.docker.com/c
 cd /var/docker/nextcloud
 ```
 ```bash
-nano .mariadb.env
+nano .env
 ```
 Paste the following using `CTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1,2} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {1,2,4,9,14,15} showLineNumbers
+NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
+TRUSTED_PROXIES=<IP address of your Reverse Proxy>
+OVERWRITEPROTOCOL=https
+OVERWRITECLIURL=https://cloud.<YourDomain>.com
+REDIS_HOST=redis
+REDIS_PORT=6379
+PHP_MEMORY_LIMIT=512M
+PHP_UPLOAD_LIMIT=100M
 MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
+COLLABORA_USERNAME=admin
+COLLABORA_PASSWORD=PASSWORD
+COLLABORA_DOMAIN=cloud\\.domain\\.com
+PORT=8080
 ```
 :::tip[Info]
 
@@ -59,51 +71,10 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
 Save the new file by pressing `CTRL+X`
 
-Now lets make the second file.
-```bash
-nano .nextcloud.env
-```
-Paste the Following
-```editorconfig title="Highlighted items will need to be modified" {1,2,4,9} showLineNumbers
-NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
-TRUSTED_PROXIES=<IP address of your Reverse Proxy>
-OVERWRITEPROTOCOL=https
-OVERWRITECLIURL=https://cloud.<YourDomain>.com
-REDIS_HOST=redis
-REDIS_PORT=6379
-PHP_MEMORY_LIMIT=512M
-PHP_UPLOAD_LIMIT=100M
-MYSQL_PASSWORD=CHANGEME
-MYSQL_DATABASE=nextcloud
-MYSQL_USER=nextcloud
-MYSQL_HOST=mariadb
-```
-:::tip[Info]
-
-<p>
-<>Please Change the `Domain` and `Reverse Proxy IP`.</>
-</p>
-
-:::warning[warning]
-
-<p>
-<>Please make sure that the Password is the same as the one you previously set in the last file</>
-</p>
-
 <p>
 <>Remove all instances of `<>`</>
 </p>
 :::
-Now lets make the third file.
-```bash
-nano .collabora.env
-```
-Paste the following
-```editorconfig title="Highlighted items will need to be modified" {1,2,3} showLineNumbers
-username=admin
-password=PASSWORD
-domain=cloud\\.domain\\.com
-```
 
 ### Creating the Compose file
 Now lets create the compose file.
@@ -121,24 +92,24 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
-      - .mariadb.env
+      - .env
 
   nextcloud:
     image: nextcloud:production
     container_name: nextcloud
     restart: always
     ports:
-      - 8080:80
+      - ${PORT}:80
     links:
       - mariadb
       - redis
       - collabora
     volumes:
-      - ./nextcloud:/var/www/html
+      - ${DATA_LOCATION}:/var/www/html
     env_file:
-      - .nextcloud.env
+      - .env
 
   redis:
     container_name: redis
@@ -159,7 +130,7 @@ services:
       - MKNOD
     image: collabora/code:latest
     env_file:
-      - .collabora.env
+      - .env
     restart: always
 
   watchtower:
