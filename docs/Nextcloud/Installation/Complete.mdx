@@ -52,26 +52,29 @@ Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/e
 nano .env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1,2,4,9,13,17,18} showLineNumbers
-NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.0/24
-TRUSTED_PROXIES=192.168.x.xxx
+```editorconfig title="Highlighted items will need to be modified" {2,3,4,6,11,12,17,18} showLineNumbers
+# Nextcloud and MariaDB
+PORT=8080
+NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
+TRUSTED_PROXIES=<IP address of your Reverse Proxy>
 OVERWRITEPROTOCOL=https
-OVERWRITECLIURL=https://cloud.example.com
+OVERWRITECLIURL=https://cloud.<YourDomain>.com
 REDIS_HOST=redis
 REDIS_PORT=6379
 PHP_MEMORY_LIMIT=512M
 PHP_UPLOAD_LIMIT=100M
+MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
-MYSQL_HOST=mariadb
+# Go_Vod
 NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
 NVIDIA_VISIBLE_DEVICES=all
+# Collabora
 username=admin
-password=CHANGEME
-domain=cloud\\.example\\.com
-PORT=8080
+password=PASSWORD
+domain=cloud\\.domain\\.com
 ```
 
 :::tip[Info]
