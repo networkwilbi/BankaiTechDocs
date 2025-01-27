@@ -47,12 +47,12 @@ sudo chown -R 1000:1000 /var/docker && cd /var/docker/nextcloud
 
 Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
 
-#### Creating .nextcloud.env
+#### Creating .env
 ```bash
-nano .nextcloud.env
+nano .env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1,2,4,9} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" {1,2,4,9,13,17,18} showLineNumbers
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.0/24
 TRUSTED_PROXIES=192.168.x.xxx
 OVERWRITEPROTOCOL=https
@@ -65,18 +65,13 @@ MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
 MYSQL_HOST=mariadb
-```
-
-#### Creating .mariadb.env
-```bash
-nano .mariadb.env
-```
-Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1,2} showLineNumbers
-MYSQL_ROOT_PASSWORD=CHANGE
-MYSQL_PASSWORD=CHANGEME
-MYSQL_DATABASE=nextcloud
-MYSQL_USER=nextcloud
+NEXTCLOUD_HOST=https://cloud.example.com
+NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
+NVIDIA_VISIBLE_DEVICES=all
+username=admin
+password=CHANGEME
+domain=cloud\\.example\\.com
+PORT=8080
 ```
 
 :::tip[Info]
@@ -88,40 +83,11 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
 Save the new file by pressing `CTRL+X`
 
-#### Creating .go_vod.env
-```bash
-nano .go_vod.env
-```
-Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1} showLineNumbers
-NEXTCLOUD_HOST=https://cloud.example.com
-NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
-NVIDIA_VISIBLE_DEVICES=all
-#devices:
-#  - /dev/dri:/dev/dri # VA-API (omit for NVENC)
-```
-
 :::warning[warning]
-
-<p>
-<>Please make sure that the Password is the same as the one you previously set in the last file</>
-</p>
-
 <p>
 <>Remove all instances of `<>`</>
 </p>
 :::
-
-#### Creating .collabora.env
-```bash
-nano .collabora.env
-```
-Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {1,2,3} showLineNumbers
-username=admin
-password=CHANGEME
-domain=cloud\\.example\\.com
-```
 
    ### Creating the Compose file
    ```bash
@@ -130,7 +96,7 @@ domain=cloud\\.example\\.com
   
    Now lets edit the compose file.
 
-```yaml
+```yaml title="Nothing in this file needs to be modified"
 name: nextcloud
 
 services:
@@ -140,16 +106,16 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --log_bin_trust_function_creators=true
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
-      - .mariadb.env
+      - .env
 
   nextcloud:
     image: bankaitech/nextcloud:latest
     container_name: nextcloud
     restart: always
     ports:
-      - 8080:80
+      - ${PORT}:80
     links:
       - mariadb
       - redis
@@ -157,16 +123,16 @@ services:
 #      - onlyoffice
       - go-vod
     volumes:
-      - ./nextcloud:/var/www/html
+      - ${DATA_LOCATION}:/var/www/html
     env_file:
-      - .nextcloud.env
+      - .env
 
   cron:
     image: bankaitech/nextcloud:latest
     container_name: cron
     restart: always
     volumes:
-      - ./nextcloud:/var/www/html:z
+      - ${DATA_LOCATION}:/var/www/html:z
     depends_on:
       - mariadb
       - redis
@@ -193,7 +159,7 @@ services:
 #    volumes:
 #      - ./collabora/config/coolwsd.xml:/etc/coolwsd/coolwsd.xml
     env_file:
-      - .collabora.env
+      - .env
     restart: always
 
   go-vod:
@@ -201,9 +167,9 @@ services:
     restart: always
     container_name: go-vod
     env_file:
-      - .go_vod.env
+      - .env
     volumes:
-      - ./nextcloud:/var/www/html:ro
+      - ${DATA_LOCATION}:/var/www/html:ro
 #    runtime: nvidia # (NVENC)
 
 #  documentserver:
