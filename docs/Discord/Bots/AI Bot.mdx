@@ -24,7 +24,11 @@ Before starting, ensure you have the following:
 1. Go to the [Discord Developer Portal](https://discord.com/developers/applications) and log in with your Discord account.
 2. Click the “New Application” button, give it a name, and click “Create”.
 3. Navigate to the “Bot” tab on the left side, then click “Add Bot” and confirm by clicking “Yes, do it!”
-4. Under the bot section, you will see the “Token”. Click “Copy” to clipboard. **Keep this token private** as it allows control over your bot.
+4. Under the bot section, you will see the “Token”. Click “Copy” to clipboard. **Keep this token private** as it allows control over your bot. If you did not see your token then click the `Reset Token` button.
+5. Navigate to the "OAUTH2" tab on the left side, then copy the `client id`.
+6. Open the Discord application on your PC and right click on your guild(server) name, Copy the ID
+7. Navigate to the "Intallation" tab on the left side, click on the Install Link dropdown and select `None` and save the changes.
+8. Navigate back to the "Bot" tab on the left side and uncheck the `Public Bot` option. Then enable the `Message Content Intent` option and save the changes.
 
 ### Step 2: Creating a Python Environment
 Open your Terminal and run the following commands
@@ -45,7 +49,7 @@ source .venv/bin/activate
 Open your terminal or command prompt and install the following Python libraries:
 
 ```py
-python3 -m pip install discord openai dotenv
+python3 -m pip install discord openai python-dotenv PyYAML
 ```
 
 - `discord`: The library to interact with Discord.
@@ -60,12 +64,18 @@ To create the file, run
 nano discord_bot.py
 ```
 
-```python
+```python title="Nothing in this file needs to be changed"
 import discord
 import os
+import logging
 from openai import OpenAI
 from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env
+
+
+logging.basicConfig(
+    format="[%(asctime)s] [%(filename)s:%(lineno)d] %(message)s", level=logging.INFO
+)
 
 # Create a client instance for the bot
 intents = discord.Intents.default()
@@ -82,9 +92,12 @@ client = discord.Client(intents=intents)
 openai_api_key=os.environ.get("OPENAI_API_KEY"),
 openai_client = OpenAI()
 
+# Access the DISCORD_TOKEN environment variable
+discord_token = os.getenv("DISCORD_BOT_TOKEN")
+
 @client.event
 async def on_ready():
-    print(f'Logged in as {client.user}')
+    print(f'Logged in as {client.user}.')
 
 @client.event
 async def on_message(message):
@@ -124,8 +137,10 @@ def generate_openai_response(prompt):
         print(f"Error generating OpenAI response: {e}")
         return "Sorry, I can't process that right now."
 
-client.run=os.environ.get("DISCORD_BOT_TOKEN"),
+client.run(discord_token),
 ```
+Save the file with `CTRL+SHIFT+X`
+
 Create the Environment file `.env`
 Run the following to create the file
 ```
@@ -134,10 +149,10 @@ nano .env
 Paste the following contents
 ```editorconfig
 OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
-DISCORD_BOT_TOKEN="YOUR_DISCORD_BOT_TOKEN"
-DISCORD_CLIENT_ID=""
+DISCORD_BOT_TOKEN="YOUR_DISCORD_BOT_TOKEN from step 4"
+DISCORD_CLIENT_ID="CLIENT ID from step 5"
 
-ALLOWED_SERVER_IDS=""
+ALLOWED_SERVER_IDS="ID copied from step 6"
 SERVER_TO_MODERATION_CHANNEL=1:1
 DEFAULT_MODEL=gpt-3.5-turbo
 ```
@@ -155,7 +170,7 @@ Description=Discord AI Bot service
 [Service]
 User=root
 WorkingDirectory=/var/discord
-ExecStart=/var/discord/.venv/bin/python3 -m discord_bot.py
+ExecStart=/var/discord/.venv/bin/python3 -m discord_bot
 
 [Install]
 WantedBy=multi-user.target
@@ -176,7 +191,7 @@ sudo systemctl start discord_bot
 ### Step 6: Adding the Bot to Your Discord Server
 
 1. In the Discord Developer Portal, navigate to the “OAuth2” tab.
-2. Under “Scopes,” select “bot” and then set the permissions your bot needs under “Bot Permissions.” At a minimum, your bot will need permission to send messages.
+2. Under “Scopes,” select “bot” and then set the permissions your bot needs under “Bot Permissions.” At a minimum, your bot will need permission to send messages, read message history, send messages in threads and view channels.
 3. Copy the generated URL under “Scopes,” open it in your web browser, and select the server to add your bot.
 
 ### Testing the Bot
