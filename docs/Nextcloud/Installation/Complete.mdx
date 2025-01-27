@@ -52,7 +52,7 @@ Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/e
 nano .nextcloud.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1,2,4,9} showLineNumbers
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.0/24
 TRUSTED_PROXIES=192.168.x.xxx
 OVERWRITEPROTOCOL=https
@@ -72,7 +72,7 @@ MYSQL_HOST=mariadb
 nano .mariadb.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1,2} showLineNumbers
 MYSQL_ROOT_PASSWORD=CHANGE
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -93,7 +93,7 @@ Save the new file by pressing `CTRL+X`
 nano .go_vod.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1} showLineNumbers
 NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
 NVIDIA_VISIBLE_DEVICES=all
@@ -117,7 +117,7 @@ NVIDIA_VISIBLE_DEVICES=all
 nano .collabora.env
 ```
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig
+```editorconfig title="Highlighted items will need to be modified" (1,2,3} showLineNumbers
 username=admin
 password=CHANGEME
 domain=cloud\\.example\\.com
@@ -296,7 +296,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```editorconfig
+```editorconfig title="Highlighted items can be changed to your Time Zone Identifier" (2} showLineNumbers
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```
