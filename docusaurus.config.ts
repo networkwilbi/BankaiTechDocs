@@ -235,7 +235,7 @@ const config: Config = {
     prism: {
       darkTheme: prismThemes.dracula,
       theme: prismThemes.github,
-      additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx'],
+      additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig'],
     },
   } satisfies Preset.ThemeConfig,
 };
