@@ -16,7 +16,7 @@ last_update:
 ***This method includes Redis, MariaDB, and Collabora Code***
 
 First lets update your system.
-```
+```bash
 sudo apt-get update && apt-get upgrade -y
 ```
 
@@ -28,23 +28,23 @@ You can change the directories to your liking.
 
 :::
 
-```
+```bash
 sudo mkdir /var/docker && sudo mkdir /var/docker/nextcloud
 ```
 Lets take ownership of the directory
-```
+```bash
 sudo chown -R 1000:1000 /var/docker
 ```
 ### Creating .env files
 Now lets make two [Docker Secrets](https://docs.docker.com/compose/use-secrets/) files in the new directory.
-```
+```bash
 cd /var/docker/nextcloud
 ```
-```
+```bash
 nano .mariadb.env
 ```
 Paste the following using `CTRL+SHIFT+V`
-```
+```editorconfig
 MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
 MYSQL_DATABASE=nextcloud
@@ -60,11 +60,11 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 Save the new file by pressing `CTRL+X`
 
 Now lets make the second file.
-```
+```bash
 nano .nextcloud.env
 ```
 Paste the Following
-```
+```editorconfig
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
 TRUSTED_PROXIES=<IP address of your Reverse Proxy>
 OVERWRITEPROTOCOL=https
@@ -95,11 +95,11 @@ MYSQL_HOST=mariadb
 </p>
 :::
 Now lets make the third file.
-```
+```bash
 nano .collabora.env
 ```
 Paste the following
-```
+```editorconfig
 username=admin
 password=PASSWORD
 domain=cloud\\.domain\\.com
@@ -107,11 +107,11 @@ domain=cloud\\.domain\\.com
 
 ### Creating the Compose file
 Now lets create the compose file.
-```
+```bash
 nano docker-compose.yaml
 ```
 Paste this into the file
-```
+```yaml
 name: nextcloud
 
 services:
@@ -170,7 +170,7 @@ services:
 ```
 ## Starting Nextcloud
 Now lets start it up.
-```
+```bash
 sudo docker compose up -d
 ```
 :::info
@@ -237,7 +237,7 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 
 ### Modifying the config.php file
 Run the following command to open the `config.php` file with nano.
-```
+```bash
 nano nextcloud/config/config.php
 ```
 :::tip[Hint]
@@ -249,7 +249,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```
+```editorconfig
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```
