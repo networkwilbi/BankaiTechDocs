@@ -18,6 +18,11 @@ const config: Config = {
   future: {
     experimental_faster: true,
   },
+  customFields:{
+    // Mendable API key for AI-powered search functionality
+  // Get your key at https://mendable.ai
+        mendableAnonKey: process.env.MENDABLE_KEY,
+  },
 
   // Set the production url of your site here
   url: 'https://docs.bankai-tech.com',
@@ -237,6 +242,7 @@ const config: Config = {
       theme: prismThemes.github,
       additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig', 'typescript', 'javascript', 'systemd', 'ini'],
     },
+
   } satisfies Preset.ThemeConfig,
 };
 
