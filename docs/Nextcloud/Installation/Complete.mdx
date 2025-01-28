@@ -51,6 +51,9 @@ Now lets create the [Docker Variables](https://docs.docker.com/compose/how-tos/e
 ```bash
 nano .env
 ```
+:::warning[warning]
+When editing the configuration below, remove all instances of `<>` from the values
+::: 
 Paste the Following with `CNTRL+SHIFT+V`
 ```editorconfig title="Highlighted items will need to be modified" {3,4,6,11,12,16,21,22} showLineNumbers
 # Nextcloud and MariaDB
@@ -78,17 +81,13 @@ domain=cloud\\.domain\\.com
 ```
 
 :::tip[Info]
-
 Please Change `CHANGEME` to a password of your choosing.
 :::danger
 Refrain from using Special characters for you MySQL Passwords. \
 Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
-Save the new file by pressing `CTRL+X`
 
-:::warning[warning]
-When editing the configuration below, remove all instances of `<>` from the values
-::: 
+Save the new file by pressing `CTRL+X`
 
    ### Creating the Compose file
    ```bash

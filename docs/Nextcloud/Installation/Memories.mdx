@@ -52,6 +52,9 @@ Now lets create the file that will contain the [Docker Variables](https://docs.d
 ```bash
 nano .env
 ```
+:::warning[warning]
+When editing the configuration below, remove all instances of `<>` from the values
+::: 
 Paste the Following with `CNTRL+SHIFT+V`
 ```editorconfig title="Highlighted items will need to be modified" {3,4,6,11,12,16} showLineNumbers
 # Nextcloud and MariaDB
@@ -73,10 +76,6 @@ NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
 NVIDIA_VISIBLE_DEVICES=all
 ```
-:::tip[info]
-Save the new file by pressing `CTRL+X`
-:::
-
 :::tip[Info]
 
 Please Change `CHANGEME` to a password of your choosing.
@@ -85,9 +84,7 @@ Refrain from using Special characters for you MySQL Passwords. \
 Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
 
-:::warning[warning]
-When editing the configuration below, remove all instances of `<>` from the values
-::: 
+Save the new file by pressing `CTRL+X`
 
    ### Creating the Compose file
    Now lets edit the compose file.
