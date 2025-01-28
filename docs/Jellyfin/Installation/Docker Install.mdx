@@ -42,7 +42,7 @@ sudo mkdir /var/docker && sudo mkdir /var/docker/jellyfin && cd /var/docker/jell
 sudo nano docker-compose.yaml
 ```
 
-```bash
+```yaml title="Modify the Highlighted lines" {12,13,16,17,27} showLineNumbers
 name: jellyfin
 
 services:
@@ -62,10 +62,10 @@ services:
         target: /media2
         read_only: true
       # Optional - extra fonts to be used during transcoding with subtitle burn-in
-      - type: bind
-        source: /path/to/fonts
-        target: /usr/local/share/fonts/custom
-        read_only: true
+      #- type: bind
+      #  source: /path/to/fonts
+      #  target: /usr/local/share/fonts/custom
+      #  read_only: true
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
@@ -76,7 +76,7 @@ services:
 ```
 
 Replace `./config`, `/path/to/cache`, and `/path/to/media` with your preferred directories on your host system.
-By default, `./config` will be created in the same directory as the `docker-compose.yaml` file.
+By default, `./config` and `./cache` will be created in the same directory as the `docker-compose.yaml` file.
 
 Start the Stack with the following command:
 ```bash

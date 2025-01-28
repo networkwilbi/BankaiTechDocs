@@ -98,7 +98,7 @@ This directory will contain your `docusaurus.config.js` or `docusaurus.config.ts
 <p>
 <>In your terminal, run the following commands</>
 </p>
-```
+```bash
 git init
 git config --global user.name "<USER_NAME>"
 git config --global user.email "<USER_EMAIL>"
@@ -113,7 +113,7 @@ git config --global user.email "<USER_EMAIL>"
 <p>
 <>Run this command to add your remote repo</>
 </p>
-```
+```bash
 git remote add origin <SSh Repo URL>
 ```
 :::note[Example]
@@ -123,7 +123,7 @@ git remote add origin <SSh Repo URL>
 ## Security
 ### Installing [talisman](https://github.com/thoughtworks/talisman)
 Go to the root directory of your website and run the following
-```
+```bash
 curl --silent  https://raw.githubusercontent.com/thoughtworks/talisman/main/global_install_scripts/install.bash > /tmp/install_talisman.bash && /bin/bash /tmp/install_talisman.bash
 ```
 
@@ -190,7 +190,7 @@ Paste your GitHub API Key into the secret field and then save.
 <p>
 <>Paste the Following Snippet</>
 </p>
-```
+```editorconfig
 name: gitleaks
 on:
   pull_request:
@@ -220,7 +220,7 @@ Run the New GitLeaks Workflow
 <p>
 <>Now run the following commands</>
 </p>
-```
+```bash
 git add -A
 git commit -m 'main'
 git push  origin master
@@ -246,7 +246,7 @@ nano docusaurus.config.js
 <p>
 <>Find the following Snippet of code</>
 </p>
-```
+```js
   presets: [
     [
       'classic',
@@ -276,14 +276,14 @@ nano docusaurus.config.js
 <p>
 <>Add the following lines in the `docs` section</>
 </p>
-```
+```js
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
 ```
 <p>
 <>The snippet of code should now look like this</>
 </p>
-```
+```js
   presets: [
     [
       'classic',
@@ -323,7 +323,7 @@ nano docusaurus.config.ts
 <p>
 <>Find the following Snippet of code</>
 </p>
-```
+```ts
   presets: [
     [
       'classic',
@@ -353,14 +353,14 @@ nano docusaurus.config.ts
 <p>
 <>Add the following lines in the `docs` section</>
 </p>
-```
+```ts
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
 ```
 <p>
 <>The snippet of code should now look like this</>
 </p>
-```
+```ts
   presets: [
     [
       'classic',
@@ -407,7 +407,7 @@ last_update:
 ---
 ```
 :::note
-You will have to add this too all of your `.md` files
+You will have to add this too all of your `.mdx` files
 :::
 <p>
 <>Now everytime you run `git pull origin main` and `npm run build` it will update the `last_updated` line from `git history`</>

@@ -150,6 +150,21 @@ const sidebars: SidebarsConfig = {
           },
         ],
       },
+      {
+        type: 'category',
+        label: 'Discord',
+        link: { type: 'doc', id: 'Discord/Introduction' },
+        items: [
+          {
+            type: 'category',
+            label: 'Bots',
+            link: { type: 'doc', id: 'Discord/Bots/Introduction' },
+            items: [
+              'Discord/Bots/AI Bot',
+            ],
+          },
+        ],
+      },
  ],
 
 
