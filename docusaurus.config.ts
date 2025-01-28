@@ -237,6 +237,10 @@ const config: Config = {
       theme: prismThemes.github,
       additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig', 'typescript', 'javascript', 'systemd', 'ini'],
     },
+    customFields:{
+        mendableAnonKey: process.env.MENDABLE_KEY,
+},
+
   } satisfies Preset.ThemeConfig,
 };
 
