@@ -1,6 +1,6 @@
 RewriteEngine On
 # Check if maintenance flag file exists
-RewriteCond %{DOCUMENT_ROOT}/maintenance/maintenance.flag -f
+RewriteCond maintenance/maintenance.flag -f
 RewriteCond %{REQUEST_URI} !^/maintenance\.html$
 RewriteRule ^ /maintenance/maintenance.html [R=503,L]
 # Check if Docusaurus build exists
