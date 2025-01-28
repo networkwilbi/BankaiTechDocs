@@ -1,12 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import {ThemeClassNames, usePrismTheme} from '@docusaurus/theme-common';
+import {usePrismTheme} from '@docusaurus/theme-common';
 import {
-  parseCodeBlockTitle,
   parseLanguage,
-  parseLines,
-  containsLineNumbers,
   useCodeWordWrap,
 } from '@docusaurus/theme-common/internal';
 import Container from '@theme/CodeBlock/Container';
@@ -32,13 +29,7 @@ export default function CodeBlock({
 
   // Parse meta string
   const language = languageProp ?? parseLanguage(blockClassName);
-  const {lineNumbers, showLineNumbers} = parseLines(
-    metastring,
-    {
-      showLineNumbers: showLineNumbersProp,
-      language,
-    },
-  );
+  const showLineNumbers = showLineNumbersProp ?? false;
   const code = children.trim();
 
   return (
