@@ -12,5 +12,5 @@ RewriteRule ^ maintenance.html [R=302,L]
 # Check for the maintenance flag file
 RewriteCond %{DOCUMENT_ROOT}/maintenance/maintenance.flag -f
 
-# Redirect all requests to the maintenance page
-RewriteRule ^.*$ "/var/websites/HomeLab Docs/maintenance/maintenance.html" [R=503,L]
+# If the above check fails, redirect all requests to the maintenance page.
+RewriteRule ^ maintenance.html [R=503,L]
