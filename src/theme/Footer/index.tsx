@@ -5,6 +5,8 @@ import FooterLinks from '@theme/Footer/Links';
 import FooterLogo from '@theme/Footer/Logo';
 import FooterCopyright from '@theme/Footer/Copyright';
 import FooterLayout from '@theme/Footer/Layout';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { MendableFloatingButton } from '@mendable/search'
 
 function Footer(): ReactNode {
   const {footer} = useThemeConfig();
@@ -21,6 +23,18 @@ function Footer(): ReactNode {
       copyright={copyright && <FooterCopyright copyright={copyright} />}
     />
   );
+}
+export default function FooterWrapper(props) {
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext()
+
+  return (
+    <>
+      <MendableFloatingButton anon_key={customFields.mendableAnonKey} />
+      <Footer {...props} />
+    </>
+  )
 }
 
 export default React.memo(Footer);
