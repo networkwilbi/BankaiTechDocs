@@ -29,7 +29,8 @@
     "posthog-docusaurus": "^2.0.1",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "swizzle": "^1.1.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
