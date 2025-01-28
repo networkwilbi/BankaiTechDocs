@@ -7,10 +7,10 @@ RewriteCond build/index.html !-f
 Alias "/maintenance" "/var/websites/HomeLab Docs/maintenance/maintenance.html"
 
 # If the above check fails, redirect all requests to the maintenance page.
-RewriteRule ^ maintenance.html [R=302,L]
+#RewriteRule ^ maintenance.html [R=302,L]
 
 # Check for the maintenance flag file
-RewriteCond maintenance/maintenance.flag -f
+#RewriteCond maintenance/maintenance.flag -f
 
 # If the above check fails, redirect all requests to the maintenance page.
-RewriteRule ^ maintenance.html [R=503,L]
+#RewriteRule ^ maintenance.html [R=503,L]
