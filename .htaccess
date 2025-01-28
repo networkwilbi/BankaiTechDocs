@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Check if Docusaurus build exists and is not empty.
+RewriteCond %{DOCUMENT_ROOT}/build/index.html !-f
+
+# If the above check fails, redirect all requests to the maintenance page.
+RewriteRule ^ maintenance.html [R=302,L]
