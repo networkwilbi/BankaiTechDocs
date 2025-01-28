@@ -3,7 +3,7 @@ import Footer from '@theme-original/Footer'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { MendableFloatingButton } from '@mendable/search'
 
-export default function FooterWrapper(props) {
+export default function FooterWrapper(props: ComponentProps<typeof Footer>) {
   const {
     siteConfig: { customFields },
   } = useDocusaurusContext()
