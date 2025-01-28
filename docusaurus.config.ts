@@ -18,6 +18,9 @@ const config: Config = {
   future: {
     experimental_faster: true,
   },
+  customFields:{
+        mendableAnonKey: process.env.MENDABLE_KEY,
+  },
 
   // Set the production url of your site here
   url: 'https://docs.bankai-tech.com',
@@ -237,9 +240,6 @@ const config: Config = {
       theme: prismThemes.github,
       additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig', 'typescript', 'javascript', 'systemd', 'ini'],
     },
-    customFields:{
-        mendableAnonKey: process.env.MENDABLE_KEY,
-},
 
   } satisfies Preset.ThemeConfig,
 };
