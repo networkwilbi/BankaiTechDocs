@@ -1,7 +1,7 @@
 RewriteEngine On
 
 # Check if Docusaurus build exists and is not empty.
-RewriteCond %{DOCUMENT_ROOT}/build/index.html !-f
+RewriteCond build/index.html !-f
 
 # Alias for maintenance page
 Alias "/maintenance" "/var/websites/HomeLab Docs/maintenance/maintenance.html"
@@ -10,7 +10,7 @@ Alias "/maintenance" "/var/websites/HomeLab Docs/maintenance/maintenance.html"
 RewriteRule ^ maintenance.html [R=302,L]
 
 # Check for the maintenance flag file
-RewriteCond %{DOCUMENT_ROOT}/maintenance/maintenance.flag -f
+RewriteCond maintenance/maintenance.flag -f
 
 # If the above check fails, redirect all requests to the maintenance page.
 RewriteRule ^ maintenance.html [R=503,L]
