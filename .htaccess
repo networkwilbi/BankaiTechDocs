@@ -1,16 +1,9 @@
-#RewriteEngine On
-
-# Check if Docusaurus build exists and is not empty.
-#RewriteCond build/index.html !-f
-
-# Alias for maintenance page
-Alias "/maintenance" "maintenance/maintenance.html"
-
-# If the above check fails, redirect all requests to the maintenance page.
-#RewriteRule ^ maintenance.html [R=302,L]
-
-# Check for the maintenance flag file
-#RewriteCond maintenance/maintenance.flag -f
-
-# If the above check fails, redirect all requests to the maintenance page.
-#RewriteRule ^ maintenance.html [R=503,L]
+RewriteEngine On
+# Check if maintenance flag file exists
+RewriteCond %{DOCUMENT_ROOT}/maintenance/maintenance.flag -f
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+RewriteRule ^ /maintenance/maintenance.html [R=503,L]
+# Check if Docusaurus build exists
+RewriteCond %{DOCUMENT_ROOT}/build/index.html !-f
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+RewriteRule ^ /maintenance/maintenance.html [R=302,L]
