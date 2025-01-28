@@ -1,0 +1,54 @@
+.copyButton {
+  background: var(--ifm-pre-background);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  color: var(--ifm-color-emphasis-800);
+  cursor: pointer;
+  opacity: 0;
+  padding: 0.4rem;
+  position: relative;
+  transition: opacity 200ms ease-in-out;
+}
+
+.copyButton:focus {
+  opacity: 1;
+}
+
+:hover > .copyButton {
+  opacity: 1;
+}
+
+.copyButtonIcons {
+  position: relative;
+  width: 1.125rem;
+  height: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copyButtonIcon,
+.copyButtonSuccessIcon {
+  position: absolute;
+  fill: currentColor;
+  opacity: inherit;
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: all 200ms ease;
+}
+
+.copyButtonSuccessIcon {
+  opacity: 0;
+  transform: scale(0.33);
+  color: #00d600;
+}
+
+.copyButtonCopied .copyButtonIcon {
+  opacity: 0;
+  transform: scale(0.33);
+}
+
+.copyButtonCopied .copyButtonSuccessIcon {
+  opacity: 1;
+  transform: scale(1);
+}

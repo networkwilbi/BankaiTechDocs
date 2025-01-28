@@ -1,0 +1,30 @@
+.wordWrapButton {
+  background: var(--ifm-pre-background);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  color: var(--ifm-color-emphasis-800);
+  cursor: pointer;
+  opacity: 0;
+  user-select: none;
+  padding: 0.4rem;
+  position: relative;
+  transition: opacity 200ms ease-in-out;
+}
+
+.wordWrapButton:focus {
+  opacity: 1;
+}
+
+:hover > .wordWrapButton {
+  opacity: 1;
+}
+
+.wordWrapButtonIcon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.wordWrapButtonEnabled {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-900);
+}
