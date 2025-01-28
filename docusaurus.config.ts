@@ -19,6 +19,8 @@ const config: Config = {
     experimental_faster: true,
   },
   customFields:{
+    // Mendable API key for AI-powered search functionality
+  // Get your key at https://mendable.ai
         mendableAnonKey: process.env.MENDABLE_KEY,
   },
 
