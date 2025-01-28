@@ -7,6 +7,7 @@ import FooterCopyright from '@theme/Footer/Copyright';
 import FooterLayout from '@theme/Footer/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { MendableFloatingButton } from '@mendable/search'
+import Footer from '@theme-original/Footer'
 
 function Footer(): ReactNode {
   const {footer} = useThemeConfig();
