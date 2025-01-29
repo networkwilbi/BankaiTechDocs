@@ -424,7 +424,7 @@ services:
 #### Explanation:
 
 - **`type: tmpfs`**: Specifies the volume type as tmpfs.
-- **`target`**: Defines the container path where the tmpfs mount will be located on the host filesystem.
+- **`target`**: Defines the container path where the tmpfs mount will be located on the containers filesystem.
 - **`tmpfs:size`**: Allocates 100MB of space for the tmpfs mount. Adjust the value as needed for your application requirements.
 - **`tmpfs:mode`**: Sets the permissions for the tmpfs mount to `1777`, which is similar to the `tmp` directory on UNIX systems, allowing all users to create files but preventing them from deleting or modifying files owned by others.
 - **`tmpfs:uid`** and **`tmpfs:gid`**: These options set the ownership of the tmpfs mount. You may need to adjust these values based on your container's user configuration to ensure proper access to the tmpfs mount.
