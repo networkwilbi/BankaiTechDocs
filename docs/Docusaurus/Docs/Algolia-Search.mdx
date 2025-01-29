@@ -74,7 +74,7 @@ Save by pressing `CTRL+X`
 nano docusaurus.config.ts
 ```
 Paste the following
-```ts
+```ts title="You DO NOT have to modify anything here. Unless the highlighted pathname differs"
     algolia: {
       appId: process.env.ALGOLIA_APP_ID,
       apiKey: process.env.ALGOLIA_API_KEY,
@@ -83,6 +83,7 @@ Paste the following
       contextualSearch: true,
       // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
       replaceSearchResultPathname: {
+        // highlight-next-line
         from: '/docs/', // or as RegExp: /\/docs\//
         to: '/',
       },
