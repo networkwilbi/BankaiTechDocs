@@ -42,7 +42,7 @@ sudo mkdir /var/docker && sudo mkdir /var/docker/jellyfin && cd /var/docker/jell
 sudo nano docker-compose.yaml
 ```
 
-```yaml title="Modify the Highlighted lines" {12,13,16,17,27} showLineNumbers
+```yaml title="Modify the Highlighted lines" showLineNumbers
 name: jellyfin
 
 services:
@@ -54,12 +54,16 @@ services:
       - ./config:/config
       - ./cache:/cache
       - type: bind
+        // highlight-start
         source: /path/to/media
         target: /media
+        // highlight-end
         read_only: true
       - type: bind
+        // highlight-start
         source: /path/to/media2
         target: /media2
+        // highlight-end
         read_only: true
       # Optional - extra fonts to be used during transcoding with subtitle burn-in
       #- type: bind
@@ -69,6 +73,7 @@ services:
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
+      // highlight-next-line
       - JELLYFIN_PublishedServerUrl=http://example.com
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
