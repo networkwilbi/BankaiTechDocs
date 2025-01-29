@@ -109,7 +109,7 @@ Save the new file by pressing `CTRL+X`
   
    Now lets edit the compose file.
 
-```yaml title="Nothing in this file needs to be modified. Info is pulled from .env file."
+```yaml title="The highlighted lines are Optional and can be removed completely"
 name: nextcloud
 
 services:
@@ -160,11 +160,13 @@ services:
   redis:
     container_name: redis
     image: redis:latest
-    volumes:
-      - type: tmpfs
-        target: /data
+    // highlight-start
+    volumes:            # Optional
+      - type: tmpfs     # Optional
+        target: /data   # Optional
         tmpfs:
-          size: 1073741824 # 1GB
+          size: 1073741824 # 1GB "Optional"
+    // highlight-end
     expose:
       - 6379
     command: redis-server --save 60 1 --loglevel warning
@@ -225,6 +227,11 @@ If you want to use GPU for transcoding then uncomment this line\
 runtime: nvidia # (NVENC)  # For Nvidia HW Acceleration, Uncomment after installing nvidia drivers.\
 Test nvidia by running `sudo nvidia-smi`
 :::
+
+:::warning
+tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
+:::
+
 ## Starting Nextcloud
 Now lets start it up.
 ```bash
