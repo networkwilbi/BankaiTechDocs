@@ -69,7 +69,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // highligh-next-line
+          // highlight-next-line
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
