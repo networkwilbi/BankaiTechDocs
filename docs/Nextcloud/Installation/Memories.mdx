@@ -116,6 +116,8 @@ services:
       - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
       - .env
+    networks:
+      - nextcloud
 
   nextcloud:
     image: bankaitech/nextcloud:latest
@@ -131,6 +133,8 @@ services:
       - ${DATA_LOCATION}:/var/www/html
     env_file:
       - .env
+    networks:
+      - nextcloud
 
   cron:
     image: bankaitech/nextcloud:latest
@@ -141,14 +145,23 @@ services:
     depends_on:
       - mariadb
       - redis
+    networks:
+      - nextcloud
     entrypoint: /cron.sh
 
   redis:
     container_name: redis
     image: redis:latest
+    volumes:
+      - type: tmpfs
+        target: /data
+        tmpfs:
+          size: 1073741824 # 1GB
     expose:
       - 6379
     command: redis-server --save 60 1 --loglevel warning
+    networks:
+      - nextcloud
     restart: always
 
   go-vod:
@@ -159,7 +172,13 @@ services:
       - .env
     volumes:
       - ${DATA_LOCATION}:/var/www/html:ro
+    networks:
+      - nextcloud
 #    runtime: nvidia # (NVENC)
+
+networks:
+  nextcloud:
+    driver: bridge
 ```
 
 :::info[NVIDIA HWA]
