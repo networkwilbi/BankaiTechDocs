@@ -55,29 +55,37 @@ nano .env
 When editing the configuration below, remove all instances of `<>` from the values
 ::: 
 Paste the Following with `CNTRL+SHIFT+V`
-```editorconfig title="Highlighted items will need to be modified" {3,4,6,11,12,16,21,22} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" showLineNumbers
 # Nextcloud and MariaDB
 PORT=8080
+// highlight-start
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
 TRUSTED_PROXIES=<IP address of your Reverse Proxy>
+// highlight-end
 OVERWRITEPROTOCOL=https
+// highlight-next-line
 OVERWRITECLIURL=https://cloud.<YourDomain>.com
 REDIS_HOST=redis
 REDIS_PORT=6379
 PHP_MEMORY_LIMIT=512M
 PHP_UPLOAD_LIMIT=100M
+// highlight-start
 MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
+// highlight-end
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
 # Go_Vod
+// highlight-next-line
 NEXTCLOUD_HOST=https://cloud.example.com
 NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
 NVIDIA_VISIBLE_DEVICES=all
 # Collabora
+// highlight-start
 username=admin
 password=PASSWORD
 domain=cloud\\.domain\\.com
+// highlight-end
 ```
 
 :::tip[Info]
@@ -96,7 +104,7 @@ Save the new file by pressing `CTRL+X`
   
    Now lets edit the compose file.
 
-```yaml title="Nothing in this file needs to be modified"
+```yaml title="Nothing in this file needs to be modified. Info is pulled from .env file."
 name: nextcloud
 
 services:
