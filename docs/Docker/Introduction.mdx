@@ -148,7 +148,7 @@ Docker supports several types of networks, each designed for specific scenarios.
 
 #### None Network
 - **No Connectivity:** Provides a way to completely disable networking for a container.
-- **Use Cases:** Useful for containers that should run isolated from the network, typically used for testing or security-sensitive applications that do not require network access to function.
+- **Use Cases:** Useful for containers that should run isolated from the network and other containers, typically used for testing or security-sensitive applications that do not require network access to function.
 ### Examples
 Defining networks in Docker Compose allows you to specify and configure custom networks for your containers to communicate on. Below are examples that illustrate how to define and use networks in a Docker Compose file.
 
@@ -157,7 +157,7 @@ Defining networks in Docker Compose allows you to specify and configure custom n
 This example demonstrates how to define a simple custom bridge network and assign containers to it.
 
 ```yaml
-version: '3.8'
+name: example
 services:
   app:
     image: my-app:image
@@ -181,7 +181,7 @@ In this example, both the `app` and `database` services are connected to a custo
 This example shows how to define multiple networks to segregate traffic between services.
 
 ```yaml
-version: '3.8'
+name: example
 services:
   app:
     image: my-app:image
@@ -213,7 +213,7 @@ Here, we have three services: `app`, `web`, and `database`. The `app` service is
 Sometimes you might want to connect your services to an existing network outside of Docker Compose.
 
 ```yaml
-version: '3.8'
+name: example
 services:
   app:
     image: my-app:image
@@ -232,7 +232,7 @@ In this Docker Compose file, `app` is connected to an external network named `ex
 For scenarios requiring static IP addresses within your custom network, Docker Compose allows you to specify these as well.
 
 ```yaml
-version: '3.8'
+name: example
 services:
   app:
     image: my-app:image
@@ -256,6 +256,27 @@ networks:
 ```
 
 In this configuration, both the `app` and `database` services are assigned static IP addresses within the `my-network` network. The `ipam` configuration specifies the subnet for the network, allowing Docker to manage IP address allocation within this range.
+
+### Example 5: No Internet Access
+
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    networks:
+      - no-network
+
+  database:
+    image: postgres:latest
+    networks:
+      - no-network
+
+networks:
+  no-network:
+    driver: none
+```
+In this example, both the `app` and `database` services are connected to a custom network named `no-network`. This uses network driver `none` meaning that the containers using this network will not be able to communicate with any other containers or the host, Including eachother. They network interface is essentialy disabled so no IP addresses are assigned to the containers.
 
 These examples demonstrate the flexibility of Docker Compose in defining and using networks, enabling complex networking setups to be described in a straightforward and declarative manner.
 
