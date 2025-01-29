@@ -126,6 +126,45 @@ Docker networks allow for fine-grained control over which containers can communi
 #### Enhanced Scalability and Flexibility
 The ability to create custom networks tailored to specific requirements or docker-compose setups makes it easier to scale applications horizontally. Each service can be scaled independently within its network, and networks can be configured to match the specific needs of an application or environment.
 
+### `expose`:
+
+- **Purpose**: The `expose` instruction is used to indicate that a container listens on specified network ports during runtime. However, it does not make these ports accessible from the host; it's more about documenting which ports are used for inter-container communication.
+- **Visibility**: Exposed ports are only accessible to linked services within the same Docker network. They are not published to the host, making them invisible to the outside world, including the host machine.
+- **Docker Compose Usage**: In a Docker Compose file, you use `expose` to list the ports that other services in the same Docker network can access.
+
+```yaml
+services:
+  my-service:
+    image: my-image
+    expose:
+      - "3000"
+```
+
+In this example, `my-service` will expose port `3000` to other containers on the same network but not to the host machine or outside world.
+
+### `ports`:
+
+- **Purpose**: The `ports` instruction is used to map a container's ports to the host, effectively making a service running inside a container accessible from outside of Docker, including the internet (if allowed by firewall rules), or the local host.
+- **Visibility**: Ports specified under `ports` are published to the host, making a service inside the container reachable from the host machine and potentially from other machines, depending on the network configuration and firewall settings.
+- **Docker Compose Usage**: In a Docker Compose file, `ports` is used to define the port mapping from the host to the containers.
+
+```yaml
+services:
+  my-service:
+    image: my-image
+    ports:
+      - "4000:3000"
+```
+
+In this example, `my-service` maps port `3000` inside the container to port `4000` on the host machine. This means that traffic to the host's port `4000` is forwarded to port `3000` on the container.
+
+### Summary:
+
+- **`expose`** is about container-to-container communication within the same Docker network and is a way of documenting which ports a container uses without opening them to the outside.
+- **`ports`** actively maps and publishes a container's ports to the host, enabling external access to a service running inside a container.
+
+Understanding the difference between these two is crucial for correctly configuring services in Docker and Docker Compose, especially regarding service accessibility, security, and network configuration.
+
 ### Types of Docker Networks and Use Cases
 
 Docker supports several types of networks, each designed for specific scenarios. Here’s a breakdown:
