@@ -112,7 +112,12 @@ Docker networks facilitate communication between Docker containers, allowing the
 At its core, Docker abstracts the complexity of network management, allowing developers and administrators to focus on the high-level configuration rather than the intricacies of network implementation. When a Docker environment is set up, it automatically creates a default bridge network, which connects containers to the host, allowing them to communicate and transfer data. This default network provides a basic level of connectivity out of the box.
 
 However, Docker’s networking capabilities extend far beyond this default setup. Docker allows for the creation of multiple network types, each tailored to specific needs and scenarios. This flexibility enables more complex and secure networking schemes, such as network isolation, where only selected containers can communicate with each other, or more open networks where containers can freely exchange information.
+
 ### Benefits of Docker Networks
+
+#### DNS and Service Discovery
+
+On user-defined networks, Docker’s built-in DNS server assigns DNS entries to each container’s name. This way, containers can resolve the names of other containers to their IP addresses, enabling them to communicate using friendly names rather than IP addresses, which can change and be hard to manage.
 
 #### Simplified Container Communication
 Docker networks simplify the process of establishing communication between containers. Containers on the same network can discover and communicate with each other using container names instead of relying on IP addresses, which can change if a container is restarted.
