@@ -66,35 +66,31 @@ Docker is an open-source project that automates the deployment of applications i
   </TabItem>
 </Tabs>
 
-### Docker Images
+## Docker Images
 
 A **Docker image** is a lightweight, standalone, executable package that includes everything needed to run a piece of software, including the code, a runtime, libraries, environment variables, and config files. Images are the building blocks of Docker containers. An image is essentially a snapshot of an application and its environment at a specific point in time.
 
-#### Benefits:
+### Benefits:
 - **Consistency:** Ensures that your application runs the same way in development, testing, and production.
 - **Portability:** Can be shared across different machines, eliminating the "it works on my machine" problem.
 - **Version Control:** You can version images, roll back to previous versions, and manage them just like source code.
 
-### Docker Containers
+## Docker Containers
 
 A **Docker container** is a runnable instance of an image. You can think of it as the execution environment for your application. Containers isolate your application from the host system and other containers, providing a private space for the application to run within.
 
-#### Benefits:
+### Benefits:
 - **Isolation:** Prevents conflicts between applications or between applications and the host system.
 - **Resource Efficiency:** Containers share the host system’s kernel but can be limited to specific amounts of CPU, memory, and I/O.
 - **Scalability:** Containers can be easily started, stopped, and replicated, which supports modern agile and DevOps practices.
 
-### Docker Environment Variables
+## Docker Environment Variables
 
 **Docker environment variables** are key-value pairs that can be set within a Docker image or container to configure behavior without changing the application's code. These variables are particularly useful for managing configuration settings that differ between environments, such as development, testing, and production.
 
-#### Benefits:
+### Benefits:
 - **Flexibility:** Quickly change settings without modifying the code or Docker images.
 - **Security:** Keep sensitive information, like database passwords, out of the image and inject it at runtime.
-
-#### Use in Docusaurus:
-
-When using Docusaurus, a project for building, deploying, and maintaining open source project websites easily, Docker can help in creating consistent build and deployment environments. Environment variables are especially helpful for customization and configuration without altering the Docusaurus installation or content directly. You can control theme settings, API endpoints, and other configurable elements of your Docusaurus site through environment variables.
 
 ### Benefits of Interpolation
 
