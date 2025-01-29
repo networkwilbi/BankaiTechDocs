@@ -49,8 +49,10 @@ When editing the configuration below, remove all instances of `<>` from the valu
 Paste the following using `CTRL+SHIFT+V`
 ```editorconfig title="Highlighted items will need to be modified" showLineNumbers
 # Nextcloud and MariaDB
+# Directory paths for persistent data storage
 DATA_LOCATION=./nextcloud
 DB_DATA_LOCATION=./mariadb
+# Nextcloud Port
 PORT=8080
 // highlight-start
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
@@ -183,7 +185,7 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 
 ![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
 
-:::danger
+:::warning
 If you see this warning
 ```
 
