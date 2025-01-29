@@ -208,7 +208,7 @@ networks:
 
 Here, we have three services: `app`, `web`, and `database`. The `app` service is connected to two networks, `front-end` and `back-end`, allowing it to communicate with both the `web` and `database` services. However, the `web` service cannot directly communicate with the `database` service, as they are on separate networks.
 
-### Example 3: External Networks
+#### Example 3: External Networks
 
 Sometimes you might want to connect your services to an existing network outside of Docker Compose.
 
