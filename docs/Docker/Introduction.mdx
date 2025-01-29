@@ -390,6 +390,9 @@ services:
       - /data
 ```
 In Docker Compose, adjusting the size of `tmpfs` mounts along with adding other arguments provides you control over the temporary filesystems associated with your services. This allows for optimizing performance and security for containers that need fast, ephemeral storage. Below is an explanation of how to change the `tmpfs` size and include other options in Docker Compose.
+:::warning
+tmpfs uses memory (RAM) adjust the size as needed. Monitor how much RAM the mount utilizes
+:::
 
 #### Changing the `tmpfs` Size
 
