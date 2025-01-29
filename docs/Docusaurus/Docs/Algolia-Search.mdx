@@ -74,10 +74,11 @@ Save by pressing `CTRL+X`
 nano docusaurus.config.ts
 ```
 Paste the following
-```ts title="You DO NOT have to modify anything here. Unless the highlighted pathname differs"
+```ts title="Modify the highlighted lines if needed"
     algolia: {
       appId: process.env.ALGOLIA_APP_ID,
       apiKey: process.env.ALGOLIA_API_KEY,
+      // highlight-next-line
       indexName: 'bankai-tech',
       // Optional: see doc section below
       contextualSearch: true,
