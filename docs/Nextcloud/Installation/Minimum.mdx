@@ -89,7 +89,7 @@ Now lets create the compose file.
 nano docker-compose.yaml
 ```
 Paste this into the file
-```yaml title="Nothing in this file requires modification. Info is pulled from .env file."
+```yaml title="The highlighted lines are Optional and can be removed completely"
 name: nextcloud
 
 services:
@@ -124,11 +124,13 @@ services:
   redis:
     container_name: redis
     image: redis:latest
-    volumes:
-      - type: tmpfs
-        target: /data
-        tmpfs:
-          size: 1073741824 # 1GB
+   // highlight-start
+    volumes:           # Optional
+      - type: tmpfs    # Optional
+        target: /data  # Optional
+        tmpfs:         # Optional
+          size: 1073741824 # 1GB "Optional"
+    // highlight-end
     expose:
       - 6379
     command: redis-server --save 60 1 --loglevel warning
@@ -146,6 +148,11 @@ networks:
   nextcloud:
     driver: bridge
 ```
+
+:::warning
+tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
+:::
+
 ## Starting Nextcloud
 Now lets start it up.
 ```bash
