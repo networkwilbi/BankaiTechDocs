@@ -47,19 +47,25 @@ nano .env
 When editing the configuration below, remove all instances of `<>` from the values
 ::: 
 Paste the Following
-```editorconfig title="Highlighted items will need to be modified" {4,5,7,12} showLineNumbers
+```editorconfig title="Highlighted items will need to be modified" showLineNumbers
 DATA_LOCATION=./nextcloud
 DB_DATA_LOCATION=./mariadb
 PORT=8080
+// highlight-start
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
 TRUSTED_PROXIES=<IP address of your Reverse Proxy>
+// highlight-end
 OVERWRITEPROTOCOL=https
+// highlight-next-line
 OVERWRITECLIURL=https://cloud.<YourDomain>.com
 REDIS_HOST=redis
 REDIS_PORT=6379
 PHP_MEMORY_LIMIT=512M
 PHP_UPLOAD_LIMIT=100M
+// highlight-start
 MYSQL_PASSWORD=CHANGEME
+MYSQL_ROOT_PASSWORD=CHANGEME
+// highlight-end
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
 MYSQL_HOST=mariadb
@@ -80,7 +86,7 @@ Now lets create the compose file.
 nano docker-compose.yaml
 ```
 Paste this into the file
-```yaml title="Nothing in this file requires modification"
+```yaml title="Nothing in this file requires modification. Info is pulled from .env file."
 name: nextcloud
 
 services:

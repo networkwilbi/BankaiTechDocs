@@ -69,6 +69,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          // highlight-next-line
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
@@ -134,22 +135,27 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
             items: [
               {
                 label: 'Documented Tutorial',
+                // highlight-next-line
                 to: '/category/documented-tutorials-',
               },
               {
                 label: 'Examples',
+                // highlight-next-line
                 to: '/category/examples-',
               },
               {
                 label: 'Jellyfin Extras',
+                // highlight-next-line
                 to: '/category/jellyfin-extras-',
               },
               {
                 label: 'Arr Self-Hosting',
+                // highlight-next-line
                 to: '/category/arr-self-hosting',
               },
               {
                 label: 'Videos',
+                // highlight-next-line
                 to: '/category/videos-tutorials',
               },
             ],
