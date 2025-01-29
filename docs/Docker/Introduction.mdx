@@ -107,47 +107,161 @@ When using Docusaurus, a project for building, deploying, and maintaining open s
 
 In summary, Docker images, containers, and environment variables are foundational concepts in Docker that enable the portability, consistency, and efficient scaling of applications. Interpolation of environment variables enhances the flexibility and security of Docker containers, making it easier to manage applications across different environments, including when deploying websites or services like Docusaurus.
 
-## Benefits of Docker Networks
+## Docker Networks
 
-### Simplified Container Communication
+Docker networks facilitate communication between Docker containers, allowing them to send data to each other or establish connections with external networks. Essentially, Docker networking plays a pivotal role in managing how containers interact both amongst themselves and with the wider world. This framework provides the necessary mechanisms to encapsulate container communication, ensuring that complex architectures can be simplified into more manageable, secure, and isolated systems.
+
+### How Docker Networks Work
+
+At its core, Docker abstracts the complexity of network management, allowing developers and administrators to focus on the high-level configuration rather than the intricacies of network implementation. When a Docker environment is set up, it automatically creates a default bridge network, which connects containers to the host, allowing them to communicate and transfer data. This default network provides a basic level of connectivity out of the box.
+
+However, Docker’s networking capabilities extend far beyond this default setup. Docker allows for the creation of multiple network types, each tailored to specific needs and scenarios. This flexibility enables more complex and secure networking schemes, such as network isolation, where only selected containers can communicate with each other, or more open networks where containers can freely exchange information.
+### Benefits of Docker Networks
+
+#### Simplified Container Communication
 Docker networks simplify the process of establishing communication between containers. Containers on the same network can discover and communicate with each other using container names instead of relying on IP addresses, which can change if a container is restarted.
 
-### Network Isolation
+#### Network Isolation
 Containers can be segmented into different networks, enhancing security by limiting which services can communicate with each other. This isolation is critical in multi-application or multi-service deployments, ensuring that only containers that need to communicate are allowed to do so.
 
-### Controlled External Access
+#### Controlled External Access
 Docker networks allow for fine-grained control over which containers can communicate with the outside world, enabling a secure environment where only specific entry points are available to external users or systems.
 
-### Enhanced Scalability and Flexibility
+#### Enhanced Scalability and Flexibility
 The ability to create custom networks tailored to specific requirements or docker-compose setups makes it easier to scale applications horizontally. Each service can be scaled independently within its network, and networks can be configured to match the specific needs of an application or environment.
 
-## Types of Docker Networks and Use Cases
+### Types of Docker Networks and Use Cases
 
 Docker supports several types of networks, each designed for specific scenarios. Here’s a breakdown:
 
-### Bridge Networks
+#### Bridge Networks
 - **Default Type:** Automatically created when you run a container without specifying a network.
 - **Use Cases:** Ideal for standalone containers or groups of interconnected containers on the same Docker host. It's the most common network type, suitable for small to medium-scale applications that require communication between containers without the complexity of more sophisticated network topologies.
 
-### Host Networks
+#### Host Networks
 - **Direct Access:** Removes network isolation between the container and the Docker host, allowing the container to use the host’s networking directly.
 - **Use Cases:** Useful for services that need to handle lots of traffic or low-latency applications. However, it exposes the container more directly to the external network, which may not be suitable for all applications.
 
-### Overlay Networks
+#### Overlay Networks
 - **Distributed Systems:** Supports multi-host networking, enabling containers running on different Docker hosts to communicate as if they were on the same host.
 - **Use Cases:** Perfect for Dockerized applications running in a Swarm or Kubernetes cluster, facilitating communication across nodes in a cloud or data center environment. It’s essential for large-scale applications that require high availability and scalability across multiple servers.
 
-### Macvlan Networks
+#### Macvlan Networks
 - **Physical Interface Emulation:** Makes it appear as if a container has its own physical device connected to the network.
 - **Use Cases:** Ideal when migrating traditional applications that expect to be directly connected to the physical network, not virtualized. It's useful in scenarios where containers need a unique MAC address or direct access to an external network.
 
-### None Network
+#### None Network
 - **No Connectivity:** Provides a way to completely disable networking for a container.
 - **Use Cases:** Useful for containers that should run isolated from the network, typically used for testing or security-sensitive applications that do not require network access to function.
+### Examples
+Defining networks in Docker Compose allows you to specify and configure custom networks for your containers to communicate on. Below are examples that illustrate how to define and use networks in a Docker Compose file.
 
-#### Conclusion
+### Example 1: Simple Custom Network
 
-Docker networks empower developers and administrators with the flexibility, security, and scalability needed to manage containerized applications effectively. By understanding the benefits and use cases of each network type, you can design a Dockerized environment optimized for your specific application needs and deployment scenarios. This knowledge is particularly valuable when developing and deploying websites or services with Docusaurus, as it ensures the underlying infrastructure supports the performance, scalability, and security requirements of modern web applications.
+This example demonstrates how to define a simple custom bridge network and assign containers to it.
+
+```yaml
+version: '3.8'
+services:
+  app:
+    image: my-app:image
+    networks:
+      - my-network
+
+  database:
+    image: postgres:latest
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+```
+
+In this example, both the `app` and `database` services are connected to a custom network named `my-network`. This enables direct communication between the `app` service and the `database` service.
+
+### Example 2: Multiple Networks
+
+This example shows how to define multiple networks to segregate traffic between services.
+
+```yaml
+version: '3.8'
+services:
+  app:
+    image: my-app:image
+    networks:
+      - front-end
+      - back-end
+  
+  web:
+    image: nginx:alpine
+    networks:
+      - front-end
+
+  database:
+    image: mysql:latest
+    networks:
+      - back-end
+
+networks:
+  front-end:
+    driver: bridge
+  back-end:
+    driver: bridge
+```
+
+Here, we have three services: `app`, `web`, and `database`. The `app` service is connected to two networks, `front-end` and `back-end`, allowing it to communicate with both the `web` and `database` services. However, the `web` service cannot directly communicate with the `database` service, as they are on separate networks.
+
+### Example 3: External Networks
+
+Sometimes you might want to connect your services to an existing network outside of Docker Compose.
+
+```yaml
+version: '3.8'
+services:
+  app:
+    image: my-app:image
+    networks:
+      - external-network
+
+networks:
+  external-network:
+    external: true
+```
+
+In this Docker Compose file, `app` is connected to an external network named `external-network`. The `external: true` parameter indicates that this network is not managed by Docker Compose and must exist before running `docker-compose up`.
+
+### Example 4: Assigning Static IP Addresses
+
+For scenarios requiring static IP addresses within your custom network, Docker Compose allows you to specify these as well.
+
+```yaml
+version: '3.8'
+services:
+  app:
+    image: my-app:image
+    networks:
+      my-network:
+        ipv4_address: 172.25.0.101
+  
+  database:
+    image: postgres:latest
+    networks:
+      my-network:
+        ipv4_address: 172.25.0.102
+
+networks:
+  my-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/24
+```
+
+In this configuration, both the `app` and `database` services are assigned static IP addresses within the `my-network` network. The `ipam` configuration specifies the subnet for the network, allowing Docker to manage IP address allocation within this range.
+
+These examples demonstrate the flexibility of Docker Compose in defining and using networks, enabling complex networking setups to be described in a straightforward and declarative manner.
 
 ## Conclusion
 
