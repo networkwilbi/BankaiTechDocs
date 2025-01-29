@@ -389,6 +389,47 @@ services:
     tmpfs:
       - /data
 ```
+In Docker Compose, adjusting the size of `tmpfs` mounts along with adding other arguments provides you control over the temporary filesystems associated with your services. This allows for optimizing performance and security for containers that need fast, ephemeral storage. Below is an explanation of how to change the `tmpfs` size and include other options in Docker Compose.
+
+#### Changing the `tmpfs` Size
+
+To specify the size of a `tmpfs` mount, you can use the `size` option. The size is set in bytes but can also be expressed in a human-readable manner using units like `k`, `m`, or `g` for kilobytes, megabytes, or gigabytes, respectively.
+
+#### Additional `tmpfs` Options
+
+Apart from setting the size, Docker allows configuring additional parameters for `tmpfs` mounts including:
+
+- **`mode`**: Sets the file mode (permissions) in an octal format. For example, a mode of `700` would restrict access to the owner of the file only.
+- **`uid` and `gid`**: Specify the user ID and group ID for the mount, allowing you to control which user or group owns the `tmpfs` mount.
+
+#### Docker Compose Example with `tmpfs` Options
+
+Here's how you can configure a service with a `tmpfs` mount, including changing its size and setting other options in a Docker Compose file:
+
+```yaml
+name: example
+services:
+  my-service:
+    image: my-image
+    volumes:
+      - type: tmpfs
+        target: /app/tmp
+        tmpfs:
+          size: 100000000 # 100 MB
+          mode: 1777
+          uid: 1000 # User ID
+          gid: 1000 # Group ID
+```
+
+#### Explanation:
+
+- **`type: tmpfs`**: Specifies the volume type as tmpfs.
+- **`target`**: Defines the container path where the tmpfs mount will be located.
+- **`tmpfs:size`**: Allocates 100MB of space for the tmpfs mount. Adjust the value as needed for your application requirements.
+- **`tmpfs:mode`**: Sets the permissions for the tmpfs mount to `1777`, which is similar to the `tmp` directory on UNIX systems, allowing all users to create files but preventing them from deleting or modifying files owned by others.
+- **`tmpfs:uid`** and **`tmpfs:gid`**: These options set the ownership of the tmpfs mount. You may need to adjust these values based on your container's user configuration to ensure proper access to the tmpfs mount.
+
+This configuration demonstrates how to effectively use `tmpfs` mounts for temporary storage needs within your Docker containers, optimizing for both performance and security by controlling the size, permissions, and ownership of the tmpfs mount.
 
 ### Named Pipes or FIFO
 
