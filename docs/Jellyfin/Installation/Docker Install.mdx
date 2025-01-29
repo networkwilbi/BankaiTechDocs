@@ -54,8 +54,10 @@ services:
       - ./config:/config
       - ./cache:/cache
       - type: bind
+        # Path on the Host
         // highlight-start
         source: /path/to/media
+        # Path the Container sees
         target: /media
         // highlight-end
         read_only: true
