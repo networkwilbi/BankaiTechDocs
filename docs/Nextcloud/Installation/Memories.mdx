@@ -103,7 +103,7 @@ Save the new file by pressing `CTRL+X`
    nano docker-compose.yaml
    ```
 
-```yaml title="Nothing in this file needs to be modified. Info is pulled from .env file"
+```yaml title="The highlighted lines are Optional and can be removed completely"
 name: nextcloud
 
 services:
@@ -116,6 +116,8 @@ services:
       - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
       - .env
+    networks:
+      - nextcloud
 
   nextcloud:
     image: bankaitech/nextcloud:latest
@@ -131,6 +133,8 @@ services:
       - ${DATA_LOCATION}:/var/www/html
     env_file:
       - .env
+    networks:
+      - nextcloud
 
   cron:
     image: bankaitech/nextcloud:latest
@@ -141,14 +145,25 @@ services:
     depends_on:
       - mariadb
       - redis
+    networks:
+      - nextcloud
     entrypoint: /cron.sh
 
   redis:
     container_name: redis
     image: redis:latest
+    // highlight-start
+    volumes:           # Optional
+      - type: tmpfs    # Optional
+        target: /data  # Optional
+        tmpfs:         # Optional
+          size: 1073741824 # 1GB "Optional"
+    //highlight-end
     expose:
       - 6379
     command: redis-server --save 60 1 --loglevel warning
+    networks:
+      - nextcloud
     restart: always
 
   go-vod:
@@ -159,7 +174,13 @@ services:
       - .env
     volumes:
       - ${DATA_LOCATION}:/var/www/html:ro
+    networks:
+      - nextcloud
 #    runtime: nvidia # (NVENC)
+
+networks:
+  nextcloud:
+    driver: bridge
 ```
 
 :::info[NVIDIA HWA]
@@ -167,6 +188,11 @@ If you want to use GPU for transcoding then uncomment this line\
 runtime: nvidia # (NVENC)  # For Nvidia HW Acceleration, Uncomment after installing nvidia drivers.\
 Test nvidia by running `sudo nvidia-smi`
 :::
+
+:::warning
+tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
+:::
+
 ## Starting Nextcloud
 Now lets start it up.
 ```bash
