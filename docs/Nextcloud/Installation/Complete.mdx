@@ -57,6 +57,10 @@ When editing the configuration below, remove all instances of `<>` from the valu
 Paste the Following with `CNTRL+SHIFT+V`
 ```editorconfig title="Highlighted items will need to be modified" showLineNumbers
 # Nextcloud and MariaDB
+# Directory paths for persistent data storage
+DATA_LOCATION=./nextcloud
+DB_DATA_LOCATION=./mariadb
+# Nextcloud Port
 PORT=8080
 // highlight-start
 NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
@@ -75,6 +79,7 @@ MYSQL_PASSWORD=CHANGEME
 // highlight-end
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
+MARIADB_AUTO_UPGRADE=true
 # Go_Vod
 // highlight-next-line
 NEXTCLOUD_HOST=https://cloud.example.com
@@ -221,6 +226,26 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 </p>
 
 ![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
+
+:::warning
+If you see this warning
+```
+
+Performance warning
+
+You chose SQLite as database.
+
+SQLite should only be used for minimal and development instances. For production we recommend a different database backend.
+
+If you use clients for file syncing, the use of SQLite is highly discouraged.
+```
+
+You will need to click the drop down and select `MySQL/MariaDB` and type in the info manually.
+- **database account:** nextcloud
+- **database password:** YOUR_PASSWORD_FROM .env
+- **database name:** nextcloud
+- **database host:** mariadb:3306
+:::
 
 ### Account Creation
 <p>
