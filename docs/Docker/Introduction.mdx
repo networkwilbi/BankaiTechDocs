@@ -152,7 +152,7 @@ Docker supports several types of networks, each designed for specific scenarios.
 ### Examples
 Defining networks in Docker Compose allows you to specify and configure custom networks for your containers to communicate on. Below are examples that illustrate how to define and use networks in a Docker Compose file.
 
-### Example 1: Simple Custom Network
+#### Example 1: Simple Custom Network
 
 This example demonstrates how to define a simple custom bridge network and assign containers to it.
 
@@ -176,7 +176,7 @@ networks:
 
 In this example, both the `app` and `database` services are connected to a custom network named `my-network`. This enables direct communication between the `app` service and the `database` service.
 
-### Example 2: Multiple Networks
+#### Example 2: Multiple Networks
 
 This example shows how to define multiple networks to segregate traffic between services.
 
@@ -227,7 +227,7 @@ networks:
 
 In this Docker Compose file, `app` is connected to an external network named `external-network`. The `external: true` parameter indicates that this network is not managed by Docker Compose and must exist before running `docker-compose up`.
 
-### Example 4: Assigning Static IP Addresses
+#### Example 4: Assigning Static IP Addresses
 
 For scenarios requiring static IP addresses within your custom network, Docker Compose allows you to specify these as well.
 
@@ -257,7 +257,7 @@ networks:
 
 In this configuration, both the `app` and `database` services are assigned static IP addresses within the `my-network` network. The `ipam` configuration specifies the subnet for the network, allowing Docker to manage IP address allocation within this range.
 
-### Example 5: No Internet Access (Isolation)
+#### Example 5: No Internet Access (Isolation)
 
 ```yaml
 name: example
