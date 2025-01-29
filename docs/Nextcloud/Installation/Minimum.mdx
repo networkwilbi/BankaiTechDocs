@@ -152,6 +152,26 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 
 ![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
 
+:::danger
+If you see this warning
+```
+
+Performance warning
+
+You chose SQLite as database.
+
+SQLite should only be used for minimal and development instances. For production we recommend a different database backend.
+
+If you use clients for file syncing, the use of SQLite is highly discouraged.
+```
+
+You will need to click the drop down and select `MySQL/MariaDB` and type in the info manually.
+- **database account:** nextcloud
+- **database password:** YOUR_PASSWORD_FROM .env
+- **database name:** nextcloud
+- **database host:** mariadb:3306
+:::
+
 ### Account Creation
 <p>
 <>Now create an admin account and click `Install`</>
