@@ -368,8 +368,11 @@ services:
       - no-network
 
 networks:
-  no-network:
+  overlay-net:
     driver: overlay
+    attachable: true
+    driver_opts:
+      encrypted: "true"
 ```
 
 #### Example 8: network_mode: host
