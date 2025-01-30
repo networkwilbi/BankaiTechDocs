@@ -323,6 +323,106 @@ networks:
 ```
 In this example, both the `app` and `database` services are connected to a custom network named `no-network`. This uses network `driver: none` meaning that the containers using this network will not be able to communicate with any other containers or the host, Including eachother. The network interface is essentialy disabled so no IP addresses are assigned to the containers.
 
+#### Example 6: macvlan
+- **Description**: Allows you to assign a MAC address to a container, making it appear as a physical device on your network. The Docker host’s networking can be bypassed.
+- **Use Case**: Useful if you require containers to have direct access to an existing network, behaving as though they were physically attached to it. Often used in scenarios where you need to integrate with legacy applications or systems that expect a direct network connection.
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    networks:
+      - no-network
+
+  database:
+    image: postgres:latest
+    networks:
+      - no-network
+
+networks:
+  no-network:
+    driver: macvlan
+```
+
+#### Example 7: overlay
+
+- **Description**: Enables Docker Swarm services to communicate across multiple Docker hosts. It leverages network encapsulation to allow containers on different hosts to communicate as if they were on the same host.
+- **Use Case**: Ideal for Docker Swarm deployments where you need to manage services that span multiple nodes in a cluster.
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    networks:
+      - no-network
+
+  database:
+    image: postgres:latest
+    networks:
+      - no-network
+
+networks:
+  no-network:
+    driver: overlay
+```
+
+#### Example 8: network_mode: host
+Using `host` mode allows the container to share the host's network stack. Thus, the container does not get its own IP-address allocated, and it uses the host's IP and port space. Containers running in host mode offer the best network performance and are useful when a container needs to manage or observe the host's network stack.
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    network_mode: host
+
+  database:
+    image: postgres:latest
+    network_mode: host
+```
+
+#### Example 9: network_mode: none
+This mode disables all networking for the container. Essentially, it provides a container with its own network namespace but without a network interface set up within it. This mode is useful for containers that need to run processes in isolation without requiring network access.
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    network_mode: none
+
+  database:
+    image: postgres:latest
+    network_mode: none
+```
+
+#### Example 10: network_mode: service:[service name]
+
+This option allows a container to share the network stack of another container. By specifying the name of another service defined in the same `docker-compose.yml` file, the container inherits the networking configuration of the targeted service. This is useful for closely coupled services that need to share the network stack without being exposed to the wider network.
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    network_mode: "service:[service name]"
+
+  database:
+    image: postgres:latest
+    network_mode: "service:[service name]"
+```
+#### Example 11: container:[container name/id]
+
+Similar to the `service:` option, but instead of specifying a service name, you directly specify a container name or ID. The container using this mode will share the network namespace of the target container, allowing it to use the exact network configurations, including the IP address.
+```yaml
+name: example
+services:
+  app:
+    image: my-app:image
+    network_mode: "container:[container name/id]"
+
+  database:
+    image: postgres:latest
+    network_mode: "container:[container name/id]"
+```
+
 These examples demonstrate the flexibility of Docker Compose in defining and using networks, enabling complex networking setups to be described in a straightforward and declarative manner.
 
 ## Docker Storage
