@@ -349,6 +349,9 @@ networks:
         - subnet: 192.168.1.0/24
           gateway: 192.168.1.1
 ```
+- parent: eth0: Specifies which host network interface the macvlan network should use. This is required as macvlan creates virtual network interfaces linked to a physical network interface.
+- subnet: 192.168.1.0/24: Defines the IP address range available to containers in this network. This subnet should match your physical network's addressing scheme.
+- gateway: 192.168.1.1: Specifies the gateway IP address for the network, typically your router's IP address.
 
 #### Example 7: overlay
 
@@ -374,6 +377,8 @@ networks:
     driver_opts:
       encrypted: "true"
 ```
+- attachable: true: Allows standalone containers (not just swarm services) to attach to this network.
+- encrypted: "true": Enables encryption for all traffic on this overlay network, providing additional security for container communication across hosts.
 
 #### Example 8: network_mode: host
 Using `host` mode allows the container to share the host's network stack. Thus, the container does not get its own IP-address allocated, and it uses the host's IP and port space. Containers running in host mode offer the best network performance and are useful when a container needs to manage or observe the host's network stack.
@@ -417,6 +422,13 @@ services:
     image: postgres:latest
     network_mode: "service:web"
 ```
+Using service:web means the container will share the exact same network namespace as the "web" service. This includes:
+- Same IP address
+- Same network interfaces
+- Same port space
+- Same DNS configuration
+- This is useful for scenarios like sidecar containers that need to monitor or interact with the main service's network traffic.
+
 #### Example 11: container:[container name/id]
 
 Similar to the `service:` option, but instead of specifying a service name, you directly specify a container name or ID. The container using this mode will share the network namespace of the target container, allowing it to use the exact network configurations, including the IP address.
@@ -431,6 +443,12 @@ services:
     image: postgres:latest
     network_mode: "container:webapp-1"
 ```
+This is useful when you need to:
+- Share network resources with an existing container
+- Monitor network traffic of another container
+- Debug network-related issues
+- Implement network-level tools like proxies or monitoring agents
+
 
 These examples demonstrate the flexibility of Docker Compose in defining and using networks, enabling complex networking setups to be described in a straightforward and declarative manner.
 
