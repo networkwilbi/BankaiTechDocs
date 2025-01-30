@@ -425,11 +425,11 @@ name: example
 services:
   app:
     image: my-app:image
-    network_mode: "container:[container name/id]"
+    network_mode: "container:webapp-1"
 
   database:
     image: postgres:latest
-    network_mode: "container:[container name/id]"
+    network_mode: "container:webapp-1"
 ```
 
 These examples demonstrate the flexibility of Docker Compose in defining and using networks, enabling complex networking setups to be described in a straightforward and declarative manner.
