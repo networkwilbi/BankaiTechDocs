@@ -24,6 +24,9 @@ networks:
         - subnet: 192.168.1.0/24  # Should match your physical network's addressing
           gateway: 192.168.1.1    # Typically your router's IP address
 ```
+- parent: eth0: Specifies which host network interface the macvlan network should use. This is required as macvlan creates virtual network interfaces linked to a physical network interface.
+- subnet: 192.168.1.0/24: Defines the IP address range available to containers in this network. This subnet should match your physical network's addressing scheme.
+- gateway: 192.168.1.1: Specifies the gateway IP address for the network, typically your router's IP address.
 
 The configuration above shows:
 - `parent: eth0`: Specifies which host network interface the macvlan network should use. This is required as macvlan creates virtual network interfaces linked to a physical network interface.
@@ -62,6 +65,8 @@ networks:
       config:
         - subnet: 10.0.0.0/24
 ```
+- attachable: true: Allows standalone containers (not just swarm services) to attach to this network.
+- encrypted: "true": Enables encryption for all traffic on this overlay network, providing additional security for container communication across hosts.
 
 The configuration above shows:
 - `attachable: true`: Allows standalone containers (not just swarm services) to attach to this network.
@@ -131,19 +136,6 @@ networks:
   backend:
 ```
 
-The configuration above demonstrates:
-- A main web service that defines the network configuration
-- An application and monitoring service that share the web service's network stack
-- All services share:
-  - The same IP address
-  - Access to ports 80 and 443
-  - Connection to both frontend and backend networks
-  - DNS resolution and network interfaces
-
-This setup is particularly useful for:
-- Implementing sidecars for monitoring, logging, or security
-- Service mesh patterns where proxies need to intercept all network traffic
-- Debugging network-related issues across multiple services
 #### Example 11: container:[container name/id]
 
 Similar to the `service:` option, but instead of specifying a service name, you directly specify a container name or ID. The container using this mode will share the network namespace of the target container, allowing it to use the exact network configurations, including the IP address.
@@ -177,6 +169,12 @@ networks:
   app-net:
     driver: bridge
 ```
+This is useful when you need to:
+- Share network resources with an existing container
+- Monitor network traffic of another container
+- Debug network-related issues
+- Implement network-level tools like proxies or monitoring agents
+
 
 The configuration above demonstrates:
 - A main webapp container with its own network configuration
