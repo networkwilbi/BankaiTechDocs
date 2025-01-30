@@ -24,10 +24,6 @@ networks:
         - subnet: 192.168.1.0/24  # Should match your physical network's addressing
           gateway: 192.168.1.1    # Typically your router's IP address
 ```
-- parent: eth0: Specifies which host network interface the macvlan network should use. This is required as macvlan creates virtual network interfaces linked to a physical network interface.
-- subnet: 192.168.1.0/24: Defines the IP address range available to containers in this network. This subnet should match your physical network's addressing scheme.
-- gateway: 192.168.1.1: Specifies the gateway IP address for the network, typically your router's IP address.
-
 The configuration above shows:
 - `parent: eth0`: Specifies which host network interface the macvlan network should use. This is required as macvlan creates virtual network interfaces linked to a physical network interface.
 - `subnet: 192.168.1.0/24`: Defines the IP address range available to containers in this network. This subnet should match your physical network's addressing scheme.
@@ -65,9 +61,6 @@ networks:
       config:
         - subnet: 10.0.0.0/24
 ```
-- attachable: true: Allows standalone containers (not just swarm services) to attach to this network.
-- encrypted: "true": Enables encryption for all traffic on this overlay network, providing additional security for container communication across hosts.
-
 The configuration above shows:
 - `attachable: true`: Allows standalone containers (not just swarm services) to attach to this network.
 - `encrypted: "true"`: Enables encryption for all traffic on this overlay network, providing additional security for container communication across hosts.
@@ -169,13 +162,6 @@ networks:
   app-net:
     driver: bridge
 ```
-This is useful when you need to:
-- Share network resources with an existing container
-- Monitor network traffic of another container
-- Debug network-related issues
-- Implement network-level tools like proxies or monitoring agents
-
-
 The configuration above demonstrates:
 - A main webapp container with its own network configuration
 - A debugging container (netshoot) that can monitor the webapp's network traffic
