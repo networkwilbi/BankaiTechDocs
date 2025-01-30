@@ -129,5 +129,41 @@ Integrating services like Redis, MariaDB, Collabora, OnlyOffice, and utilizing N
 
 Note: These are general guidelines. The actual requirements may vary based on specific use cases, the number of users, and the data volume. Monitoring resource usage and performance over time will help in making informed decisions about scaling your Nextcloud infrastructure.
 
+## Nextcloud High Performance Backend
+The Nextcloud High-Performance Backend (HPB) is a crucial enhancement for Nextcloud instances, particularly for larger installations seeking to optimize the performance of real-time communication features. Nextcloud, a popular open-source software for creating and using file hosting services, includes functionalities like Nextcloud Talk for chat and video calls. However, as the number of users grows, the standard PHP-based signaling approach may not scale efficiently, leading to performance bottlenecks. This is where the High-Performance Backend comes into play.
+
+### Core Benefits of Nextcloud HPB
+
+- **Improved Scalability**: HPB handles signaling for Nextcloud Talk outside of the traditional web server and PHP processing pipeline, efficiently managing high volumes of messages and sessions.
+- **Reduced Server Load**: By offloading the signaling to a separate service, HPB reduces the load on the main Nextcloud server, ensuring smoother operation of file hosting and other core functionalities, even under the increased load of real-time communications.
+- **Lower Latency**: HPB improves the responsiveness of chat and video calls by enabling more direct communication paths between client devices, thus reducing round-trip times for data.
+- **Enhanced Feature Set**: Some advanced features of Nextcloud Talk, like the ability to handle larger numbers of video call participants or the use of Command Line Interface (CLI) commands during calls, require HPB for optimal performance.
+
+### Architecture and Components
+
+The High-Performance Backend consists of several key components:
+- **Signaling Server**: This is the heart of HPB. It handles the signaling messages between clients (users) participating in chats or video calls. The signaling messages coordinate actions like starting a call, joining a session, and exchanging media session descriptions.
+- **Turn Server (STUN/TURN)**: For video calls to work, especially when participants are behind NAT (Network Address Translation) or firewalls, it's often necessary to relay media through a server. While HPB can work with any TURN server, integrating it with HPB ensures optimal routing of media data.
+- **Web Proxy (optional)**: In some configurations, especially when hosting the signaling server on a separate machine, a web proxy might be used to manage WebSocket connections and HTTPS termination.
+
+### Deployment and Configuration
+
+Deploying HPB involves setting up the signaling server, often written in Go for efficiency, and configuring Nextcloud and Nextcloud Talk to communicate with this service. This setup requires network configuration to allow WebSocket connections from clients to the signaling server and, if used, TURN server configurations to relay media.
+
+Administrators need to follow specific steps, which might include:
+- Installing and configuring the signaling server software on a dedicated server or service instance.
+- Configuring Nextcloud Talk with the signaling server's address and shared secrets to ensure secure communication.
+- Setting up TURN server credentials in Nextcloud Talk settings, if needed.
+
+### Practical Considerations
+
+- **Hardware Requirements**: Deploying HPB effectively increases hardware requirements. The signaling server should be hosted on a capable machine, especially for installations with heavy real-time communication load.
+- **Software Compatibility**: Ensure compatibility between Nextcloud, Nextcloud Talk, and the HPB version you plan to deploy, as features and requirements can change between versions.
+- **Security**: Secure the communication channels between your Nextcloud server, the signaling server, and client devices. Use HTTPS and WSS (WebSocket Secure) protocols, and protect server endpoints with firewalls and access controls.
+
+### Conclusion
+
+The High-Performance Backend significantly enhances the real-time communication capabilities of Nextcloud by ensuring scalability, reducing server load, and improving responsiveness. While its deployment adds complexity and requires additional resources, for larger installations or those relying heavily on Nextcloud Talk for communication, the benefits it brings in performance and user experience can be considerable.
+
 For detailed guidance on integrating these services with Nextcloud, refer to the [official Nextcloud documentation](https://docs.nextcloud.com/) and the respective service documentation.
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
