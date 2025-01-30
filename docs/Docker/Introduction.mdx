@@ -39,20 +39,35 @@ services:
   app:
     image: my-app:image
     networks:
-      - no-network
+      - overlay-net
+    deploy:
+      replicas: 3
 
   database:
     image: postgres:latest
     networks:
-      - no-network
+      - overlay-net
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
 
 networks:
   overlay-net:
     driver: overlay
-    attachable: true
+    attachable: true    # Allows standalone containers to attach to this network
     driver_opts:
-      encrypted: "true"
+      encrypted: "true" # Enables encryption for all network traffic
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
 ```
+
+The configuration above shows:
+- `attachable: true`: Allows standalone containers (not just swarm services) to attach to this network.
+- `encrypted: "true"`: Enables encryption for all traffic on this overlay network, providing additional security for container communication across hosts.
+- `deploy`: Configuration specific to swarm mode, defining how services should be deployed across the cluster.
+- `subnet`: Defines the IP range for containers in this overlay network.
 
 #### Example 8: network_mode: host
 Using `host` mode allows the container to share the host's network stack. Thus, the container does not get its own IP-address allocated, and it uses the host's IP and port space. Containers running in host mode offer the best network performance and are useful when a container needs to manage or observe the host's network stack.
@@ -88,28 +103,96 @@ This option allows a container to share the network stack of another container. 
 ```yaml
 name: example
 services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - frontend
+      - backend
+
   app:
     image: my-app:image
-    network_mode: "service:web"
+    network_mode: "service:web"  # Shares network namespace with web service
+    depends_on:
+      - web
 
-  database:
-    image: postgres:latest
-    network_mode: "service:web"
+  monitoring:
+    image: prometheus:latest
+    network_mode: "service:web"  # Also shares network namespace with web service
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - web
+
+networks:
+  frontend:
+  backend:
 ```
+
+The configuration above demonstrates:
+- A main web service that defines the network configuration
+- An application and monitoring service that share the web service's network stack
+- All services share:
+  - The same IP address
+  - Access to ports 80 and 443
+  - Connection to both frontend and backend networks
+  - DNS resolution and network interfaces
+
+This setup is particularly useful for:
+- Implementing sidecars for monitoring, logging, or security
+- Service mesh patterns where proxies need to intercept all network traffic
+- Debugging network-related issues across multiple services
 #### Example 11: container:[container name/id]
 
 Similar to the `service:` option, but instead of specifying a service name, you directly specify a container name or ID. The container using this mode will share the network namespace of the target container, allowing it to use the exact network configurations, including the IP address.
 ```yaml
 name: example
 services:
-  app:
-    image: my-app:image
-    network_mode: "container:webapp-1"
+  webapp:
+    image: node:latest
+    container_name: webapp-1
+    ports:
+      - "3000:3000"
+    networks:
+      - app-net
+    volumes:
+      - ./app:/usr/src/app
+    command: npm start
 
-  database:
-    image: postgres:latest
-    network_mode: "container:webapp-1"
+  debugger:
+    image: nicolaka/netshoot:latest
+    network_mode: "container:webapp-1"  # Shares network namespace with webapp
+    command: ["sh", "-c", "tcpdump -i any port 3000"]
+
+  metrics:
+    image: prom/node-exporter:latest
+    network_mode: "container:webapp-1"  # Also shares network namespace with webapp
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+
+networks:
+  app-net:
+    driver: bridge
 ```
+
+The configuration above demonstrates:
+- A main webapp container with its own network configuration
+- A debugging container (netshoot) that can monitor the webapp's network traffic
+- A metrics collection container that shares the same network namespace
+- All containers share:
+  - The same network interfaces
+  - Access to port 3000
+  - The same IP address
+  - Network visibility and DNS resolution
+
+This setup is particularly useful for:
+- Network debugging and troubleshooting
+- Performance monitoring and analysis
+- Security auditing of network traffic
+- Adding network-level tooling without modifying the main application
 
 These examples demonstrate the flexibility of Docker Compose in defining and using networks, enabling complex networking setups to be described in a straightforward and declarative manner.
 
