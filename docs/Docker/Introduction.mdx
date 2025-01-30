@@ -402,11 +402,11 @@ name: example
 services:
   app:
     image: my-app:image
-    network_mode: "service:[service name]"
+    network_mode: "service:web"
 
   database:
     image: postgres:latest
-    network_mode: "service:[service name]"
+    network_mode: "service:web"
 ```
 #### Example 11: container:[container name/id]
 
