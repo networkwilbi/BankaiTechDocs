@@ -181,9 +181,11 @@ const sidebars: SidebarsConfig = {
            link: { type: 'doc', id: 'Proxmox/LXC Containers/Bind Mounts/Introduction' },
          },
         ],
+       {
         type: 'category',
         label: 'VM (Virtual Machines)',
         link: { type: 'doc', id: 'Proxmox/VM/Introduction' },
+       },
       },
      ],
    },
