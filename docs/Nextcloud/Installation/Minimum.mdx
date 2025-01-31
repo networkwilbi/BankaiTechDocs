@@ -14,7 +14,7 @@ last_update:
 ***This method includes Redis and MariaDB***
 
 First lets update your system.
-```
+```bash
 sudo apt-get update && apt-get upgrade -y
 ```
 
@@ -26,25 +26,52 @@ You can change the directories to your liking.
 
 :::
 
-```
+```bash
 sudo mkdir /var/docker && sudo mkdir /var/docker/nextcloud
 ```
 Lets take ownership of the directory
-```
+```bash
 sudo chown -R 1000:1000 /var/docker
 ```
 ### Creating .env files
-Now lets make two [Docker Secrets](https://docs.docker.com/compose/use-secrets/) files in the new directory.
-```
+Now lets make an [Environment File with Interpolation](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/) file in the new directory.
+```bash
 cd /var/docker/nextcloud
-nano .mariadb.env
 ```
-Paste this using `CTRL+SHIFT+V`
+
+Now lets make the environment file.
+```bash
+nano .env
 ```
-MYSQL_ROOT_PASSWORD=CHANGEME
+:::warning[warning]
+When editing the configuration below, remove all instances of `<>` from the values
+::: 
+Paste the Following
+```editorconfig title="Highlighted items will need to be modified" showLineNumbers
+# Nextcloud & MariaDB
+# Directory paths for persistent data storage
+DATA_LOCATION=./nextcloud
+DB_DATA_LOCATION=./mariadb
+PORT=8080
+// highlight-start
+NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
+TRUSTED_PROXIES=<IP address of your Reverse Proxy>
+// highlight-end
+OVERWRITEPROTOCOL=https
+// highlight-next-line
+OVERWRITECLIURL=https://cloud.<YourDomain>.com
+REDIS_HOST=redis
+REDIS_PORT=6379
+PHP_MEMORY_LIMIT=512M
+PHP_UPLOAD_LIMIT=100M
+// highlight-start
 MYSQL_PASSWORD=CHANGEME
+MYSQL_ROOT_PASSWORD=CHANGEME
+MARIADB_AUTO_UPGRADE=true
+// highlight-end
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
+MYSQL_HOST=mariadb
 ```
 :::tip[Info]
 
@@ -53,51 +80,16 @@ Please Change `CHANGEME` to a password of your choosing.
 Refrain from using Special characters for you MySQL Passwords. \
 Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
+
 Save the new file by pressing `CTRL+X`
-
-Now lets make the second file.
-```
-nano .nextcloud.env
-```
-Paste the Following
-```
-NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
-TRUSTED_PROXIES=<IP address of your Reverse Proxy>
-OVERWRITEPROTOCOL=https
-OVERWRITECLIURL=https://cloud.<YourDomain>.com
-REDIS_HOST=redis
-REDIS_PORT=6379
-PHP_MEMORY_LIMIT=512M
-PHP_UPLOAD_LIMIT=100M
-MYSQL_PASSWORD=CHANGEME
-MYSQL_DATABASE=nextcloud
-MYSQL_USER=nextcloud
-MYSQL_HOST=mariadb
-```
-:::tip[Info]
-
-<p>
-<>Please Change the `Domain` and `Reverse Proxy IP`.</>
-</p>
-
-:::warning[warning]
-
-<p>
-<>Please make sure that the Password is the same as the one you previously set in the last file</>
-</p>
-
-<p>
-<>Remove all instances of `<>`</>
-</p>
-:::
 
 ### Creating the Compose file
 Now lets create the compose file.
-```
+```bash
 nano docker-compose.yaml
 ```
 Paste this into the file
-```
+```yaml title="The highlighted lines are Optional and can be removed completely"
 name: nextcloud
 
 services:
@@ -107,30 +99,43 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
-      - .mariadb.env
+      - .env
+    networks:
+      - nextcloud
 
   nextcloud:
     image: nextcloud:production
     container_name: nextcloud
     restart: always
     ports:
-      - 8080:80
+      - ${PORT}:80
     links:
       - mariadb
       - redis
     volumes:
-      - ./nextcloud:/var/www/html
+      - ${DATA_LOCATION}:/var/www/html
     env_file:
-      - .nextcloud.env
+      - .env
+    networks:
+      - nextcloud
 
   redis:
     container_name: redis
     image: redis:latest
+   // highlight-start
+    volumes:           # Optional
+      - type: tmpfs    # Optional
+        target: /data  # Optional
+        tmpfs:         # Optional
+          size: 1073741824 # 1GB "Optional"
+    // highlight-end
     expose:
       - 6379
     command: redis-server --save 60 1 --loglevel warning
+    networks:
+      - nextcloud
     restart: always
 
   watchtower:
@@ -138,10 +143,19 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+  nextcloud:
+    driver: bridge
 ```
+
+:::warning
+tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
+:::
+
 ## Starting Nextcloud
 Now lets start it up.
-```
+```bash
 sudo docker compose up -d
 ```
 :::info
@@ -150,7 +164,7 @@ the `-d` flag stands for [detatched](https://docs.docker.com/engine/reference/ru
 :::
 <p>After its done pulling the docker images you can open up a web browser.</p>
 :::note
-Before proceeding, you will need to configure your reverse proxy. I have an example Nginx config [Here](https://docs.bankai-tech.com/Reverse%20Proxy/Nginx).
+Before proceeding, you will need to configure your reverse proxy. I have an example Nginx config [Here](https://docs.bankai-tech.com/Examples/Reverse%20Proxies/Nginx/#nextcloud).
 :::
 <p>
 <>Connect to nextcloud by typing in your configured `domain`</>
@@ -161,6 +175,26 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 </p>
 
 ![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
+
+:::warning
+If you see this warning
+```
+
+Performance warning
+
+You chose SQLite as database.
+
+SQLite should only be used for minimal and development instances. For production we recommend a different database backend.
+
+If you use clients for file syncing, the use of SQLite is highly discouraged.
+```
+
+You will need to click the drop down and select `MySQL/MariaDB` and type in the info manually.
+- **database account:** nextcloud
+- **database password:** YOUR_PASSWORD_FROM .env
+- **database name:** nextcloud
+- **database host:** mariadb:3306
+:::
 
 ### Account Creation
 <p>
@@ -210,7 +244,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```
+```editorconfig title="You may change the highlighted line to your Time Zone Identifier" {2} showLineNumbers
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```

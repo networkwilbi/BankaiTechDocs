@@ -22,7 +22,7 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 ```
 ### Adding the Repository
 The following command will setup Dockers `apt` repository.
-```
+```bash
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl

@@ -22,19 +22,23 @@
     "@docusaurus/theme-live-codeblock": "^3.7.0",
     "@docusaurus/theme-search-algolia": "^3.7.0",
     "@mdx-js/react": "^3.0.0",
+    "@mendable/search": "^0.0.206",
     "clsx": "^2.0.0",
     "disqus-react": "^1.1.5",
     "dotenv": "^16.4.7",
     "posthog-docusaurus": "^2.0.1",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "swizzle": "^1.1.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
     "@giscus/react": "^3.0.0",
+    "@rspack/cli": "^1.1.8",
+    "@rspack/core": "^1.1.8",
     "typescript": "~5.2.2"
   },
   "browserslist": {

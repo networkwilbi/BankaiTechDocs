@@ -9,7 +9,7 @@ last_update:
 
 <p>Lets Change the directory to the root of the website.</p>
 
-```
+```bash
 cd /var/websites/"HomeLab Docs"/
 ```
 :::note
@@ -19,7 +19,7 @@ Your directory will likely be different
 
 ## Modifying the docusaurus.config.ts File
 <p>Lets open the file with Nano</p>
-```
+```bash
 nano docusaurus.config.ts
 ```
 :::note
@@ -29,7 +29,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
 
 <p>Scroll down until you see this snippet of code</p>
 
-```
+```js
   presets: [
     [
       'classic',
@@ -62,13 +62,14 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
 #### My finished changes to docusaurus.config.ts file
 <p>It should look like this</p>
 
-```
+```ts
   presets: [
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          // highlight-next-line
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
@@ -92,7 +93,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
 ```
 <p>Now scroll down some more and find</p>
 
-```
+```js
       footer: {
         style: 'dark',
         links: [
@@ -125,7 +126,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
 <p>Change `'/docs/*',` to `'/',` for every link</p>
 <p>It should look like this</p>
 
-```
+```ts
       footer: {
         style: 'dark',
         links: [
@@ -134,22 +135,27 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
             items: [
               {
                 label: 'Documented Tutorial',
+                // highlight-next-line
                 to: '/category/documented-tutorials-',
               },
               {
                 label: 'Examples',
+                // highlight-next-line
                 to: '/category/examples-',
               },
               {
                 label: 'Jellyfin Extras',
+                // highlight-next-line
                 to: '/category/jellyfin-extras-',
               },
               {
                 label: 'Arr Self-Hosting',
+                // highlight-next-line
                 to: '/category/arr-self-hosting',
               },
               {
                 label: 'Videos',
+                // highlight-next-line
                 to: '/category/videos-tutorials',
               },
             ],

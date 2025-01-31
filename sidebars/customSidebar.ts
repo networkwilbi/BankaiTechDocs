@@ -89,6 +89,82 @@ const sidebars: SidebarsConfig = {
          'Docusaurus/Docs/Connecting to GitHub',
      ],
    },
+   {  
+     type: 'category',
+     label: 'Ubiquiti',
+     link: { type: 'doc', id: 'Ubiquiti/Introduction' },
+     items: [
+      {
+        type: 'category',
+        label: 'Access Points',
+        link: { type: 'doc', id: 'Ubiquiti/Access Points/Introduction' },
+        items: [
+          'Ubiquiti/Access Points/Unifi Controller Server',
+        ],
+      },
+     ],
+   },
+   {  
+     type: 'category',
+     label: 'Reverse Proxy',
+     link: { type: 'doc', id: 'Reverse Proxy/Introduction' },
+     items: [
+      {
+        type: 'category',
+        label: 'Nginx',
+        link: { type: 'doc', id: 'Reverse Proxy/Nginx/Introduction' },
+        items: [
+          'Reverse Proxy/Nginx/Installing Nginx',
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Certbot',
+        link: { type: 'doc', id: 'Reverse Proxy/Certbot/Introduction' },
+        items: [
+          {
+            type: 'category',
+            label: 'Cloudflare',
+            link: { type: 'doc', id: 'Reverse Proxy/Certbot/Cloudflare/Introduction' },
+            items: [
+              'Reverse Proxy/Certbot/Cloudflare/Cloudflare',
+            ],
+          },
+        ],
+      },
+     ],
+   },
+      {
+        type: 'category',
+        label: 'Jellyfin',
+        link: { type: 'doc', id: 'Jellyfin/Introduction' },
+        items: [
+          {
+            type: 'category',
+            label: 'Installation',
+            link: { type: 'doc', id: 'Jellyfin/Installation/Introduction' },
+            items: [
+              'Jellyfin/Installation/Docker Install',
+              'Jellyfin/Installation/Host Install',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Discord',
+        link: { type: 'doc', id: 'Discord/Introduction' },
+        items: [
+          {
+            type: 'category',
+            label: 'Bots',
+            link: { type: 'doc', id: 'Discord/Bots/Introduction' },
+            items: [
+              'Discord/Bots/AI Bot',
+            ],
+          },
+        ],
+      },
  ],
 
 
@@ -198,6 +274,29 @@ const sidebars: SidebarsConfig = {
       },
      ],
    },
+ ],
+  "MSwindowsSidebar": [
+   {
+    type: 'category',
+    label: 'Windows',
+    link: { type: 'doc', id: 'MS Windows/Windows/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Windows 11',
+        items: [
+          'MS Windows/Windows/Windows 11/Editions/Changing to Windows 11 Enterprise',
+         ],
+      },
+      {
+        type: 'category',
+        label: 'Activation',
+        items: [
+          'MS Windows/Windows/Activation/Activating Windows',
+         ],
+      }, 
+    ],
+  },
  ],
 };
 
