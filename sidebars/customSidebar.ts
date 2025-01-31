@@ -173,9 +173,9 @@ const sidebars: SidebarsConfig = {
       {
         type: 'category',
         label: 'LXC Containers',
-        link: { type: 'doc', id: 'LXC Containers/Introduction' },
+        link: { type: 'doc', id: 'Proxmox/LXC Containers/Introduction' },
         items: [
-          'Proxmox/LXC Containers/NFS Shares',
+        //  'Proxmox/LXC Containers/NFS Shares',
         ],
       },
      ],
