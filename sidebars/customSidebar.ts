@@ -165,6 +165,21 @@ const sidebars: SidebarsConfig = {
           },
         ],
       },
+      {  
+     type: 'category',
+     label: 'Proxmox',
+     link: { type: 'doc', id: 'Proxmox/Introduction' },
+     items: [
+      {
+        type: 'category',
+        label: 'LXC Containers',
+        link: { type: 'doc', id: 'LXC Containers/Introduction' },
+        items: [
+          'Proxmox/LXC Containers/NFS Shares',
+        ],
+      },
+     ],
+   },
  ],
 
 
