@@ -175,8 +175,15 @@ const sidebars: SidebarsConfig = {
         label: 'LXC Containers',
         link: { type: 'doc', id: 'Proxmox/LXC Containers/Introduction' },
         items: [
-        //  'Proxmox/LXC Containers/NFS Shares',
+         {
+           type: 'category',
+           label: 'Bind Mounts',
+           link: { type: 'doc', id: 'Proxmox/LXC Containers/Bind Mounts/Introduction' },
+         },
         ],
+        type: 'category',
+        label: 'VM (Virtual Machines)',
+        link: { type: 'doc', id: 'Proxmox/VM/Introduction' },
       },
      ],
    },
