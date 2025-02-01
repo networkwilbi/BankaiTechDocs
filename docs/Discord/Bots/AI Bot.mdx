@@ -37,18 +37,18 @@ Create the directory for the new files
 sudo mkdir /var/discord && cd /var/discord
 ```
 Creating the Environment
-```py
+```bash
 python3 -m venv .venv
 ```
 Activating the environment
-```py
+```bash
 source .venv/bin/activate
 ```
 
 ### **Step 3: Installing Required Libraries**
 Open your terminal or command prompt and install the following Python libraries:
 
-```py
+```bash
 python3 -m pip install discord openai python-dotenv
 ```
 
@@ -60,7 +60,7 @@ python3 -m pip install discord openai python-dotenv
 
 Create a new Python file for your bot, e.g., `discord_bot.py`, and add the following code:
 To create the file, run
-```
+```bash
 nano discord_bot.py
 ```
 
@@ -143,7 +143,7 @@ Save the file with `CTRL+SHIFT+X`
 
 Create the Environment file `.env`
 Run the following to create the file
-```
+```bash
 nano .env
 ```
 Paste the following contents
@@ -162,7 +162,7 @@ DEFAULT_MODEL=gpt-3.5-turbo
 Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key and `YOUR_DISCORD_TOKEN` with your Discord bot token.
 
 ### **Step 5: Creating Systemd File to run the bot on system boot**
-```
+```bash
 nano /etc/systemd/system/discord_bot.service
 ```
 Paste the following
@@ -179,15 +179,15 @@ ExecStart=/var/discord/.venv/bin/python3 -m discord_bot
 WantedBy=multi-user.target
 ```
 Enable the service
-```
+```bash
 sudo systemctl enable discord_bot.service
 ```
 Reload daemon
-```
+```bash
 sudo systemctl daemon-reload
 ```
 Start the service
-```
+```bash
 sudo systemctl start discord_bot
 ```
 
