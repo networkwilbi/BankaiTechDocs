@@ -166,28 +166,29 @@ const sidebars: SidebarsConfig = {
         ],
       },
       {  
-     type: 'category',
-     label: 'Proxmox',
-     link: { type: 'doc', id: 'Proxmox/Introduction' },
-     items: [
-      {
         type: 'category',
-        label: 'LXC Containers',
-        link: { type: 'doc', id: 'Proxmox/LXC Containers/Introduction' },
+        label: 'Proxmox',
+        link: { type: 'doc', id: 'Proxmox/Introduction' },
         items: [
          {
            type: 'category',
-           label: 'Bind Mounts',
-           link: { type: 'doc', id: 'Proxmox/LXC Containers/Bind Mounts/Introduction' },
+           label: 'LXC Containers',
+           link: { type: 'doc', id: 'Proxmox/LXC Containers/Introduction' },
+           items: [
+            {
+              type: 'category',
+              label: 'Bind Mounts',
+              link: { type: 'doc', id: 'Proxmox/LXC Containers/Bind Mounts/Introduction' },
+            },
+           ],
+         },
+         {
+           type: 'category',
+           label: 'VM (Virtual Machines)',
+           link: { type: 'doc', id: 'Proxmox/VM/Introduction' },
          },
         ],
-       {
-        type: 'category',
-        label: 'VM (Virtual Machines)',
-        link: { type: 'doc', id: 'Proxmox/VM/Introduction' },
-       },
       },
-     ],
    },
  ],
 
