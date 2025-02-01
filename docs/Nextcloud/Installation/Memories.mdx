@@ -16,7 +16,8 @@ last_update:
 You can find prebuilt images [Here](https://docs.bankai-tech.com/Nextcloud/Pre-built%20Images)
 :::
 
-        ## Nextcloud Installation using Docker Build and Docker Compose
+## **Nextcloud Installation using Docker Build and Docker Compose**
+
 ***This method includes Redis, MariaDB, and Nextcloud Memories***
 :::note
 inotify libraries have been added to the Dockerfile for the iNotify App
@@ -30,7 +31,8 @@ First lets update your system.
 sudo apt-get update && apt-get upgrade -y
 ```
 
-### Setting up the directories
+### ***Setting up the directories***
+
 Now lets setup the Directories
 :::note
 
@@ -45,10 +47,13 @@ Lets take ownership of the directory
 ```bash
 sudo chown -R 1000:1000 /var/docker
 ```
-### Creating .env file
+
+### ***Creating .env file***
+
 Now lets create the file that will contain the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
 
-#### Creating .env
+### ***Creating .env***
+
 ```bash
 nano .env
 ```
@@ -193,7 +198,8 @@ Test nvidia by running `sudo nvidia-smi`
 tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
 :::
 
-## Starting Nextcloud
+## **Starting Nextcloud**
+
 Now lets start it up.
 ```bash
 sudo docker compose up -d
@@ -238,7 +244,8 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 - **database host:** mariadb:3306
 :::
 
-### Account Creation
+### ***Account Creation***
+
 <p>
 <>Now create an admin account and click `Install`</>
 </p>
@@ -255,7 +262,8 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 
 ![Nextcloud Dashboard](/img/nextcloud/Dashboard.jpg)
 
-### Checking for errors and warnings
+### ***Checking for errors and warnings***
+
 <p>
 <>On the top right click the `User Icon` and go to `Administration Settings`</>
 </p>
@@ -272,9 +280,10 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 <>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</>
 </p>
 
-### Modifying the config.php file
+### ***Modifying the config.php file***
+
 Run the following command to open the `config.php` file with nano.
-```
+```bash
 nano nextcloud/config/config.php
 ```
 :::tip[Hint]
@@ -309,7 +318,8 @@ Now add the following to the bottom of the file.
 In some cases, you may have to delete your browser cache and restart the browser for the Warnings to update.
 :::
 
-### Creating production use user
+### ***Creating production use user***
+
 <p>
 <>Now you can go create a user for yourself.</>
 </p>
@@ -336,7 +346,9 @@ Make sure to set `Groups` to `admin`
 :::
 
 ![Nextcloud Add Users1](/img/nextcloud/Adduser1.jpg)
-## Installing Nextcloud Memories
+
+## **Installing Nextcloud Memories**
+
 <p>
 <>Go to `Apps`</>
 </p>
@@ -348,7 +360,9 @@ Make sure to set `Groups` to `admin`
 <p>
 <>Now search and install `Preview Generator`.</>
 </p>
-### Configuring Nextcloud Memories
+
+### ***Configuring Nextcloud Memories***
+
 <p>
 <>Go to your `Administration Settings` and find `Memories`</>
 </p>
@@ -362,7 +376,9 @@ Make sure to set `Groups` to `admin`
 ![Memories Setting4](/img/nextcloud/MemoriesSetting4.jpg)
 ![Memories Setting5](/img/nextcloud/MemoriesSetting5.jpg)
 ![Memories Setting6](/img/nextcloud/MemoriesSetting6.jpg)
-### Fixing the warnings
+
+### ***Fixing the warnings***
+
 <p>
 <>Im sure you noticed that there are a few warnings we need to take care of.</>
 </p>
@@ -373,12 +389,12 @@ Reverse geocoding has not been configured (-1).
 <p>
 <>We can generate the Geometry table using this command.</>
 </p>
-```
+```bash
 sudo docker exec -it -u 33 nextcloud php occ memories:places-setup
 ```
 :::tip
 I prefer generating the Geometry table this way so I can view the progress
 :::
-## Congragulations!! you have installed Nextcloud with NC Memories!
+## **Congragulations!! you have installed Nextcloud with NC Memories!**
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>

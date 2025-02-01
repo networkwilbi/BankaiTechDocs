@@ -12,7 +12,8 @@ last_update:
   author: BankaiTech
 ---
 
-    ## Nextcloud Installation With Collabora Code
+## **Nextcloud Installation With Collabora Code**
+
 ***This method includes Redis, MariaDB, and Collabora Code***
 
 First lets update your system.
@@ -20,7 +21,8 @@ First lets update your system.
 sudo apt-get update && apt-get upgrade -y
 ```
 
-### Setting up the directories
+### ***Setting up the directories***
+
 Now lets setup the Directories
 :::note
 
@@ -35,7 +37,9 @@ Lets take ownership of the directory
 ```bash
 sudo chown -R 1000:1000 /var/docker
 ```
-### Creating .env files
+
+### ***Creating .env files***
+
 Now lets make an [Environment File with Interpolation](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/) file in the new directory.
 ```bash
 cd /var/docker/nextcloud
@@ -89,7 +93,8 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 
 Save the new file by pressing `CTRL+X`
 
-### Creating the Compose file
+### ***Creating the Compose file***
+
 Now lets create the compose file.
 ```bash
 nano docker-compose.yaml
@@ -175,7 +180,8 @@ networks:
 tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
 :::
 
-## Starting Nextcloud
+## **Starting Nextcloud**
+
 Now lets start it up.
 ```bash
 sudo docker compose up -d
@@ -228,7 +234,8 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 - **database host:** mariadb:3306
 :::
 
-### Account Creation
+### ***Account Creation***
+
 <p>
 <>Now create an admin account and click `Install`</>
 </p>
@@ -245,7 +252,8 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 
 ![Nextcloud Dashboard](/img/nextcloud/Dashboard.jpg)
 
-### Checking for errors and warnings
+### ***Checking for errors and warnings***
+
 <p>
 <>On the top right click the `User Icon` and go to `Administration Settings`</>
 </p>
@@ -262,7 +270,8 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 <>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</>
 </p>
 
-### Modifying the config.php file
+### ***Modifying the config.php file***
+
 Run the following command to open the `config.php` file with nano.
 ```bash
 nano nextcloud/config/config.php
@@ -296,7 +305,8 @@ It should look something like this.
 In some cases, you may have to delete your browser cache and restart the browser for the Warnings to update.
 :::
 
-### Creating production use user
+### ***Creating production use user***
+
 <p>
 <>Now you can go create a user for yourself.</>
 </p>
@@ -324,7 +334,8 @@ Make sure to set `Groups` to `admin`
 
 ![Nextcloud Add Users1](/img/nextcloud/Adduser1.jpg)
 
-## Setting up Nextcloud Office (Collabora Code)
+## **Setting up Nextcloud Office (Collabora Code)**
+
 Head back over to your `Administration Settings` and scroll down on the left until you see `Nextcloud Office`
 Wait a few seconds while it processes.
 Now choose `Use your own Server`
@@ -337,7 +348,9 @@ Now choose `Use your own Server`
 You will have to add an `A` record for `office` and setup your reverse proxy for Collabra
 :::
 ![CollaboraUrl](/img/nextcloud/OfficeUrl.jpg)
-### WOPI List
+
+### ***WOPI List***
+
 <p>
 <>Now scroll down to the `WOPI List`</>
 </p>
@@ -347,13 +360,15 @@ Ex. `251.163.184.3,192.168.1.1/24,127.0.0.1`
 :::
 ![Office WOPI](/img/nextcloud/OfficeWOPI.jpg)
 Press `ENTER`
-### Testing Nextcloud Office
+
+### ***Testing Nextcloud Office***
+
 <p>
 <>Go to `Files` and create a new document</>
 </p>
 ![New Document](/img/nextcloud/NewDocument.jpg)
 ![Nextcloud Office](/img/nextcloud/NextcloudOffice.jpg)
 
-## Congragulations!! you have installed Nextcloud With Collabora Code!
+## **Congragulations!! you have installed Nextcloud With Collabora Code!**
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
