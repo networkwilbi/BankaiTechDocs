@@ -2,7 +2,7 @@
 last_update:
   author: BankaiTech
 ---
-## How to remove the /docs path
+## **How to remove the /docs path**
 <h3>*How to remove the `/docs` path from the URL.* [Official Docs](https://docusaurus.io/docs/docs-introduction#docs-only-mode)</h3>
 
 <p>We will be editing the file `docusaurus.config.js` for this entire documentation. Or in my case `docusaurus.config.ts`.</p>
@@ -17,7 +17,7 @@ cd /var/websites/"HomeLab Docs"/
 Your directory will likely be different
 :::
 
-## Modifying the docusaurus.config.ts File
+## **Modifying the docusaurus.config.ts File**
 <p>Lets open the file with Nano</p>
 ```bash
 nano docusaurus.config.ts
@@ -59,7 +59,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
 
 <p>Add `routeBasePath: '/', // Serve the docs at the site's root` above `sidebarPath: './sidebars.js',`</p>
 
-#### My finished changes to docusaurus.config.ts file
+#### *My finished changes to docusaurus.config.ts file*
 <p>It should look like this</p>
 
 ```ts
@@ -168,7 +168,7 @@ I am using `typescript` but you may be using `javascript` make sure you use the 
 Save with `CTRL+X`
 :::
 
-### Rebuilding the website
+### ***Rebuilding the website***
 <p>Now rebuild the site</p>
 
 ```
