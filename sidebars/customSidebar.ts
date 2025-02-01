@@ -26,12 +26,12 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Installation',
           items: [
-            'Docker/Installing Docker/Docker Engine.mdx',
-            'Docker/Installing Docker/Docker-Compose.mdx',
+            'Docker/Installing Docker/Docker Engine',
+            'Docker/Installing Docker/Docker-Compose',
           ],
         },
-         'Docker/Docs/Helpful Commands.mdx',
-         'Docker/Troubleshooting/Docker.mdx',
+         'Docker/Docs/Helpful Commands',
+         'Docker/Troubleshooting/Docker',
       ],      
    },
    {
