@@ -19,7 +19,7 @@ last_update:
 sudo docker exec -it -u 33 nextcloud php occ memories:places-setup
 ```
 
-### Database triggers are not set up correctly.
+### ***Database triggers are not set up correctly.***
 <p>
 <>You need to add `--log_bin_trust_function_creators=true` to `command:` for `mariadb` in you `docker-compose.yaml` file.</>
 </p>
@@ -53,7 +53,7 @@ sudo docker exec -it -u 33 nextcloud php occ maintenance:repair
 sudo docker restart nextcloud
 ```
 
-## Resources
+## **Resources**
 [Geometry Table](https://memories.gallery/troubleshooting/#trigger-compatibility-mode)
 
 
