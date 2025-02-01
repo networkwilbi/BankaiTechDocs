@@ -70,12 +70,12 @@ Docker is an open-source project that automates the deployment of applications i
 
 A **Docker image** is a lightweight, standalone, executable package that includes everything needed to run a piece of software, including the code, a runtime, libraries, environment variables, and config files. Images are the building blocks of Docker containers. An image is essentially a snapshot of an application and its environment at a specific point in time.
 
-### Benefits:
+### ***Benefits:***
 - **Consistency:** Ensures that your application runs the same way in development, testing, and production.
 - **Portability:** Can be shared across different machines, eliminating the "it works on my machine" problem.
 - **Version Control:** You can version images, roll back to previous versions, and manage them just like source code.
 
-## Docker Containers
+## **Docker Containers**
 
 A **Docker container** is a runnable instance of an image. You can think of it as the execution environment for your application. Containers isolate your application from the host system and other containers, providing a private space for the application to run within.
 
@@ -194,7 +194,7 @@ Docker supports several types of networks, each designed for specific scenarios.
 #### ***None Network***
 - **No Connectivity:** Provides a way to completely disable networking for a container.
 - **Use Cases:** Useful for containers that should run isolated from the network and other containers, typically used for testing or security-sensitive applications that do not require network access to function.
-### Network Examples
+### **Network Examples**
 Defining networks in Docker Compose allows you to specify and configure custom networks for your containers to communicate on. Below are examples that illustrate how to define and use networks in a Docker Compose file.
 
 #### ***Example 1: Simple Custom Network***
@@ -353,7 +353,8 @@ The configuration above shows:
 - `parent: eth0`: Specifies which host network interface the macvlan network should use. This is required as macvlan creates virtual network interfaces linked to a physical network interface.
 - `subnet: 192.168.1.0/24`: Defines the IP address range available to containers in this network. This subnet should match your physical network's addressing scheme.
 - `gateway: 192.168.1.1`: Specifies the gateway IP address for the network, typically your router's IP address.
-#### Example 7: overlay
+
+#### ***Example 7: overlay***
 
 - **Description**: Enables Docker Swarm services to communicate across multiple Docker hosts. It leverages network encapsulation to allow containers on different hosts to communicate as if they were on the same host.
 - **Use Case**: Ideal for Docker Swarm deployments where you need to manage services that span multiple nodes in a cluster.
