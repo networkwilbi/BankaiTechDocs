@@ -35,17 +35,27 @@ Proxmox offers advanced networking capabilities, including support for VLANs, bo
 
 Proxmox VE supports two types of virtualization: containers using LXC and fully isolated VMs using KVM.
 
-#### **LXC Containers**
+<Tabs
+  defaultValue="lxc"
+  values={[
+    {label: 'LXC Containers', value: 'lxc'},
+    {label: 'VMs', value: 'vm'},
+  ]}>
+
+<TabItem value="lxc">
 - **Brief Intro**: LXC (Linux Containers) are lightweight, operating-system-level virtualization methods for running multiple isolated Linux systems (containers) on a single control host. Containers share the host system’s kernel but have their own filesystem, processes, and network interfaces.
 - **Benefits**: LXC containers are more resource-efficient than VMs since they don't need to emulate hardware or run separate kernel instances. They offer quicker boot times and higher density, making them ideal for applications that require isolation but not full virtualization.
 - **Cons**: Being less isolated than VMs, containers share the host's kernel, making them potentially more vulnerable to security issues. They are also limited to Linux environments.
+</TabItem>
 
-#### **VMs (Virtual Machines)**
+<TabItem value="vm">
 - **Brief Intro**: VMs are fully isolated guest systems running on a hypervisor that emulates underlying hardware. Each VM operates with its own kernel, enabling the running of various operating systems regardless of the host system.
 - **Benefits**: VMs offer complete isolation from the host, enhancing security and flexibility. They allow for running multiple OS types on a single hardware host, making them suitable for diverse environments and testing different configurations or applications.
 - **Cons**: VMs consume more resources than containers, including CPU, memory, and storage, because of the overhead associated with running full operating system instances. They also have slower startup times compared to containers.
+</TabItem>
+</Tabs>
 
-### **Tab Items: LXC Containers vs. VMs in Proxmox**
+### LXC Containers vs. VMs in Proxmox
 
 <Tabs
   defaultValue="lxc"
