@@ -10,7 +10,7 @@ last_update:
   author: BankaiTech
 ---
 
-    ## Nextcloud Installation using Docker Compose
+## **Nextcloud Installation using Docker Compose**
 ***This method includes Redis and MariaDB***
 
 First lets update your system.
@@ -18,7 +18,7 @@ First lets update your system.
 sudo apt-get update && apt-get upgrade -y
 ```
 
-### Setting up the directories
+### ***Setting up the directories***
 Now lets setup the Directories
 :::note
 
@@ -33,7 +33,7 @@ Lets take ownership of the directory
 ```bash
 sudo chown -R 1000:1000 /var/docker
 ```
-### Creating .env files
+### ***Creating .env files***
 Now lets make an [Environment File with Interpolation](https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/) file in the new directory.
 ```bash
 cd /var/docker/nextcloud
@@ -83,7 +83,7 @@ Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 
 Save the new file by pressing `CTRL+X`
 
-### Creating the Compose file
+### ***Creating the Compose file***
 Now lets create the compose file.
 ```bash
 nano docker-compose.yaml
@@ -153,7 +153,7 @@ networks:
 tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
 :::
 
-## Starting Nextcloud
+## **Starting Nextcloud**
 Now lets start it up.
 ```bash
 sudo docker compose up -d
@@ -196,7 +196,7 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 - **database host:** mariadb:3306
 :::
 
-### Account Creation
+### ***Account Creation***
 <p>
 <>Now create an admin account and click `Install`</>
 </p>
@@ -213,7 +213,7 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 
 ![Nextcloud Dashboard](/img/nextcloud/Dashboard.jpg)
 
-### Checking for errors and warnings
+### ***Checking for errors and warnings***
 <p>
 <>On the top right click the `User Icon` and go to `Administration Settings`</>
 </p>
@@ -230,7 +230,7 @@ You will need to click the drop down and select `MySQL/MariaDB` and type in the 
 <>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</>
 </p>
 
-### Modifying the config.php file
+### ***Modifying the config.php file***
 Run the following command to open the `config.php` file with nano.
 ```
 nano nextcloud/config/config.php
@@ -264,7 +264,7 @@ It should look something like this.
 In some cases, you may have to delete your browser cache and restart the browser for the Warnings to update.
 :::
 
-### Creating production use user
+### ***Creating production use user***
 <p>
 <>Now you can go create a user for yourself.</>
 </p>
@@ -292,6 +292,6 @@ Make sure to set `Groups` to `admin`
 
 ![Nextcloud Add Users1](/img/nextcloud/Adduser1.jpg)
 
-## Congragulations!! you have installed Nextcloud!
+## **Congragulations!! you have installed Nextcloud!**
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
