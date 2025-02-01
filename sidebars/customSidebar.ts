@@ -189,8 +189,7 @@ const sidebars: SidebarsConfig = {
          },
         ],
       },
-   },
- ],
+  ],
 
 
   "exampleSidebar": [
