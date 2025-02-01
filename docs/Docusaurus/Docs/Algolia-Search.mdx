@@ -11,6 +11,7 @@ Make sure you are in the root of your website, in my case ill run
 cd /var/websites/"HomeLab Docs"
 ```
 ### ***Applying to the DocSearch Program***
+
 Lets apply for [Algolia DocSearch](https://docsearch.algolia.com/apply/)
 
 :::note
@@ -38,11 +39,13 @@ Take note of the ID and Both keys, we will be using them shortly.
 ![Algolia Keys](/img/Docusaurus/AlgoliaKeys.jpg)
 
 ### **Dotenv**
+
 In order to keep your sensitive information hidden, we need to install and configure dotenv
 
 #### ***Installing dotenv***
+
 Run the following command
-```py
+```bash
 npm install dotenv --save
 ```
 #### ***Configuring dotenv***
@@ -55,6 +58,7 @@ require('dotenv').config({path: './.env', debug: true})
 ```
 
 #### ***Creating the .env file***
+
 Now lets create an `.env` file.
 ```bash
 nano .env
@@ -71,6 +75,7 @@ Save by pressing `CTRL+X`
 :::
 
 ### **Modifying the docusaurus.config.ts file**
+
 ```bash
 nano docusaurus.config.ts
 ```
@@ -98,12 +103,14 @@ Paste the following
 ```
 
 ### **Building the website**
+
 Now build the site.
-```py
+```bash
 npm run build
 ```
 
 ### **Start the first Crawl**
+
 Now we should be able to [login](https://dashboard.algolia.com/).
 Go to `Data Sources`
 
