@@ -179,6 +179,8 @@ const sidebars: SidebarsConfig = {
               type: 'category',
               label: 'Bind Mounts',
               link: { type: 'doc', id: 'Proxmox/LXC Containers/Bind Mounts/Introduction' },
+              items: [
+              ],
             },
            ],
          },
@@ -186,6 +188,8 @@ const sidebars: SidebarsConfig = {
            type: 'category',
            label: 'VM (Virtual Machines)',
            link: { type: 'doc', id: 'Proxmox/VM/Introduction' },
+           items: [
+           ],
          },
         ],
       },
