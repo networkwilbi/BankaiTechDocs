@@ -6,12 +6,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 
-## Adding Last Updated Feature
+## **Adding Last Updated Feature**
 <h3>
 <>*Official Docs can be found here. [Link](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#last_update)*</>
 </h3>
 ![Example](/img/Docusaurus/Styling/lastUpdate.jpg)
-### Creating a GitHub Repository
+### ***Creating a GitHub Repository***
 <p>
 <>First we need to create a [GitHub Repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories).</>
 </p>
@@ -48,7 +48,7 @@ I used my repo name `BankaiTechDocs` for the Key name\
 Key type is `Authentication key`
 :::
 
-### Creating local SSH key
+### ***Creating local SSH key***
 <p>
 <>Go to your temninal and run this command</>
 </p>
@@ -77,7 +77,7 @@ cat <location of new ssh key>
 I ran `cat /root/.ssh/id_ed25519.pub`
 :::
 
-### Adding SSH key to GitHub
+### ***Adding SSH key to GitHub***
 <p>
 <>Go back over to GitHub and Paste the SSH key you just copied</>
 </p>
@@ -88,7 +88,7 @@ I ran `cat /root/.ssh/id_ed25519.pub`
 <>Press `Add SSH key`</>
 </p>
 
-## Creating a local .git repo
+## **Creating a local .git repo**
 <p>
 <>Go to the root directory of your website</>
 </p>
@@ -103,7 +103,7 @@ git init
 git config --global user.name "<USER_NAME>"
 git config --global user.email "<USER_EMAIL>"
 ```
-## Connecting to the remote Repo
+## **Connecting to the remote Repo**
 <p>
 <>We are going to need the SSH url for your repo, we can find that here</>
 </p>
@@ -120,15 +120,15 @@ git remote add origin <SSh Repo URL>
 `git@github.com:TrueBankai416/BankaiTechDocs.git`
 :::
 
-## Security
-### Installing [talisman](https://github.com/thoughtworks/talisman)
+## **Security**
+### ***Installing [talisman](https://github.com/thoughtworks/talisman)***
 Go to the root directory of your website and run the following
 ```bash
 curl --silent  https://raw.githubusercontent.com/thoughtworks/talisman/main/global_install_scripts/install.bash > /tmp/install_talisman.bash && /bin/bash /tmp/install_talisman.bash
 ```
 
-### Setting Up [GitLeaks](https://github.com/gitleaks/gitleaks)
-#### Creating a GitHub API Key
+### **Setting Up [GitLeaks](https://github.com/gitleaks/gitleaks)**
+#### ***Creating a GitHub API Key***
 <p>
 <>Click the user icon at the top right and go to `Settings`</>
 </p>
@@ -142,7 +142,7 @@ curl --silent  https://raw.githubusercontent.com/thoughtworks/talisman/main/glob
 
 ![GitHub Developer Settings](/img/Docusaurus/GitHub_Developer.png)
 
-##### Creating a new Token (classic)
+##### *Creating a new Token (classic)*
 <p>
 <>Click on `Tokens (classic)` and then Generate a new Token</>
 </p>
@@ -164,7 +164,7 @@ It is recommended that you set an expiration date instead of having no Expiratio
 ![Token Repo](/img/Docusaurus/Token_Repo.png)
 ![Token Project](/img/Docusaurus/Token_Project.png)
 
-##### Creating Action Secrets for GitLeaks
+##### *Creating Action Secrets for GitLeaks*
 <p>
 <>Go to `Settings` and then `Secrets and Variables > Actions` and create a new Repository Secret</>
 </p>
@@ -174,7 +174,7 @@ It is recommended that you set an expiration date instead of having no Expiratio
 </p>
 Paste your GitHub API Key into the secret field and then save.
 
-#### Creating the GitLeaks Workflow Action
+#### ***Creating the GitLeaks Workflow Action***
 <p>
 <>Go to `Actions` and then Click `New Workflow`</>
 </p>
@@ -211,12 +211,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           GITLEAKS_NOTIFY_USER_LIST: "@<YOUR_GITHUB_USER>"
 ```
-##### Running the Action
+##### *Running the Action*
 Run the New GitLeaks Workflow
 
 ![Run Workflow](/img/Docusaurus/Run_Workflow.png)
 
-## Pushing to GitHub
+## **Pushing to GitHub**
 <p>
 <>Now run the following commands</>
 </p>
@@ -233,8 +233,8 @@ git pull origin main
 When you run `git pull origin main` you will have to run `npm run build` afterwards to apply the changes
 :::
 
-## Enabling the last updated footer
-### Editing the docusaurus config file
+## **Enabling the last updated footer**
+### ***Editing the docusaurus config file***
 <Tabs groupId="Java-Type">
   <TabItem value="js" label="Javascript">
     <p>
@@ -392,7 +392,7 @@ nano docusaurus.config.ts
   </TabItem>
 </Tabs>
 
-### Adding the last updated to Font Matter
+### ***Adding the last updated to Font Matter***
 <p>
 <>Open up one of your `.md` files in `/docs`</>
 </p>
@@ -413,7 +413,7 @@ You will have to add this too all of your `.mdx` files
 <>Now everytime you run `git pull origin main` and `npm run build` it will update the `last_updated` line from `git history`</>
 </p>
 
-## References
+## **References**
 [Font Matter Options](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter)\
 [Introduction to GIT](https://learn.microsoft.com/en-us/training/modules/intro-to-git/2-exercise-configure-git)\
 [How to Push Existing Project to GitHub](https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github)\
