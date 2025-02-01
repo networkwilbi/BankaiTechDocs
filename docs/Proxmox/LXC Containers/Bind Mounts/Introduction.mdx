@@ -12,7 +12,7 @@ last_update:
 
 In the context of a Proxmox environment, especially when working with Linux Containers (LXC), understanding the concept of bind mounts, as well as the role of `subuid` and `subgid`, is crucial for efficient container management. This knowledge enables administrators to securely and efficiently grant containers access to specific host resources.
 
-### What Are Bind Mounts?
+### **What Are Bind Mounts?**
 
 Bind mounts are a feature of the Linux kernel that allows you to mount a specific directory from the host system into a container. This means that the same directory can appear in two different locations in the filesystem: on the host and inside the container. Unlike traditional mounts, which connect a device to a directory, bind mounts re-target an existing part of the file tree.
 
@@ -25,7 +25,7 @@ In Proxmox’s LXC containers, bind mounts are used to give containers access to
 
 Bind mounts enhance flexibility and efficiency in managing resources and data in containerized environments.
 
-### Types of Bind Mounts in Proxmox
+### **Types of Bind Mounts in Proxmox**
 
 #### 1. **Simple Bind Mounts**
 
@@ -57,7 +57,7 @@ Bind mounts enhance flexibility and efficiency in managing resources and data in
 - **Use cases**: Ideal for storing temporary data, like session or cache files, that don't need to be persisted and require fast access.
 - **Benefits**: Improves performance for temporary data access and ensures any sensitive data is not left on the disk.
 
-### Choosing the Right Bind Mount for LXC in Proxmox
+### **Choosing the Right Bind Mount for LXC in Proxmox**
 
 When working with LXC containers in Proxmox, the choice of bind mount type generally hinges on the data access needs and security considerations:
 
@@ -67,7 +67,7 @@ When working with LXC containers in Proxmox, the choice of bind mount type gener
 - **For Nested Mounts**: Recursive bind mounts come into play when dealing with complex directory structures that include their own mounts.
 - **For Temporary Data**: tmpfs bind mounts can significantly enhance performance and security for temporary data handling within containers.
 
-### Subuid and Subgid: Their Role in Bind Mounts
+### **Subuid and Subgid: Their Role in Bind Mounts**
 
 When dealing with bind mounts in LXC containers, considerations around Linux user namespaces, particularly `subuid` (subordinate user IDs) and `subgid` (subordinate group IDs), become important. These concepts play a crucial role in how permissions and ownership are handled for bind-mounted directories in an unprivileged container context.
 
@@ -77,7 +77,7 @@ When dealing with bind mounts in LXC containers, considerations around Linux use
   - The container has the necessary permissions to read/write to the bind-mounted directory according to its needs and intended use.
   - Operations within the container, affecting the mounted directory, are restricted on the host, adhering to the principle of least privilege.
 
-### Best Practices
+### **Best Practices**
 
 - **Security**: Ensure that `subuid` and `subgid` mappings are configured securely to prevent containers from gaining unintended access to host resources.
 - **Performance**: Use bind mounts judiciously, as excessive mounts can complicate container management and potentially impact system performance.
@@ -85,7 +85,7 @@ When dealing with bind mounts in LXC containers, considerations around Linux use
 
 Understanding and correctly implementing bind mounts with an awareness of `subuid` and `subgid` mappings is key to leveraging the full power and flexibility of LXC containers within Proxmox VE. This setup not only boosts the efficiency of resource utilization but also maintains a stringent security posture within containerized environments.
 
-### Conclusion
+### **Conclusion**
 
 Understanding the different types of bind mounts available in Proxmox and their respective benefits is crucial for setting up a flexible, secure, and efficient containerized environment. By carefully selecting the appropriate type of bind mount for each scenario, administrators can optimize their Proxmox LXC deployments to meet a wide array of application requirements and operational standards.
 
