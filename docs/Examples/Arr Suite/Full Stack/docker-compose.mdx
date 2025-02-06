@@ -6,7 +6,7 @@ keywords: [Arr Suite]
 last_update:
   author: BankaiTech
 ---
-```
+```yaml
 name: media-management
 
 services:
@@ -16,7 +16,7 @@ services:
     hostname: radarr
     depends_on:
       - prowlarr
-    environtment:
+    environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
@@ -37,7 +37,7 @@ services:
     container_name: readarr
     depends_on:
       - prowlarr
-    environtment:
+    environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
@@ -55,7 +55,7 @@ services:
     hostname: sonarr
     depends_on:
       - prowlarr
-    environtment:
+    environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
@@ -77,7 +77,7 @@ services:
     hostname: lidarr
     depends_on:
       - prowlarr
-    environtment:
+    environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York
@@ -93,7 +93,7 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     hostname: prowlarr
-    environtment:
+    environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/New_York

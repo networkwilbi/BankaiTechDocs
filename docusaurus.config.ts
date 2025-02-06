@@ -18,6 +18,11 @@ const config: Config = {
   future: {
     experimental_faster: true,
   },
+  customFields:{
+    // Mendable API key for AI-powered search functionality
+  // Get your key at https://mendable.ai
+        mendableAnonKey: process.env.MENDABLE_KEY,
+  },
 
   // Set the production url of your site here
   url: 'https://docs.bankai-tech.com',
@@ -160,6 +165,12 @@ const config: Config = {
           position: 'left',
           label: 'Examples',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'MSwindowsSidebar',
+          position: 'left',
+          label: 'MS Windows',
+        },
           {to: 'https://buymeacoffee.com/BankaiTech', label: 'Buy Me a Beer', position: 'left'},
     //    {to: '/blog', label: 'Blog', position: 'left'},
         {
@@ -229,7 +240,9 @@ const config: Config = {
     prism: {
       darkTheme: prismThemes.dracula,
       theme: prismThemes.github,
+      additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig', 'typescript', 'javascript', 'systemd', 'ini', 'bash'],
     },
+
   } satisfies Preset.ThemeConfig,
 };
 

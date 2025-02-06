@@ -16,7 +16,8 @@ last_update:
 You can find prebuilt images [Here](https://docs.bankai-tech.com/Nextcloud/Pre-built%20Images)
 :::
 
-        ## Nextcloud Installation using Docker Build and Docker Compose
+## **Nextcloud Installation using Docker Build and Docker Compose**
+
 ***This method includes Redis, MariaDB, and Nextcloud Memories***
 :::note
 inotify libraries have been added to the Dockerfile for the iNotify App
@@ -26,11 +27,12 @@ Nextcloud 28.0.4 was the latest version when making this tutorial.
 :::
 
 First lets update your system.
-```
+```bash
 sudo apt-get update && apt-get upgrade -y
 ```
 
-### Setting up the directories
+### ***Setting up the directories***
+
 Now lets setup the Directories
 :::note
 
@@ -38,35 +40,58 @@ You can change the directories to your liking.
 
 :::
 
-```
+```bash
 sudo mkdir /var/docker && sudo mkdir /var/docker/nextcloud
 ```
 Lets take ownership of the directory
-```
+```bash
 sudo chown -R 1000:1000 /var/docker
 ```
-### Creating .env files
-Now lets create the files that will contain the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
 
-#### Creating .nextcloud.env
+### ***Creating .env file***
+
+Now lets create the file that will contain the [Docker Variables](https://docs.docker.com/compose/how-tos/environment-variables/set-environment-variables/#use-the-env_file-attribute) files in the new directory.
+
+### ***Creating .env***
+
+```bash
+nano .env
 ```
-NEXTCLOUD_TRUSTED_DOMAINS=cloud.bankai-tech.com,192.168.x.xxx/24
-TRUSTED_PROXIES=192.168.x.xxx
+:::warning[warning]
+When editing the configuration below, remove all instances of `<>` from the values
+::: 
+Paste the Following with `CNTRL+SHIFT+V`
+```editorconfig title="Highlighted items will need to be modified" showLineNumbers
+# Nextcloud and MariaDB
+# Directory paths for persistent data storage
+DATA_LOCATION=./nextcloud
+DB_DATA_LOCATION=./mariadb
+# Nextcloud Port
+PORT=8080
+// highlight-start
+NEXTCLOUD_TRUSTED_DOMAINS=cloud.<YourDomain>.com
+TRUSTED_PROXIES=<IP address of your Reverse Proxy>
+// highlight-end
 OVERWRITEPROTOCOL=https
-OVERWRITECLIURL=https://cloud.example.com
+// highlight-next-line
+OVERWRITECLIURL=https://cloud.<YourDomain>.com
 REDIS_HOST=redis
 REDIS_PORT=6379
 PHP_MEMORY_LIMIT=512M
 PHP_UPLOAD_LIMIT=100M
+// highlight-start
+MYSQL_ROOT_PASSWORD=CHANGEME
 MYSQL_PASSWORD=CHANGEME
+MARIADB_AUTO_UPGRADE=true
+// highlight-end
 MYSQL_DATABASE=nextcloud
 MYSQL_USER=nextcloud
-MYSQL_HOST=mariadb
+# Go_Vod
+// highlight-next-line
+NEXTCLOUD_HOST=https://cloud.example.com
+NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
+NVIDIA_VISIBLE_DEVICES=all
 ```
-:::tip[info]
-Save the new file by pressing `CTRL+X`
-:::
-
 :::tip[Info]
 
 Please Change `CHANGEME` to a password of your choosing.
@@ -75,43 +100,15 @@ Refrain from using Special characters for you MySQL Passwords. \
 Ex. `‘ ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] / < > , . ; ? ' : | (space)`
 :::
 
-#### Creating .mariadb.env
-```
-MYSQL_ROOT_PASSWORD=CHANGEME
-MYSQL_PASSWORD=CHANGEME
-MYSQL_DATABASE=nextcloud
-MYSQL_USER=nextcloud
-```
-
-#### Creating .go_vod.env
-```
-NEXTCLOUD_HOST=https://cloud.example.com
-NEXTCLOUD_ALLOW_INSECURE=1 # (self-signed certs or no HTTPS)
-NVIDIA_VISIBLE_DEVICES=all
-#devices:
-#  - /dev/dri:/dev/dri # VA-API (omit for NVENC)
-```
-
-
-:::warning[warning]
-
-<p>
-<>Please make sure that the Password is the same as the one you previously set in the last file</>
-</p>
-
-<p>
-<>Remove all instances of `<>`</>
-</p>
-:::
-
+Save the new file by pressing `CTRL+X`
 
    ### Creating the Compose file
    Now lets edit the compose file.
-   ```
+   ```bash
    nano docker-compose.yaml
    ```
 
-```
+```yaml title="The highlighted lines are Optional and can be removed completely"
 name: nextcloud
 
 services:
@@ -121,42 +118,57 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW --log_bin_trust_function_creators=true
     volumes:
-      - ./mariadb:/var/lib/mysql
+      - ${DB_DATA_LOCATION}:/var/lib/mysql
     env_file:
-      - .mariadb.env
+      - .env
+    networks:
+      - nextcloud
 
   nextcloud:
     image: bankaitech/nextcloud:latest
     container_name: nextcloud
     restart: always
     ports:
-      - 8080:80
+      - ${PORT}:80
     links:
       - mariadb
       - redis
       - go-vod
     volumes:
-      - ./nextcloud:/var/www/html
+      - ${DATA_LOCATION}:/var/www/html
     env_file:
-      - .nextcloud.env
+      - .env
+    networks:
+      - nextcloud
 
   cron:
     image: bankaitech/nextcloud:latest
     container_name: cron
     restart: always
     volumes:
-      - ./nextcloud:/var/www/html:z
+      - ${DATA_LOCATION}:/var/www/html:z
     depends_on:
       - mariadb
       - redis
+    networks:
+      - nextcloud
     entrypoint: /cron.sh
 
   redis:
     container_name: redis
     image: redis:latest
+    // highlight-start
+    volumes:           # Optional
+      - type: tmpfs    # Optional
+        target: /data  # Optional
+        tmpfs:         # Optional
+          size: 1073741824 # 1GB "Optional"
+    //highlight-end
     expose:
       - 6379
     command: redis-server --save 60 1 --loglevel warning
+    networks:
+      - nextcloud
     restart: always
 
   go-vod:
@@ -164,10 +176,16 @@ services:
     restart: always
     container_name: go-vod
     env_file:
-      - .go_vod.env
+      - .env
     volumes:
-      - ./nextcloud:/var/www/html:ro
+      - ${DATA_LOCATION}:/var/www/html:ro
+    networks:
+      - nextcloud
 #    runtime: nvidia # (NVENC)
+
+networks:
+  nextcloud:
+    driver: bridge
 ```
 
 :::info[NVIDIA HWA]
@@ -175,9 +193,15 @@ If you want to use GPU for transcoding then uncomment this line\
 runtime: nvidia # (NVENC)  # For Nvidia HW Acceleration, Uncomment after installing nvidia drivers.\
 Test nvidia by running `sudo nvidia-smi`
 :::
-## Starting Nextcloud
+
+:::warning
+tmpfs uses memory (RAM), adjust the value as needed or optionally remove the volume section from the redis container
+:::
+
+## **Starting Nextcloud**
+
 Now lets start it up.
-```
+```bash
 sudo docker compose up -d
 ```
 :::info
@@ -188,7 +212,7 @@ the `-d` flag stands for [detatched](https://docs.docker.com/engine/reference/ru
 <>After its done pulling the docker images you can open up a web browser.</>
 </p>
 :::note
-Before proceeding, you will need to configure your reverse proxy. I have an example Nginx config [Here](https://docs.bankai-tech.com/Reverse%20Proxy/Nginx).
+Before proceeding, you will need to configure your reverse proxy. I have an example Nginx config [Here](https://docs.bankai-tech.com/Examples/Reverse%20Proxies/Nginx/#nextcloud).
 :::
 <p>
 <>Connect to nextcloud by typing in your configured `domain`</>
@@ -200,7 +224,28 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 
 ![Nextcloud First Start](/img/nextcloud/FirstStart.jpg)
 
-### Account Creation
+:::warning
+If you see this warning
+```
+
+Performance warning
+
+You chose SQLite as database.
+
+SQLite should only be used for minimal and development instances. For production we recommend a different database backend.
+
+If you use clients for file syncing, the use of SQLite is highly discouraged.
+```
+
+You will need to click the drop down and select `MySQL/MariaDB` and type in the info manually.
+- **database account:** nextcloud
+- **database password:** YOUR_PASSWORD_FROM .env
+- **database name:** nextcloud
+- **database host:** mariadb:3306
+:::
+
+### ***Account Creation***
+
 <p>
 <>Now create an admin account and click `Install`</>
 </p>
@@ -217,7 +262,8 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 
 ![Nextcloud Dashboard](/img/nextcloud/Dashboard.jpg)
 
-### Checking for errors and warnings
+### ***Checking for errors and warnings***
+
 <p>
 <>On the top right click the `User Icon` and go to `Administration Settings`</>
 </p>
@@ -234,9 +280,10 @@ Before proceeding, you will need to configure your reverse proxy. I have an exam
 <>In order to fix the [Maintenance Window](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#maintenance-window-start) and the [Phone Region](https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/config_sample_php_parameters.html#default-phone-region) warnings, we will have to edit our `config.php` file.</>
 </p>
 
-### Modifying the config.php file
+### ***Modifying the config.php file***
+
 Run the following command to open the `config.php` file with nano.
-```
+```bash
 nano nextcloud/config/config.php
 ```
 :::tip[Hint]
@@ -248,7 +295,7 @@ Run `cd /var/docker/nextcloud` then try again.
 :::
 
 Now add the following to the bottom of the file.
-```
+```editorconfig title="Highlighted items can be chaged to your Time Zone Identifier" {2} showLineNumbers
   'maintenance_window_start' => 1,
   'default_phone_region' => 'US',
 ```
@@ -271,7 +318,8 @@ Now add the following to the bottom of the file.
 In some cases, you may have to delete your browser cache and restart the browser for the Warnings to update.
 :::
 
-### Creating production use user
+### ***Creating production use user***
+
 <p>
 <>Now you can go create a user for yourself.</>
 </p>
@@ -298,7 +346,9 @@ Make sure to set `Groups` to `admin`
 :::
 
 ![Nextcloud Add Users1](/img/nextcloud/Adduser1.jpg)
-## Installing Nextcloud Memories
+
+## **Installing Nextcloud Memories**
+
 <p>
 <>Go to `Apps`</>
 </p>
@@ -310,7 +360,9 @@ Make sure to set `Groups` to `admin`
 <p>
 <>Now search and install `Preview Generator`.</>
 </p>
-### Configuring Nextcloud Memories
+
+### ***Configuring Nextcloud Memories***
+
 <p>
 <>Go to your `Administration Settings` and find `Memories`</>
 </p>
@@ -324,7 +376,9 @@ Make sure to set `Groups` to `admin`
 ![Memories Setting4](/img/nextcloud/MemoriesSetting4.jpg)
 ![Memories Setting5](/img/nextcloud/MemoriesSetting5.jpg)
 ![Memories Setting6](/img/nextcloud/MemoriesSetting6.jpg)
-### Fixing the warnings
+
+### ***Fixing the warnings***
+
 <p>
 <>Im sure you noticed that there are a few warnings we need to take care of.</>
 </p>
@@ -335,12 +389,12 @@ Reverse geocoding has not been configured (-1).
 <p>
 <>We can generate the Geometry table using this command.</>
 </p>
-```
+```bash
 sudo docker exec -it -u 33 nextcloud php occ memories:places-setup
 ```
 :::tip
 I prefer generating the Geometry table this way so I can view the progress
 :::
-## Congragulations!! you have installed Nextcloud with NC Memories!
+## **Congragulations!! you have installed Nextcloud with NC Memories!**
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
