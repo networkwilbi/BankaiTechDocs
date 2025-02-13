@@ -29,7 +29,7 @@ Microsoft Office's installation directory varies depending on the version and ar
 
 For example, for a default 32-bit Office installation on a 64-bit Windows system, the path might be:
 
-```cmd
+```ps
 cd \Program Files (x86)\Microsoft Office\Office16
 ```
 
@@ -42,7 +42,7 @@ For a 64-bit Office installation or different versions of Office, the path might
 
 Configure your Office installation to use your local KMS server for activation. Replace `<KMS_Server_IP>` with your KMS server's IP address or hostname, the port is not needed:
 
-```cmd
+```ps
 cscript ospp.vbs /sethst:<KMS_Server_IP>
 ```
 
@@ -51,7 +51,7 @@ Here, `ospp.vbs` is a script provided with Office for configuring product activa
 #### Step 4: Install License Key
 I am Activating Microsoft Office LTSC Professional Plus 2024, you can find keys by going to `<KMS_Server_IP:1688/products>` in your browser.
 
-```cmd
+```ps
 slmgr /ipk XJ2XN-FW8RK-P4HMP-DKDBV-GCVGB
 ```
 
@@ -59,7 +59,7 @@ slmgr /ipk XJ2XN-FW8RK-P4HMP-DKDBV-GCVGB
 
 Trigger the Office activation process using the same `ospp.vbs` script:
 
-```cmd
+```ps
 cscript ospp.vbs /act
 ```
 
@@ -72,7 +72,7 @@ You may have to do this more than once to get a `sucessful` message.
 
 To confirm that Office has successfully activated, you can check its activation status:
 
-```cmd
+```ps
 cscript ospp.vbs /dstatus
 ```
 
