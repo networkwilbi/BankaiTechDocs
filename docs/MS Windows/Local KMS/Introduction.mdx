@@ -41,25 +41,25 @@ The basic steps include:
 
 1. **Install the KMS Host Key**: Use the `slmgr.vbs` script included with Windows to install the KMS Host Key(license). The command looks like this:
 
-    ```powershell
+    ```ps
     slmgr.vbs /ipk <KmsHostKey>
     ```
 
 2. **Activate the KMS Server with Microsoft**:
 
-    ```powershell
+    ```ps
     slmgr.vbs /ato
     ```
 
 3. **Verify Operation**: Use the `slmgr.vbs` script to verify the status of the KMS server and the number of clients activated:
 
-    ```powershell
+    ```ps
     slmgr.vbs /dli
     ```
 
     or
 
-    ```powershell
+    ```ps
     slmgr.vbs /dlv
     ```
 
