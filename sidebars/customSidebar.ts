@@ -325,6 +325,21 @@ const sidebars: SidebarsConfig = {
       }, 
     ],
   },
+  {
+    type: 'category',
+    label: 'KMS',
+    link: { type: 'doc', id: 'MS Windows/Local KMS/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Local KMS',
+        items: [
+          'MS Windows/Local KMS/KMS Server',
+          'MS Windows/Local KMS/Activating Windows',
+          'MS Windows/Local KMS/Activating Office',
+         ],
+      },
+  },
  ],
 };
 
