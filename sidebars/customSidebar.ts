@@ -338,10 +338,10 @@ const sidebars: SidebarsConfig = {
           'MS Windows/Local KMS/Activating Windows',
           'MS Windows/Local KMS/Activating Office',
          ],
-      },
     },
    ],
   },
+ ],
 };
 
 export default sidebars;
