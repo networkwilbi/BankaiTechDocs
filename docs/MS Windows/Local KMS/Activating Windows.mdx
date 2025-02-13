@@ -21,7 +21,7 @@ Here's a step-by-step guide to activate Windows using your local KMS server:
 
 In the Command Prompt, use the `slmgr` tool to specify the address of your KMS server. Replace `<KMS_Server_IP>` with the IP address or hostname of your KMS server:
 
-```poweshell
+```ps
 slmgr /skms <KMS_Server_IP>:1688
 ```
 
@@ -31,7 +31,7 @@ This command configures Windows to use your local KMS server for activation. The
 
 Install the License key for the version of windows you want to install, I am using Windows 11 Enterprise. You can find keys by going to `<KMS_Server_IP>:1688/products>` in a browser.
 
-```powershell
+```ps
 slmgr /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43
 ```
 
@@ -39,7 +39,7 @@ slmgr /ipk NPPR9-FWDCX-D2C8J-H872K-2YT43
 
 Now, instruct Windows to attempt activation through the KMS server:
 
-```powershell
+```ps
 slmgr /ato
 ```
 
@@ -51,13 +51,13 @@ You may need to do this more than once to get a `successfull` message.
 
 To verify that Windows has been successfully activated using elevated powershell:
 
-```powershell
+```ps
 slmgr /dlv
 ```
 
 or
 
-```powershell
+```ps
 slmgr /xpr
 ```
 
