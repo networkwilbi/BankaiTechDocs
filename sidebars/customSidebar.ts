@@ -341,6 +341,18 @@ const sidebars: SidebarsConfig = {
     },
    ],
   },
+  {
+    type: 'category',
+    label: 'Microsoft Office',
+    link: { type: 'doc', id: 'MS Windows/Microsoft Office/Introduction' },
+    items: [
+     {
+        type: 'doc',
+        label: 'Installing Office',
+        id: 'MS Windows/Microsoft Office/Installation'
+    },
+   ],
+  },
  ],
 };
 
