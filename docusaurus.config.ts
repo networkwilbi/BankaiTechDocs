@@ -221,19 +221,14 @@ const config: Config = {
               label: 'Buy me a Beer',
               href: 'https://buymeacoffee.com/BankaiTech',
             },
-          /*
-          items: [
-      //      {
-      //        label: 'Blog',
-         //     to: '/blog',
-       //     },
-      //      {
-      //        label: 'GitHub',
-      //        href: 'https://github.com/facebook/docusaurus',
-      //      },
-      */
           ],
         },
+        {
+          title: 'Status',
+          items: [
+            {
+              href: '![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/TrueBankai416/BankaiTechDocs)',
+            },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Bankai-Tech Docs`,
     },
