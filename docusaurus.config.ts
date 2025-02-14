@@ -223,12 +223,6 @@ const config: Config = {
             },
           ],
         },
-        {
-          title: 'Status',
-          items: [
-            {
-              href: '![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/TrueBankai416/BankaiTechDocs)',
-            },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Bankai-Tech Docs`,
     },
