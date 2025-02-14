@@ -7,7 +7,7 @@
 ![Discord](https://img.shields.io/discord/1217932881301737523?label=Discord)
 
 
-This repository contains the source code for the [My Homelab](https://docs.bankai-tech.com) documentation. Built with [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
+This repository contains the source code for [My Homelab](https://docs.bankai-tech.com) documentation. Built with [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
 ### Social
 - Discord: https://discord.gg/6THYdvayjg
