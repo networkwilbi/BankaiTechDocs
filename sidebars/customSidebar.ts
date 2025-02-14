@@ -347,9 +347,9 @@ const sidebars: SidebarsConfig = {
     link: { type: 'doc', id: 'MS Windows/Microsoft Office/Introduction' },
     items: [
      {
-        type: 'category',
+        type: 'doc',
         label: 'Installing Office',
-        link: { type: 'doc', id: 'MS Windows/Microsoft Office/Installation' },
+        id: 'MS Windows/Microsoft Office/Installation'
     },
    ],
   },
