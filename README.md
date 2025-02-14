@@ -1,4 +1,5 @@
 # Bankai-tech Docs
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/TrueBankai416/BankaiTechDocs/main)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/t/TrueBankai416/BankaiTechDocs/main)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/TrueBankai416/BankaiTechDocs)
 ![Docker Pulls](https://img.shields.io/docker/pulls/bankaitech/nextcloud)
