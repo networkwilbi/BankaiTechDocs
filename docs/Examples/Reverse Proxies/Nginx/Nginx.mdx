@@ -18,13 +18,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ## Nextcloud
-```nginx title="Highlighted items will need to be modified" {7,9,17,20,21,39,47,48,49} showLineNumbers
+```nginx title="Highlighted items will need to be modified" showLineNumbers
 map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
 }
 server {
     listen 80;
+// highlight-next-line
     server_name cloud.bankai-tech.com;
     #                         Redirect to https version of website
     return 301 https://cloud.bankai-tech.com;
