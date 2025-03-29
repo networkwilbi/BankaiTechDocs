@@ -28,6 +28,7 @@ server {
 // highlight-next-line
     server_name cloud.bankai-tech.com;
     #                         Redirect to https version of website
+// highlight-next-line
     return 301 https://cloud.bankai-tech.com;
     #                         Logging
     access_log /var/log/nginx/nextcloud_access.log;
@@ -36,12 +37,15 @@ server {
 server {
     listen 443 ssl;
     http2 on;
+// highlight-start
     server_name cloud.bankai-tech.com;
     set $upstream_nextcloud http://192.168.4.130;
+// highlight-end
     #                         Load TLS Certs
+// highlight-start
     ssl_certificate /etc/letsencrypt/live/bankai-tech.com/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/bankai-tech.com/privkey.pem;
-    proxy_ssl_trusted_certificate /etc/letsencrypt/live/bankai-tech.com/chain.pem;
+// highlight-end
     #                      ssl_stapling on;
     #                      ssl_stapling_verify on;
     #                         Logging
