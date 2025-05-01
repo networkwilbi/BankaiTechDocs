@@ -87,6 +87,14 @@ const sidebars: SidebarsConfig = {
          'Docusaurus/Docs/Algolia-Search',
          'Docusaurus/Docs/Docs Only Mode',
          'Docusaurus/Docs/Connecting to GitHub',
+         'Docusaurus/Docs/Migration',
+         {
+          type: 'category',
+          label: 'Troubleshooting',
+          items: [
+            'Docusaurus/Troubleshooting/troubleshooting',
+          ],
+         },
      ],
    },
    {  
