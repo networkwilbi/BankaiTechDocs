@@ -12,13 +12,13 @@ last_update:
 
 First lets create the root directory on your new host.
 ```bash
-sudo mkdir /var/webisites && sudo /var/websites/<example> && cd /var/websites/<example>
+sudo mkdir /var/websites && sudo mkdir /var/websites/<example> && cd /var/websites/<example>
 ```
 :::info
 Change `<example>` to whatever you want to name the folder. Mine will be named `BankaiTechDocs`
 :::
 
-## **Installing Depencencies**
+## **Installing Dependencies**
 ```bash
 sudo apt install git && sudo apt install npm
 ```
@@ -26,7 +26,7 @@ sudo apt install git && sudo apt install npm
 ## **Creating local SSH key**
 
 <p>
-<>Go to your temninal and run this command</>
+<>Go to your terminal and run this command</>
 </p>
 ```bash
 ssh-keygen -t ed25519 -C "your-email@example.com"
@@ -120,9 +120,9 @@ git remote add origin <SSh Repo URL>
 `git@github.com:TrueBankai416/BankaiTechDocs.git`
 :::
 
-## **Security**
+### **Security**
 
-### ***Installing [talisman](https://github.com/thoughtworks/talisman)***
+#### ***Installing [talisman](https://github.com/thoughtworks/talisman)***
 
 Go to the root directory of your website and run the following
 ```bash
@@ -131,11 +131,11 @@ sudo apt install curl && curl --silent  https://raw.githubusercontent.com/though
 
 ## **Installing Docusaurus**
 ```bash
-sudo npm i docusaurus && sudo npm audit fix
+sudo npm install docusaurus && sudo npm audit fix
 ```
 ### **Installing module for Environment Variables**
 ```bash
-sudo install dotenv --save
+sudo npm install dotenv --save
 ```
 
 ## **Pulling Docs from GitHub**
@@ -151,7 +151,7 @@ git pull origin main
 </p>
 
 <p>
-<>Now if you have any environment veriables or secrets inside an `.env` file or other file then you will need to move them over to the new host or `npm run build` will fail.</>
+<>Now if you have any environment variables or secrets inside an `.env` file or other file then you will need to move them over to the new host or `npm run build` will fail.</>
 </p>
 :::note
 When you run `git pull origin main` you will have to run `npm run build` afterwards to apply the changes
