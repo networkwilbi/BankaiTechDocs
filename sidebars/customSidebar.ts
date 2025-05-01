@@ -325,6 +325,34 @@ const sidebars: SidebarsConfig = {
       }, 
     ],
   },
+  {
+    type: 'category',
+    label: 'KMS',
+    link: { type: 'doc', id: 'MS Windows/Local KMS/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Local KMS',
+        items: [
+          'MS Windows/Local KMS/KMS Server',
+          'MS Windows/Local KMS/Activating Windows',
+          'MS Windows/Local KMS/Activating Office',
+         ],
+    },
+   ],
+  },
+  {
+    type: 'category',
+    label: 'Microsoft Office',
+    link: { type: 'doc', id: 'MS Windows/Microsoft Office/Introduction' },
+    items: [
+     {
+        type: 'doc',
+        label: 'Installing Office',
+        id: 'MS Windows/Microsoft Office/Installation'
+    },
+   ],
+  },
  ],
 };
 

@@ -221,17 +221,6 @@ const config: Config = {
               label: 'Buy me a Beer',
               href: 'https://buymeacoffee.com/BankaiTech',
             },
-          /*
-          items: [
-      //      {
-      //        label: 'Blog',
-         //     to: '/blog',
-       //     },
-      //      {
-      //        label: 'GitHub',
-      //        href: 'https://github.com/facebook/docusaurus',
-      //      },
-      */
           ],
         },
       ],
