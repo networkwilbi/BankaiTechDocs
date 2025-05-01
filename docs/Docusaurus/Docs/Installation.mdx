@@ -7,8 +7,8 @@ last_update:
   author: BankaiTech
 ---
 
-# **Docusaurus Installition with Apache2**
-***Apache2 will act as webserver to serve the content for the site***
+# **Docusaurus Installation with Apache2**
+***Apache2 will act as a webserver to serve the content for the site***
 
 First lets create the root directory on your new host.
 ```bash
@@ -17,7 +17,10 @@ sudo mkdir /var/websites && cd /var/websites/
 
 ## **Installing Docusaurus**
 ```bash
-sudo apt installl npm && sudo npx create-docusaurus@latest <my-website> classic --typescript
+sudo apt installl npm
+```
+```bash
+sudo npx create-docusaurus@latest <my-website> classic --typescript
 ```
 :::info
 Change `<my-website>` to anything you'd like>. Im going to make mine `BankaiTechDocs`.
@@ -26,8 +29,6 @@ Change `<my-website>` to anything you'd like>. Im going to make mine `BankaiTech
 ### **Building the Files**
 ```bash
 cd <my-website>
-```
-```bash
 npm run build
 ```
 
@@ -38,7 +39,7 @@ sudo apt install apache2
 
 ### **Creating vhost**
 ```bash
-sudo nano /etc/apache2/sites-available/documentaion.conf
+sudo nano /etc/apache2/sites-available/documentation.conf
 ```
 Paste the following.
 ```apache title="Highlighted items will need to be modified" showLineNumbers
@@ -60,9 +61,11 @@ Paste the following.
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+
 Now lets create a symbolic link of the vhost.
 ```bash
 sudo ln -s /etc/apache2/sites-available/documentation.conf /etc/apache2/sites-enabled/
+```
 
 ### **Configuring the Ports**
 In order to prevent port conflicts we will need to modify `ports.conf`
@@ -72,6 +75,7 @@ sudo nano /etc/apache2/ports.conf
 
 Make it look like the following.
 ```conf showLineNumbers
+# Only listens on port 8091
 #Listen 80
 Listen 8091
 <IfModule ssl_module>
@@ -89,6 +93,6 @@ sudo systemctl restart apache2
 ```
 
 ## **Docusaurus has been Installed!
-You can now install and configure a reverse proxy such as [NGINX](https://docs.bankai-tech.com/Reverse%20Proxy/Introduction)
+You can now install and configure a reverse proxy such as [NGINX](https://docs.bankai-tech.com/Reverse%20Proxy/Nginx/Installing%20Nginx)
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
