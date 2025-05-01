@@ -84,6 +84,7 @@ const sidebars: SidebarsConfig = {
      label: 'Docusaurus',
      link: { type: 'doc', id: 'Docusaurus/Introduction' },
      items: [
+         'Docusaurus/Docs/Installation',
          'Docusaurus/Docs/Algolia-Search',
          'Docusaurus/Docs/Docs Only Mode',
          'Docusaurus/Docs/Connecting to GitHub',
