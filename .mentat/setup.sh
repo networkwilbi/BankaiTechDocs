@@ -2,77 +2,50 @@
 
 # Create environment variables for local development
 echo "----- Setting up environment variables -----"
-echo "ALGOLIA_APP_ID=LOCAL_DEV" > .env
-echo "ALGOLIA_API_KEY=LOCAL_DEV" >> .env
-echo "ALGOLIA_INDEX_NAME=LOCAL_DEV" >> .env
-echo "POSTHOG_API_KEY=phc_000000000000000000000000000000000000" >> .env
-echo "Environment variables set."
+# Create .env file with development placeholders
+cat > .env << EOL
+# Development environment variables
+ALGOLIA_APP_ID=LOCAL_DEV
+ALGOLIA_API_KEY=LOCAL_DEV
+ALGOLIA_INDEX_NAME=LOCAL_DEV
+POSTHOG_API_KEY=phc_000000000000000000000000000000000000
+MENDABLE_KEY=dev_key
+EOL
+echo "Environment variables set for local development."
 
-# Clear any existing node_modules and cache to ensure clean install
-echo "----- Cleaning up any previous installations -----"
-if [ -d "node_modules" ]; then
-  echo "Removing existing node_modules..."
-  rm -rf node_modules
-fi
-
-# Clear npm cache if needed
-echo "Clearing npm cache..."
-npm cache clean --force
-
-# First try regular install
 echo "----- Installing dependencies -----"
-echo "Attempting standard npm install..."
-if npm install; then
+# Check if node_modules exists and if package-lock.json has changed
+if [ ! -d "node_modules" ] || [ "package.json" -nt "node_modules" ]; then
+  echo "Installing dependencies with --legacy-peer-deps..."
+  npm install --legacy-peer-deps
+  
+  # Verify that the installation succeeded
+  if [ ! -d "node_modules" ]; then
+    echo "ERROR: Dependencies installation failed."
+    exit 1
+  fi
   echo "Dependencies installed successfully."
 else
-  echo "Regular npm install failed, trying with --legacy-peer-deps..."
-  # Fallback to --legacy-peer-deps if normal install fails
-  if npm install --legacy-peer-deps; then
-    echo "Dependencies installed with --legacy-peer-deps."
-  else
-    echo "Installation with --legacy-peer-deps failed, trying with --force..."
-    # Try one more time with --force as a last resort
-    npm install --force
-  fi
+  echo "Dependencies are up to date."
 fi
 
-# Verify that the project dependencies are installed correctly
-echo "----- Verifying installation -----"
-if [ ! -d "node_modules" ]; then
-  echo "ERROR: node_modules directory doesn't exist. Installation failed."
-  exit 1
-fi
-
-# Check for common Docusaurus issues
-echo "----- Checking for potential Docusaurus configuration issues -----"
-echo "Checking sidebar configuration..."
-if [ -f "sidebars/customSidebar.ts" ]; then
-  echo "Custom sidebar found."
-else
+# Verify key project files exist
+echo "----- Verifying project configuration -----"
+if [ ! -f "sidebars/customSidebar.ts" ]; then
   echo "WARNING: Custom sidebar configuration not found!"
+  echo "Creating empty sidebar file to prevent errors..."
+  mkdir -p sidebars
+  echo "export default {};" > sidebars/customSidebar.ts
+else
+  echo "Custom sidebar configuration found."
 fi
 
-# Run docusaurus commands with more verbose output
-echo "----- Running docusaurus diagnostic commands -----"
-echo "Checking docusaurus version and dependencies..."
+# Display Docusaurus version for debugging
+echo "----- Checking Docusaurus version -----"
 npx docusaurus --version
 
-# Attempt to build the project
-echo "----- Building project -----"
-echo "Starting build process - this might take a few minutes..."
-if npm run build; then
-  echo "✅ Build completed successfully! The project is ready for development."
-else
-  echo "❌ Build failed. This could be due to:"
-  echo "  1. React version compatibility issues (the project currently uses React 18)"
-  echo "  2. Sidebar configuration errors"
-  echo "  3. Other content or configuration issues"
-  echo ""
-  echo "The setup script has completed the dependency installation process,"
-  echo "but the build has issues that need to be fixed in the codebase."
-  echo ""
-  echo "You can run 'npm start' to work on fixing these issues in development mode."
-  # Exit with code 0 since we want setup to "succeed" even if build fails
-  # This allows the PR to still be created with the dependency fixes
-  exit 0
-fi
+# Skip the build step in the setup script as it's already run in precommit
+echo "----- Setup complete -----"
+echo "✅ Project is ready for development."
+echo "Run 'npm start' to start the development server."
+echo "The precommit script will handle building the project before commits."

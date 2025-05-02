@@ -7,10 +7,13 @@ export default function FooterWrapper(props) {
   const {
     siteConfig: { customFields },
   } = useDocusaurusContext()
+  
+  // Fixed TypeScript error - explicit type casting for mendableAnonKey
+  const mendableKey = customFields.mendableAnonKey as string;
 
   return (
     <>
-      <MendableFloatingButton anon_key={customFields.mendableAnonKey} />
+      <MendableFloatingButton anon_key={mendableKey} />
       <Footer {...props} />
     </>
   )
