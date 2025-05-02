@@ -93,7 +93,9 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: 'Troubleshooting',
           items: [
-            'Docusaurus/Troubleshooting/troubleshooting',
+            'Docusaurus/Troubleshooting/Docusaurus',
+            'Docusaurus/Troubleshooting/Algolia',
+            'Docusaurus/Troubleshooting/GitHub',
           ],
          },
      ],
