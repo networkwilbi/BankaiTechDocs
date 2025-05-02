@@ -15,10 +15,12 @@ fi
 # Run a limited build check to catch major issues without full build time
 echo "🔍 Running build check..."
 
-# Add additional flags for docusaurus build to make it more helpful
-# Using --out-dir /tmp/docusaurus-build to avoid polluting the main directory
-if npm run build -- --out-dir /tmp/docusaurus-build; then
+# Use standard build command without custom output directory to avoid issues
+if npm run build; then
   echo "✅ Build check passed! Changes look good."
+  # Clean up the build directory to avoid committing it
+  echo "Cleaning up build files..."
+  rm -rf build
   exit 0
 else
   echo "❌ Build check failed!"
