@@ -1,0 +1,31 @@
+---
+title: docker-compose.yaml
+tags:
+    - Arr Suite
+    - Lidarr
+keywords: [Arr Suite, Lidarr]
+last_update:
+  author: BankaiTech
+---
+```yaml
+name: lidarr
+
+services:
+  lidarr:
+    image: lscr.io/linuxserver/lidarr:latest
+    container_name: lidarr
+    hostname: lidarr
+    environtment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./lidarr/config:/config
+      - /media/Music:/music #optional
+      - /media/Downloads:/media/Downloads #optional
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+```
+
+<a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
