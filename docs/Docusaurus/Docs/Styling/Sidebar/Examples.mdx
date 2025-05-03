@@ -221,4 +221,57 @@ and so on.
    },
 ```
 
+## **Manually Configured Sidebar**
+*For this sidebar you have to manually add any new directories and files in order for them the appear in the sidebar*
+
+```ts title="customSidebar.ts showLineNumbers
+{
+      type: 'category',
+      label: 'Getting Started with Docker',
+      link: { type: 'doc', id: 'Docker/Introduction' },
+      items: [
+        {
+          type: 'category',
+          label: 'Installation',
+          items: [
+            'Docker/Installing Docker/Docker Engine',
+            'Docker/Installing Docker/Docker-Compose',
+          ],
+        },
+         'Docker/Docs/Helpful Commands',
+         'Docker/Troubleshooting/Docker',
+      ],      
+   },
+   {
+    type: 'category',
+    label: 'Nextcloud',
+    link: { type: 'doc', id: 'Nextcloud/Introduction' },
+    items: [
+     {
+        type: 'category',
+        label: 'Installation',
+        items: [
+          'Nextcloud/Installation/Minimum',
+          'Nextcloud/Installation/Collabora',
+          'Nextcloud/Installation/Memories',
+          'Nextcloud/Installation/Complete',
+         ],
+      },   
+        'Nextcloud/Docs/Updating',
+        'Nextcloud/Docs/Pre-built Images',
+        'Nextcloud/Docs/Helpful Commands',
+     {
+       type: 'category',
+       label: 'Troubleshooting',
+       items: [
+         'Nextcloud/Troubleshooting/Nextcloud',
+         'Nextcloud/Troubleshooting/Nextcloud Memories',
+         'Nextcloud/Troubleshooting/Collabora Code',
+         'Nextcloud/Troubleshooting/OnlyOffice',
+        ],
+     },
+     ],
+  }, 
+```
+
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
