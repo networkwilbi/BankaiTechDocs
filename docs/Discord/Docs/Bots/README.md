@@ -1,5 +1,5 @@
 ---
-title: Introduction to Discord Bots
+title: Bots
 tags:
    - Discord
 

@@ -1,5 +1,5 @@
 ---
-title: Introduction to Ubiquiti Access Points
+title: Access Points
 tags:
    - Ubiquiti
    - Unifi Controller
