@@ -1,5 +1,5 @@
 ---
-title: Cloudflare1
+title: Cloudflare
 tags:
    - Cloudflare
    - DNS
