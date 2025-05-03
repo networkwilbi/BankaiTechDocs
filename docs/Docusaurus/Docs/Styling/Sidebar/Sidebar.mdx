@@ -106,6 +106,37 @@ Create a `_category_.json` file in your docs folder:
 }
 ```
 
+### **Font Matter**
+*You can add styling to the top of a doc file*
+```mdx showLineNumbers
+---
+title: Install with Collabora
+sidebar_position: 2
+tags:
+   - Docker
+   - Docker Compose
+   - Tutorial
+keywords: [Docker, Docker Engine, Tutorial, Nextcloud]
+last_update:
+  author: BankaiTech
+---
+Some Doc Content
+```
+
+#### *Changing the doc name shown in the Sidebar*
+```mdx
+title: Doc Name
+```
+#### *Changing the order of the Doc files*
+```mdx
+sidebar_position: 2
+```
+#### *Showing when the docs were last updated and by who (via github)*
+```mdx
+last_update:
+  author: BankaiTech
+```
+
 ## **Sidebar Organization Best Practices**
 
 - Limit sidebar nesting to 2-3 levels for better readability
