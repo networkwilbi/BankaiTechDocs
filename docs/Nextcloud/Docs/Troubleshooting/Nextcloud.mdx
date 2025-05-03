@@ -1,0 +1,185 @@
+---
+title: Nextcloud
+tags:
+   - Docker
+   - Nextcloud
+   - Tutorial
+   - Troubleshooting
+keywords: [Docker, Docker Engine, Tutorial, Nextcloud, Troubleshootiing]
+last_update:
+  author: BankaiTech
+---
+## **Troubleshooting for Nextcloud**
+
+### ***Access through untrusted Domain***
+
+<p>
+<>This happens when you attempt to access nextcloud from a source not listed inside the `config.php` file.</>
+</p>
+![NC Untrusted Domain](/img/nextcloud/Troubleshooting/untrustedDomain.jpg)
+
+#### *Changing directories*
+
+<p>
+<>First we need to change our directory to where nextcloud is installed</>
+</p>
+In this example, nextclouds webroot is located at `/var/docker/nextcloud/nextcloud/`
+```bash
+cd /var/docker/nextcloud/nextcloud
+```
+:::info
+`cd` stands for `Change Directory`
+:::
+
+<p>
+<>If you are in the right spot then you will see</>
+</p>
+```bash
+3rdparty  apps           config       cron.php     dist        lib                       ocs                package.json  resources   themes
+AUTHORS   composer.json  console.php  custom_apps  index.html  nextcloud-init-sync.lock  ocs-provider       public.php    robots.txt  version.php
+COPYING   composer.lock  core         data         index.php   occ                       package-lock.json  remote.php    status.php
+```
+
+#### *Editing the config.php file*
+
+<p>
+<>Now lets edit the `config.php` file using nano</>
+</p>
+```bash
+nano config/config.php
+```
+<p>
+<>Scroll down until you see</>
+</p>
+```editorconfig
+'trusted_domains' =>
+array (
+    0 => '',
+  ),
+```
+
+#### *Adding your domain to config.php*
+
+<p>
+<>Now add your domain to the array</>
+</p>
+```editorconfig
+'trusted_domains' => 
+  array (
+    0 => 'cloud.bankai-tech.com',
+  ),
+```
+<p>
+<>If you need to add multiple domains you can do so like this</>
+</p>
+```editorconfig
+'trusted_domains' => 
+  array (
+    0 => 'cloud.bankai-tech.com',
+    1 => '192.168.4.130',
+  ),
+```
+<p>
+<>Now save the file and you should be able to access nextcloud now</>
+</p>
+:::tip
+Save the file by pressing `CTRL+X`
+:::note
+If the error doesnt go away, you may need to clear your browser cache and restart the browser
+:::
+
+### ***The database is missing some indexes.***
+
+![Missing Indexes](/img/nextcloud/Troubleshooting/missingIndexes.jpg)
+<p>
+<>This seems to be caused by nextcloud skipping large indexes. To fix in a Docker environment, run the following.</>
+</p>
+```bash
+sudo docker exec -it -u 33 nextcloud php occ db:add-missing-indices
+```
+## **Example Files**
+
+### ***Config.php***
+
+```editorconfig
+<?php
+$CONFIG = array (
+  'htaccess.RewriteBase' => '/',
+  'memcache.local' => '\\OC\\Memcache\\APCu',
+  'apps_paths' => 
+  array (
+    0 => 
+    array (
+      'path' => '/var/www/html/apps',
+      'url' => '/apps',
+      'writable' => false,
+    ),
+    1 => 
+    array (
+      'path' => '/var/www/html/custom_apps',
+      'url' => '/custom_apps',
+      'writable' => true,
+    ),
+  ),
+  'memcache.distributed' => '\\OC\\Memcache\\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' => 
+  array (
+    'host' => 'redis',
+    'password' => '',
+    'port' => 6379,
+  ),
+  'trusted_proxies' => 
+  array (
+    0 => '192.168.4.204',
+  ),
+  'trusted_proxies' => 
+  array (
+    0 => '192.168.4.204',
+  ),
+  'forwarded-for-headers' =>
+  array (
+    0 => 'HTTP_X_FORWARDED_FOR',
+  ),
+  'upgrade.disable-web' => true,
+  'instanceid' => '**REDACTED**',
+  'passwordsalt' => '**REDACTED**',
+  'secret' => '**REDACTED**',
+  'trusted_domains' => 
+  array (
+    0 => 'cloud.bankai-tech.com',
+    1 => '192.168.4.130',
+  ),
+  'datadirectory' => '/var/www/html/data',
+  'dbtype' => 'mysql',
+  'version' => '30.0.2.2',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'mariadb',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'nextcloud',
+  'dbpassword' => 'CHANGEME',
+  'installed' => true,
+  'maintenance_window_start' => 1,
+  'default_phone_region' => 'US',
+  'overwriteprotocol' => 'https',
+  'overwrite.cli.url' => 'https://cloud.bankai-tech.com',
+  'loglevel' => 2,
+);
+```
+
+## **Clearing the Logs**
+### *Nextcloud*
+```bash
+sudo docker exec -it <container_name> trunecate data/nextcloud.log -s 0 && sudo docker restart <container_name>
+```
+
+### *Nextcloud AIO*
+```bash
+sudo docker exec -it nextcloud-aio-nextcloud trunecate data/nextcloud.log -s 0 && sudo docker restart nextcloud-aio-nextcloud
+```
+## **Resources**
+
+
+<a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
