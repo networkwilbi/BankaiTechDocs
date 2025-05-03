@@ -1,0 +1,86 @@
+---
+title: Styling Overview
+tags:
+   - Docusaurus
+   - Styling
+   - CSS
+keywords: [Docusaurus, Styling, CSS, Customization, Theme]
+last_update:
+  author: BankaiTech
+---
+
+# **Docusaurus Styling Overview**
+
+Docusaurus provides several ways to customize the appearance of your documentation site. This guide covers the basics of styling in Docusaurus and points you to more specific styling techniques.
+
+## **Understanding Docusaurus Styling**
+
+Docusaurus uses a combination of global CSS, CSS modules, and Infima (a React-based CSS framework) to provide styling options. You can customize nearly every aspect of your site's appearance through these mechanisms.
+
+### **Where to Find Styling Files**
+
+The main styling files in a Docusaurus project are:
+
+- `src/css/custom.css`: For global CSS overrides
+- Component-specific CSS modules (`.module.css` files)
+- Theme files that can be swapped or customized
+
+## **Basic Styling Methods**
+
+### **Global CSS Customization**
+
+The simplest way to customize your site's appearance is by modifying the `src/css/custom.css` file:
+
+```css
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+},
+```
+
+### **Theme Configuration**
+
+You can configure theme settings in your `docusaurus.config.ts` file:
+
+```ts
+module.exports = {
+  themeConfig: {
+    // Color mode configuration
+    colorMode: {
+      defaultMode: 'light',
+      disableSwitch: false,
+      respectPrefersColorScheme: true,
+    },
+    // Other theme settings...
+  },
+};
+```
+
+## **Advanced Styling Techniques**
+
+For more advanced styling needs, Docusaurus offers:
+
+1. **Theme Swizzling**: Customizing specific theme components
+2. **Custom CSS Modules**: Creating scoped styles for components
+3. **Custom Plugins**: Extending functionality with styling options
+
+## **Next Steps**
+
+- Check out [Sidebar Styling](./Sidebar) to learn how to customize your documentation's navigation
+- Explore the [official Docusaurus styling documentation](https://docusaurus.io/docs/styling-layout)
+
+## **Resources**
+
+- [Official Docusaurus Styling Documentation](https://docusaurus.io/docs/styling-layout)
+- [Infima CSS Framework](https://infima.dev/) - The styling framework used by Docusaurus
+- [CSS Variables](https://docusaurus.io/docs/styling-layout#css-variables) - Complete list of Docusaurus CSS variables
+- [Docusaurus Theme Configuration](https://docusaurus.io/docs/api/themes/configuration) - All available theme configuration options
+- [Theme Classic](https://docusaurus.io/docs/api/themes/@docusaurus/theme-classic) - Documentation for the default Docusaurus theme
+
+<a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
