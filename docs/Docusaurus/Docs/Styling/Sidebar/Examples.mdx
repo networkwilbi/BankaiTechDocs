@@ -27,19 +27,7 @@ When you are done with the new sidebar, you will have to update the `docusaurus.
             'https://github.com/TrueBankai416/BankaiTechDocs/tree/main/',
         },
 ```
-
-## **Link Introduction file to Dropdown**
-**This will show a specified file when clicking on a dropdown menu in the sidebar instead of simply just opening the sidebar content.**
-```ascii title="Directory Tree" {2,7} showLineNumbers
-└── docs/
-    └── Docker/
-        ├── Docs/
-        │   ├── Installing Docker/
-        │   ├── Helpful Commands.mdx
-        │   └── Troubleshooting.mdx
-        └── Introduction.mdx
-```
-
+## **Auto-Generated Sidebar**
 ```ts title="yourNewSidebar.ts showLineNumbers
 {
       type: 'category',
@@ -55,5 +43,28 @@ When you are done with the new sidebar, you will have to update the `docusaurus.
       ],      
    },
 ```
+
+```ascii title="Directory Tree | All content in the Docs folder will auto-generate in the sidebar" {8-11} showLineNumbers
+└── docs/
+    └── Docker/
+        ├── Docs/
+        │   ├── Installing Docker/
+        │   ├── Helpful Commands.mdx
+        │   └── Troubleshooting.mdx
+        └── Introduction.mdx
+```
+
+## **Link Introduction file to Dropdown**
+**This will show a specified file when clicking on a dropdown menu in the sidebar instead of simply just opening the sidebar content.**
+```ascii title="Directory Tree" {2,7} showLineNumbers
+└── docs/
+    └── Docker/
+        ├── Docs/
+        │   ├── Installing Docker/
+        │   ├── Helpful Commands.mdx
+        │   └── Troubleshooting.mdx
+        └── Introduction.mdx
+```
+
 
 <a href="https://www.buymeacoffee.com/BankaiTech"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=BankaiTech&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
