@@ -69,12 +69,13 @@ You do not need to enter a `passphrase` but it is recommended for security
 :::warning
 If you do use a Passphrase, please keep it safe as you will need it every time you run `Git pull` or `Git push`
 :::
+Take note of the Key location, we will need it in the next step.
 
 <p>
 <>Run the following command and copy the contents of the result</>
 </p>
 ```bash
-cat <location of new ssh key>
+cat /root/.ssh/<id_key.pub>
 ```
 :::info
 I ran `cat /root/.ssh/id_ed25519.pub`
