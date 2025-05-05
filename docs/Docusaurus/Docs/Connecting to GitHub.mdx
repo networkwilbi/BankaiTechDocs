@@ -412,6 +412,10 @@ nano docusaurus.config.ts
 
 ### ***Adding the last updated to Font Matter***
 
+:::note
+By default it will show the GitHub user that last updated the file. Setting this to Manually Input a name
+:::
+
 <p>
 <>Open up one of your `.md` files in `/docs`</>
 </p>
@@ -425,9 +429,7 @@ last_update:
   author: custom author name
 ---
 ```
-:::note
-By default it will show the GitHub user that last updated the file. Setting this will Override that.
-:::
+
 <p>
 <>Now everytime you run `git pull origin main` and `npm run build` it will update the `last_updated` line from `git history`</>
 </p>
