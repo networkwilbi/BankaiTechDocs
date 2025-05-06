@@ -69,12 +69,13 @@ You do not need to enter a `passphrase` but it is recommended for security
 :::warning
 If you do use a Passphrase, please keep it safe as you will need it every time you run `Git pull` or `Git push`
 :::
+Take note of the Key location, we will need it in the next step.
 
 <p>
 <>Run the following command and copy the contents of the result</>
 </p>
 ```bash
-cat <location of new ssh key>
+cat /root/.ssh/<id_key.pub>
 ```
 :::info
 I ran `cat /root/.ssh/id_ed25519.pub`
@@ -412,6 +413,10 @@ nano docusaurus.config.ts
 
 ### ***Adding the last updated to Font Matter***
 
+:::note
+By default it will show the GitHub user that last updated the file. Setting this will override the GitHub name.
+:::
+
 <p>
 <>Open up one of your `.md` files in `/docs`</>
 </p>
@@ -425,9 +430,7 @@ last_update:
   author: custom author name
 ---
 ```
-:::note
-You will have to add this too all of your `.mdx` files
-:::
+
 <p>
 <>Now everytime you run `git pull origin main` and `npm run build` it will update the `last_updated` line from `git history`</>
 </p>

@@ -4,9 +4,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-// Environment Variable Config
+// Environment Variable Config - fixed redundant imports and removed debug mode
 import dotenv from 'dotenv';
-require('dotenv').config({path: './.env', debug: true})
+dotenv.config({path: './.env'});
 
 // Main Config 
 const config: Config = {
@@ -20,8 +20,8 @@ const config: Config = {
   },
   customFields:{
     // Mendable API key for AI-powered search functionality
-  // Get your key at https://mendable.ai
-        mendableAnonKey: process.env.MENDABLE_KEY,
+    // Get your key at https://mendable.ai
+    mendableAnonKey: process.env.MENDABLE_KEY,
   },
 
   // Set the production url of your site here
@@ -55,7 +55,7 @@ const config: Config = {
           showLastUpdateTime: true,
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarCollapsible: true,
-          sidebarPath: './sidebars/customSidebar.ts',
+          sidebarPath: './sidebars/customAutogen.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -229,7 +229,7 @@ const config: Config = {
     prism: {
       darkTheme: prismThemes.dracula,
       theme: prismThemes.github,
-      additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig', 'typescript', 'javascript', 'systemd', 'ini', 'bash'],
+      additionalLanguages: ['dax', 'csharp', 'powerquery', 'powershell', 'yaml', 'nginx', 'editorconfig', 'typescript', 'javascript', 'systemd', 'ini', 'bash', 'apacheconf'],
     },
 
   } satisfies Preset.ThemeConfig,

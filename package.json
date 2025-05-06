@@ -28,15 +28,15 @@
     "dotenv": "^16.4.7",
     "posthog-docusaurus": "^2.0.1",
     "prism-react-renderer": "^2.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "swizzle": "^1.1.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
     "@docusaurus/tsconfig": "3.7.0",
     "@docusaurus/types": "3.7.0",
-    "@giscus/react": "^3.0.0",
+    "@giscus/react": "^3.1.0",
     "@rspack/cli": "^1.1.8",
     "@rspack/core": "^1.1.8",
     "typescript": "~5.2.2"
